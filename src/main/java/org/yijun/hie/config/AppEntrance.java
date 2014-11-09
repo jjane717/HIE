@@ -2,13 +2,15 @@ package org.yijun.hie.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
- * Created by Liu yijun on 11/8/14.
+ * Created by liuyijun on 14-11-8.
  */
 
 
@@ -35,11 +37,11 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
 //		registry.addViewController("/login").setViewName("login");
 //	}
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver() {
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/WEB-INF/views/");
-//        viewResolver.setSuffix(".jsp");
-//        return viewResolver;
-//    }
+    @Bean
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        //viewResolver.setPrefix("");
+        viewResolver.setSuffix(".html");
+        return viewResolver;
+    }
 }

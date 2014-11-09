@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import javax.sql.DataSource;
 
 /**
- * Created by zjy on 11/8/14.
+ * Created by liuyijun on 14-11-8.
  */
 
 @Configuration
