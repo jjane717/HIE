@@ -24,6 +24,8 @@ public class PersistenceConfig {
 
         // scan all entity classes
         sessionFactoryBuilder.scanPackages("org.yijun.hie.persistence");
+        sessionFactoryBuilder.setProperty("hibernate.show_sql", "true");
+        sessionFactoryBuilder.setProperty("hibernate.format_sql", "true");
         return sessionFactoryBuilder.buildSessionFactory();
     }
 }

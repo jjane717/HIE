@@ -24,12 +24,12 @@ public class OrderEntity {
     @Column(name = "total_amount")
     private double totalAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
     @JoinColumn(name = "id_product")
     public ProductEntity productEntity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<PaymentEntity> paymentEntityList = new LinkedList<PaymentEntity>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = PaymentEntity.class)
+    List<PaymentEntity> paymentEntityList = new LinkedList<>();
 
     public List<PaymentEntity> getPaymentEntityList() {
         return paymentEntityList;

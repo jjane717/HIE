@@ -8,7 +8,7 @@ import javax.persistence.Table;
  * Created by liuyijun on 14-11-8.
  */
 @Entity
-@Table(name = "role")
+//@Table(name = "role")
 @DiscriminatorValue(value = "hie_admin_role_entity")
 public class HieAdminRoleEntity extends RoleEntity{
 }

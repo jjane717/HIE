@@ -25,7 +25,7 @@ public class PaymentEntity {
     @Column(name = "amount")
     private double amount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = OrderEntity.class)
     @JoinColumn(name = "id_order")
     public OrderEntity orderEntity;
 

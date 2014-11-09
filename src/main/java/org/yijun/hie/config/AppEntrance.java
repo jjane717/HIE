@@ -1,13 +1,19 @@
 package org.yijun.hie.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -43,5 +49,23 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
         //viewResolver.setPrefix("");
         viewResolver.setSuffix(".html");
         return viewResolver;
+    }
+
+    /* *
+        * Here we register the Hibernate4Module into an ObjectMapper, then set this custom-configured ObjectMapper
+        * to the MessageConverter and return it to be added to the HttpMessageConverters of our application
+    */
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper mapper = new ObjectMapper();
+        //Registering Hibernate4Module to support lazy objects
+        mapper.registerModule(new Hibernate4Module());
+        messageConverter.setObjectMapper(mapper);
+
+        //Here we add our custom-configured HttpMessageConverter
+        converters.add(messageConverter);
+        super.configureMessageConverters(converters);
     }
 }

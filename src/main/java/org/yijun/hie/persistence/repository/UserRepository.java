@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserRepository {
     private SessionFactory sessionFactory;
 
     private String getUserByNameHql = "from UserAccountEntity where userName = :userName";
+    private String getEnterprise = "from EnterpriseEntity";
 
     public List<UserAccountEntity> getUserByName (String userName) {
         Session session = sessionFactory.openSession();
@@ -29,6 +31,17 @@ public class UserRepository {
 //        session.flush();
         session.close();
         return userAccountEntityList;
+    }
+
+    public List<EnterpriseEntity> getEnterprise () {
+        Session session = sessionFactory.openSession();
+        List<EnterpriseEntity> enterpriseEntityList;
+
+        enterpriseEntityList = session.createQuery(getEnterprise).list();
+
+//        session.flush();
+        session.close();
+        return enterpriseEntityList;
     }
 
 }

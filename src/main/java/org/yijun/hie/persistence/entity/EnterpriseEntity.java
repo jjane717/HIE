@@ -44,10 +44,10 @@ public class EnterpriseEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = UserAccountEntity.class)
     List<UserAccountEntity> userAccountEntityList = new LinkedList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
     List<ProductEntity> productEntityList = new LinkedList<>();
 
     public List<ProductEntity> getProductEntityList() {
