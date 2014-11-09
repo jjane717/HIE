@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "Enterprise", schema = "", catalog = "hiedb")
 public class EnterpriseEntity {
+    // test push
     @Id
     @Column(name = "id_enterprise")
     private Integer idEnterprise;
