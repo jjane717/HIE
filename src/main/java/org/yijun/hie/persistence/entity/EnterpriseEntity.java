@@ -48,9 +48,9 @@ public class EnterpriseEntity {
             targetEntity = UserAccountEntity.class, mappedBy = "enterpriseEntity")
     List<UserAccountEntity> userAccountEntityList = new LinkedList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            targetEntity = ProductEntity.class, mappedBy = "enterpriseEntity")
-    List<ProductEntity> productEntityList = new LinkedList<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_enterprise"), inverseJoinColumns = @JoinColumn(name = "id_product"))
+    private List<ProductEntity> productEntityList  = new LinkedList<>();
 
     public List<ProductEntity> getProductEntityList() {
         return productEntityList;

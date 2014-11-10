@@ -58,18 +58,27 @@ CREATE TABLE IF NOT EXISTS User_Account (
   PRIMARY KEY (id_user_account)
 );
 
-DROP TABLE User_Account;
+CREATE TABLE IF NOT EXISTS Enterprise_Product(
+  id_enterprise_product INT NOT NULL AUTO_INCREMENT,
+  id_enterprise INT NOT NULL,
+  id_product INT NOT NULL,
+  PRIMARY KEY (id_enterprise_product)
+);
 
 CREATE TABLE IF NOT EXISTS Product (
   id_product INT NOT NULL AUTO_INCREMENT,
   id_enterprise INT NOT NULL,
-  offer_name INT NOT NULL,
+  offer_name VARCHAR(45) NOT NULL,
   co_Pay DOUBLE NOT NULL,
   deductible DOUBLE NOT NULL,
   co_Insurance DOUBLE NOT NULL,
   offer_price DOUBLE NOT NULL,
   description VARCHAR(200) NOT NULL,
+  status TINYINT(1) NOT NULL,
+  target_market VARCHAR(100) NOT NULL,
   PRIMARY KEY (id_product));
+
+  DROP TABLE Enterprise_Product;
 
 CREATE TABLE IF NOT EXISTS `Order` (
   id_order INT NOT NULL AUTO_INCREMENT,
@@ -97,3 +106,6 @@ drop table Product;
 drop table User_Role;
 drop table Role_Privilege;
 drop table Role;
+
+1,HIDE,200,1000,0.5,200,NJASDJDF,0,LowIncomeMarket
+2,SDKF,700,500,0.2,250,NJASDJDF,1,LowIncomeMarket

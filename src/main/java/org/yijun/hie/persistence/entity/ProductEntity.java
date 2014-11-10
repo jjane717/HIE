@@ -33,13 +33,35 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
-    @JoinColumn(name = "id_enterprise")
-    public EnterpriseEntity enterpriseEntity;
+    @Column(name = "status")
+    private Boolean status;
+
+    @Column(name = "targetMarket")
+    private String targetMarket;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_product"), inverseJoinColumns = @JoinColumn(name = "id_enterprise"))
+    private List<EnterpriseEntity> enterpriseEntities  = new LinkedList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             targetEntity = OrderEntity.class, mappedBy = "productEntity")
     List<OrderEntity> orderEntityList = new LinkedList<>();
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getTargetMarket() {
+        return targetMarket;
+    }
+
+    public void setTargetMarket(String targetMarket) {
+        this.targetMarket = targetMarket;
+    }
 
     public List<OrderEntity> getOrderEntityList() {
         return orderEntityList;
@@ -49,12 +71,12 @@ public class ProductEntity {
         this.orderEntityList = orderEntityList;
     }
 
-    public EnterpriseEntity getEnterpriseEntity() {
-        return enterpriseEntity;
+    public List<EnterpriseEntity> getEnterpriseEntities() {
+        return enterpriseEntities;
     }
 
-    public void setEnterpriseEntity(EnterpriseEntity enterpriseEntity) {
-        this.enterpriseEntity = enterpriseEntity;
+    public void setEnterpriseEntities(List<EnterpriseEntity> enterpriseEntities) {
+        this.enterpriseEntities = enterpriseEntities;
     }
 
     public Integer getIdProduct() {
