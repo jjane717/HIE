@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.PrivilegeEntity;
+import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class UserRepository {
 
     private String getUserByNameHql = "from UserAccountEntity where userName = :userName";
     private String getEnterprise = "from EnterpriseEntity";
+    private String getRoleByName = "from RoleEntity where roleName = :roleName";
+    private String getPrivilegeByName = "from PrivilegeEntity where privilegeName = :privilegeName";
 
     public List<UserAccountEntity> getUserByName (String userName) {
         Session session = sessionFactory.openSession();
@@ -43,5 +47,27 @@ public class UserRepository {
         session.close();
         return enterpriseEntityList;
     }
+
+    public List<RoleEntity> getRole (String roleName) {
+        Session session = sessionFactory.getCurrentSession();
+        List<RoleEntity> roleEntityList;
+        roleEntityList = session.createQuery(getRoleByName).setString("roleName", roleName).list();
+        return roleEntityList;
+    }
+
+    public List<PrivilegeEntity> getPrivilege (String privilegeName) {
+        Session session = sessionFactory.getCurrentSession();
+        List<PrivilegeEntity> privilegeEntityList;
+        privilegeEntityList = session.createQuery(getPrivilegeByName).setString("privilegeName", privilegeName).list();
+        return privilegeEntityList;
+    }
+
+    public void addPrivilege (RoleEntity role, PrivilegeEntity privilege) {
+        role.getPrivilegeEntityList().add(privilege);
+        Session session = sessionFactory.getCurrentSession();
+        session.update(role);
+        session.flush();
+    }
+
 
 }

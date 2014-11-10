@@ -44,10 +44,12 @@ public class EnterpriseEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = UserAccountEntity.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = UserAccountEntity.class, mappedBy = "enterpriseEntity")
     List<UserAccountEntity> userAccountEntityList = new LinkedList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = ProductEntity.class, mappedBy = "enterpriseEntity")
     List<ProductEntity> productEntityList = new LinkedList<>();
 
     public List<ProductEntity> getProductEntityList() {

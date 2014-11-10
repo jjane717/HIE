@@ -33,11 +33,12 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = EnterpriseEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
     @JoinColumn(name = "id_enterprise")
     public EnterpriseEntity enterpriseEntity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = OrderEntity.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = OrderEntity.class, mappedBy = "productEntity")
     List<OrderEntity> orderEntityList = new LinkedList<>();
 
     public List<OrderEntity> getOrderEntityList() {

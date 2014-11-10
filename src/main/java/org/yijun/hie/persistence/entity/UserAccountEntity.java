@@ -66,11 +66,11 @@ public class UserAccountEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = EnterpriseEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
     @JoinColumn(name = "id_enterprise")
     public EnterpriseEntity enterpriseEntity;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "id_user_account"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<RoleEntity> roleEntityList = new LinkedList<>();
 

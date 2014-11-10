@@ -24,11 +24,12 @@ public class OrderEntity {
     @Column(name = "total_amount")
     private double totalAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ProductEntity.class)
     @JoinColumn(name = "id_product")
     public ProductEntity productEntity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = PaymentEntity.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = PaymentEntity.class, mappedBy = "orderEntity")
     List<PaymentEntity> paymentEntityList = new LinkedList<>();
 
     public List<PaymentEntity> getPaymentEntityList() {

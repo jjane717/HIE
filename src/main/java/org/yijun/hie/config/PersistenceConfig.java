@@ -4,7 +4,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -27,5 +29,11 @@ public class PersistenceConfig {
         sessionFactoryBuilder.setProperty("hibernate.show_sql", "true");
         sessionFactoryBuilder.setProperty("hibernate.format_sql", "true");
         return sessionFactoryBuilder.buildSessionFactory();
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+        //return new JtaTransactionManager();
+        return new HibernateTransactionManager(sessionFactory);
     }
 }
