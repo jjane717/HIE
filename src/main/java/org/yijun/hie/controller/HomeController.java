@@ -33,7 +33,7 @@ public class HomeController {
         return "html/index";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @RequestMapping(value="/register", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
     public String register (HttpServletRequest request) throws ParseException {
