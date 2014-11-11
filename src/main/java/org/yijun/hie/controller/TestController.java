@@ -32,8 +32,9 @@ public class TestController {
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     @ResponseBody
+    @Transactional
     public UserAccountEntity login (String u, String p) {
-        return loginService.userLogin(u, p);
+        return loginService.userLogin(u,p);
     }
 
     @RequestMapping(value="/test", method = RequestMethod.GET)

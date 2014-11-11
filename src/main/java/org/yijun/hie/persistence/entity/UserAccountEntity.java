@@ -22,7 +22,7 @@ public class UserAccountEntity {
     private String password;
 
     @Column(name = "status")
-    private String status;
+    private Boolean status;
 
     @Column(name = "first_name")
     private String firstName;
@@ -114,11 +114,11 @@ public class UserAccountEntity {
         this.password = password;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

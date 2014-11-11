@@ -1,5 +1,6 @@
 package org.yijun.hie.persistence.repository;
 
+import org.eclipse.jetty.util.ajax.JSON;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,14 +28,17 @@ public class UserRepository {
     private String getPrivilegeByName = "from PrivilegeEntity where privilegeName = :privilegeName";
 
     public List<UserAccountEntity> getUserByName (String userName) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         List<UserAccountEntity> userAccountEntityList;
 
         userAccountEntityList = session.createQuery(getUserByNameHql).setString("userName", userName).list();
-
-//        session.flush();
-        session.close();
         return userAccountEntityList;
+    }
+
+    public void addUserAccount (UserAccountEntity userAccountEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.save(userAccountEntity);
+        session.flush();
     }
 
     public List<EnterpriseEntity> getEnterprise () {
@@ -42,8 +46,6 @@ public class UserRepository {
         List<EnterpriseEntity> enterpriseEntityList;
 
         enterpriseEntityList = session.createQuery(getEnterprise).list();
-
-//        session.flush();
         return enterpriseEntityList;
     }
 
