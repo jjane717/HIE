@@ -28,6 +28,7 @@ public class PersistenceConfig {
         sessionFactoryBuilder.scanPackages("org.yijun.hie.persistence");
         sessionFactoryBuilder.setProperty("hibernate.show_sql", "true");
         sessionFactoryBuilder.setProperty("hibernate.format_sql", "true");
+        sessionFactoryBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
         return sessionFactoryBuilder.buildSessionFactory();
     }
 

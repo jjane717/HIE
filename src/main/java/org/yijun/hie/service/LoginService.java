@@ -23,12 +23,10 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
     public UserAccountEntity userLogin (String userName, String password) {
         return userRepository.getUserByName(userName).get(0);
     }
 
-    @Transactional
     public boolean isUserExist(String userName){
         if(userRepository.getUserByName(userName).size() > 0){
             return true;
@@ -37,7 +35,6 @@ public class LoginService {
         }
     }
 
-    @Transactional
     public void createUserAccount(HttpServletRequest request, String string) throws ParseException {
         UserAccountEntity userAccountEntity = new UserAccountEntity();
         if(string.equals("Customer")) {
