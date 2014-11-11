@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.persistence.repository.UserRepository;
 import org.yijun.hie.service.LoginService;
+import org.yijun.hie.service.UserRolePrivilegeService;
+
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -23,6 +26,9 @@ public class TestController {
     private UserRepository userRepository;
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private UserRolePrivilegeService userRolePrivilegeService;
+
 
     @RequestMapping(value="/hello", method = RequestMethod.GET)
     public String helloWorld () {
@@ -53,5 +59,13 @@ public class TestController {
     public EnterpriseEntity tt () {
         EnterpriseEntity enterpriseEntity = userRepository.getEnterprise().get(0);
         return enterpriseEntity;
+    }
+
+    @RequestMapping(value="/pp", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<PrivilegeEntity> pp () {
+        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+        return userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
     }
 }

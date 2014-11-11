@@ -23,6 +23,7 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public UserAccountEntity userLogin (String userName, String password) {
         return userRepository.getUserByName(userName).get(0);
     }

@@ -70,16 +70,16 @@ public class UserAccountEntity {
     @JoinColumn(name = "id_enterprise")
     public EnterpriseEntity enterpriseEntity;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "id_user_account"), inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private List<RoleEntity> roleEntityList = new LinkedList<>();
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = RoleEntity.class)
+    @JoinColumn(name = "id_role")
+    private RoleEntity roleEntity;
 
-    public List<RoleEntity> getRoleEntityList() {
-        return roleEntityList;
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
     }
 
-    public void setRoleEntityList(List<RoleEntity> roleEntityList) {
-        this.roleEntityList = roleEntityList;
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
     }
 
     public EnterpriseEntity getEnterpriseEntity() {

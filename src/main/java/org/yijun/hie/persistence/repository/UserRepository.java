@@ -70,5 +70,13 @@ public class UserRepository {
         session.flush();
     }
 
+    public List<PrivilegeEntity>  getPrivilegeByRole (UserAccountEntity userAccountEntity){
+        Session session = sessionFactory.getCurrentSession();
+        RoleEntity roleEntity = userAccountEntity.getRoleEntity();
+        List<PrivilegeEntity> privilegeEntityList;
+        privilegeEntityList = roleEntity.getPrivilegeEntityList();
+        return privilegeEntityList;
+    }
+
 
 }
