@@ -35,6 +35,7 @@ public class HomeController {
         String roleType = "Customer";
 
         if(!loginService.isUserExist(userAccountEntity.getUserName())) {
+            // 这个地方自己改
             //loginService.createUserAccount(request,roleType);
             return "success";
         } else {
