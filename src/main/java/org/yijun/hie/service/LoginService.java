@@ -29,8 +29,8 @@ public class LoginService {
     }
 
     @Transactional
-    public boolean duplicatedUserChecked(String userName){
-        if(userRepository.getUserByName(userName).get(0)==null){
+    public boolean isUserExist(String userName){
+        if(userRepository.getUserByName(userName).size() > 0){
             return true;
         }else{
             return false;
