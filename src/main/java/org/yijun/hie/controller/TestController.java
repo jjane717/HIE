@@ -45,4 +45,12 @@ public class TestController {
         userRepository.addPrivilege(roleEntity, privilegeEntity);
         return roleEntity;
     }
+
+    @RequestMapping(value="/tt", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public EnterpriseEntity tt () {
+        EnterpriseEntity enterpriseEntity = userRepository.getEnterprise().get(0);
+        return enterpriseEntity;
+    }
 }

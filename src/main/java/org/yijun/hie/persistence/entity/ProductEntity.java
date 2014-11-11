@@ -36,7 +36,7 @@ public class ProductEntity {
     @Column(name = "status")
     private Boolean status;
 
-    @Column(name = "targetMarket")
+    @Column(name = "target_market")
     private String targetMarket;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

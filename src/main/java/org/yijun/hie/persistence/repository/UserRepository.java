@@ -38,13 +38,12 @@ public class UserRepository {
     }
 
     public List<EnterpriseEntity> getEnterprise () {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         List<EnterpriseEntity> enterpriseEntityList;
 
         enterpriseEntityList = session.createQuery(getEnterprise).list();
 
 //        session.flush();
-        session.close();
         return enterpriseEntityList;
     }
 
