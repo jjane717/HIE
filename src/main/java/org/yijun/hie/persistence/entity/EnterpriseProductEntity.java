@@ -14,6 +14,7 @@ public class EnterpriseProductEntity {
 
     @Id
     @Column(name = "id_enterprise_product")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getIdEnterpriseProduct() {
         return idEnterpriseProduct;
     }

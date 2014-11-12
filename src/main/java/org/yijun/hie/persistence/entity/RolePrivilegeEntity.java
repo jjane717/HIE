@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class RolePrivilegeEntity {
     @Id
     @Column(name = "id_role_privilege")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idRolePrivilege;
 
     @Column(name = "id_privilege")

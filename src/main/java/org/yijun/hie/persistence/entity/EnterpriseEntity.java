@@ -12,6 +12,7 @@ import java.util.List;
 public class EnterpriseEntity {
     @Id
     @Column(name = "id_enterprise")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idEnterprise;
 
     @Column(name = "enterprise_name")

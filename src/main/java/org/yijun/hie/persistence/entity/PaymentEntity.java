@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class PaymentEntity {
     @Id
     @Column(name = "id_payment")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idPayment;
 
     @Column(name = "due_date")

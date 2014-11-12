@@ -12,6 +12,7 @@ import java.util.List;
 public class PrivilegeEntity {
     @Id
     @Column(name = "id_privilege")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idPrivilege;
 
     @Column(name = "privilege_name")

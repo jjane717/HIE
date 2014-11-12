@@ -13,6 +13,7 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @Column(name = "id_order")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idOrder;
 
     @Column(name = "id_user_account")

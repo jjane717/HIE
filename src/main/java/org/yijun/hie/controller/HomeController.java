@@ -28,7 +28,6 @@ public class HomeController {
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
     @ResponseBody
-    @Transactional
     public String register (UserAccountEntity userAccountEntity) throws ParseException {
 
 //        String userName = request.getParameter("userName");
@@ -41,5 +40,10 @@ public class HomeController {
         } else {
             return "This User has already been used. User name or email may be duplicated.";
         }
+    }
+
+    @RequestMapping(value = "/system", method = RequestMethod.GET)
+    public String managementSystem (UserAccountEntity userAccountEntity){
+        return "html/manage";
     }
 }
