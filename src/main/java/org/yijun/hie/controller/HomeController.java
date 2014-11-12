@@ -26,16 +26,17 @@ public class HomeController {
         return "html/index";
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @RequestMapping(value="/userSignIn", method = RequestMethod.POST)
     @ResponseBody
+    @Transactional
     public String register (UserAccountEntity userAccountEntity) throws ParseException {
 
 //        String userName = request.getParameter("userName");
-//        String roleType = "Customer";
+        String roleType = "Customer";
 
         if(!loginService.isUserExist(userAccountEntity.getUserName())) {
 
-            loginService.createUserAccount(userAccountEntity);
+            loginService.createUserAccount(userAccountEntity, roleType);
             return "success";
         } else {
             return "This User has already been used. User name or email may be duplicated.";

@@ -37,7 +37,6 @@ public class UserRepository {
 
     public void addUserAccount (UserAccountEntity userAccountEntity){
         Session session = sessionFactory.getCurrentSession();
-
         session.save(userAccountEntity);
         session.flush();
     }

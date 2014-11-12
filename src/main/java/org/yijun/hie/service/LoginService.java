@@ -27,6 +27,7 @@ public class LoginService {
         return userRepository.getUserByName(userName).get(0);
     }
 
+    @Transactional
     public boolean isUserExist(String userName){
         if(userRepository.getUserByName(userName).size() > 0){
             return true;
@@ -35,9 +36,9 @@ public class LoginService {
         }
     }
 
-    public void createUserAccount(UserAccountEntity userAccountEntity) throws ParseException {
+    public void createUserAccount(UserAccountEntity userAccountEntity, String ss) throws ParseException {
 //        UserAccountEntity userAccountEntity = new UserAccountEntity();
-//        if(ss.equals("Customer")) {
+        if(ss.equals("Customer")) {
 //            userAccountEntity.setEmail(request.getParameter("email"));
 //            userAccountEntity.setPassword(request.getParameter("password"));
 //            userAccountEntity.setUserName(request.getParameter("userName"));
@@ -54,9 +55,8 @@ public class LoginService {
 //            userAccountEntity.setIsSmallBusiness(Boolean.valueOf(request.getParameter("isSmallBusiness")));
 //            userAccountEntity.setIsFamily(Boolean.valueOf(request.getParameter("isFamily")));
 //            userAccountEntity.setIncomeStatus(request.getParameter("incomeStatus"));
-//
-//            userRepository.addUserAccount(userAccountEntity);
-//        }
-        userRepository.addUserAccount(userAccountEntity);
+            userAccountEntity.setRoleEntity(userRepository.getRole("Customer").get(0));
+            userRepository.addUserAccount(userAccountEntity);
+        }
     }
 }
