@@ -1,6 +1,9 @@
 package org.yijun.hie.controller;
 
+import org.eclipse.jetty.util.ajax.JSON;
 import org.hibernate.SessionFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,6 +69,15 @@ public class TestController {
     @Transactional
     public List<PrivilegeEntity> pp () {
         UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
-        return userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+        return privilegeEntityList;
+    }
+
+    @RequestMapping(value="/oo", method = RequestMethod.GET)
+    @ResponseBody
+    public JSON oo (JSON o) {
+        JSON json = new JSON();
+
+        return json;
     }
 }

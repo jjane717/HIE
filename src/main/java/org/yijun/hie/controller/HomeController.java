@@ -23,7 +23,7 @@ public class HomeController {
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String mainIndex () {
-        return "html/index";
+        return "html/index.html";
     }
 
     @RequestMapping(value="/userSignIn", method = RequestMethod.POST)
@@ -45,6 +45,6 @@ public class HomeController {
 
     @RequestMapping(value = "/system", method = RequestMethod.GET)
     public String managementSystem (UserAccountEntity userAccountEntity){
-        return "html/manage";
+        return "html/manage.html";
     }
 }

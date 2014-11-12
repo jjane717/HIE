@@ -11,13 +11,15 @@
         $(document).ready(function(){
             $.ajax({
                 type: "GET",
-                url : "http://localhost:8080/pp",
+                url : "http://localhost:8080/oo",
                 data : "",
                 cache:true,
 
                 success: function(data){
                     alert("OK" + data);
-                    $("#h").html(data);
+                    $.each($.parseJSON(data),function(key,val){
+                        $("#h").append(val);
+                    });
 
                 },
                 error: function(error){

@@ -47,7 +47,7 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         //viewResolver.setPrefix("");
-        viewResolver.setSuffix(".html");
+        //viewResolver.setSuffix(".html");
         return viewResolver;
     }
 
