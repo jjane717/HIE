@@ -41,11 +41,11 @@ public class ProductEntity {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_product"), inverseJoinColumns = @JoinColumn(name = "id_enterprise"))
-    private List<EnterpriseEntity> enterpriseEntities  = new LinkedList<>();
+    private List<EnterpriseEntity> enterpriseEntities  = new LinkedList<EnterpriseEntity>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             targetEntity = OrderEntity.class, mappedBy = "productEntity")
-    List<OrderEntity> orderEntityList = new LinkedList<>();
+    List<OrderEntity> orderEntityList = new LinkedList<OrderEntity>();
 
     public Boolean getStatus() {
         return status;

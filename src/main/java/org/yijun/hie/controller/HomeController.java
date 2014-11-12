@@ -31,12 +31,12 @@ public class HomeController {
     @Transactional
     public String register (UserAccountEntity userAccountEntity) throws ParseException {
 
-        //String userName = request.getParameter("username");
-        String roleType = "Customer";
+//        String userName = request.getParameter("userName");
+//        String roleType = "Customer";
 
         if(!loginService.isUserExist(userAccountEntity.getUserName())) {
-            // 这个地方自己改
-            //loginService.createUserAccount(request,roleType);
+
+            loginService.createUserAccount(userAccountEntity);
             return "success";
         } else {
             return "This User has already been used. User name or email may be duplicated.";

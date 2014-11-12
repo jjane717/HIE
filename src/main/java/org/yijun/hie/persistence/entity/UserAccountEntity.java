@@ -31,7 +31,7 @@ public class UserAccountEntity {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private Timestamp dateOfBirth;
+    private String dateOfBirth;
 
     @Column(name = "age")
     private Integer age;
@@ -138,11 +138,11 @@ public class UserAccountEntity {
         this.lastName = lastName;
     }
 
-    public Timestamp getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Timestamp dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -35,30 +35,28 @@ public class LoginService {
         }
     }
 
-    public void createUserAccount(HttpServletRequest request, String string) throws ParseException {
-        UserAccountEntity userAccountEntity = new UserAccountEntity();
-        if(string.equals("Customer")) {
-            userAccountEntity.setEmail(request.getParameter("email"));
-            userAccountEntity.setPassword(request.getParameter("pass"));
-            userAccountEntity.setUserName(request.getParameter("username"));
-            userAccountEntity.setStatus(Boolean.valueOf(true));
-            userAccountEntity.setFirstName(request.getParameter("fname"));
-            userAccountEntity.setLastName(request.getParameter("lname"));
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-            String str = request.getParameter("mm") + "-" + request.getParameter("dd") + "-" + request.getParameter("yyyy");
-            userAccountEntity.setDateOfBirth((Timestamp) sdf.parse(str));
-            userAccountEntity.setAge(Integer.getInteger(request.getParameter("age")));
-            userAccountEntity.setStreet(request.getParameter("street"));
-            userAccountEntity.setCity(request.getParameter("city"));
-            userAccountEntity.setState(request.getParameter("state"));
-            userAccountEntity.setZip(request.getParameter("zip"));
-            userAccountEntity.setPhone(request.getParameter("phone"));
-            userAccountEntity.setIsSmallBusiness(Boolean.valueOf(request.getParameter("smallBusiness")));
-            userAccountEntity.setIsFamily(Boolean.valueOf(request.getParameter("family")));
-            userAccountEntity.setIncomeStatus(request.getParameter("income"));
-
-            userRepository.addUserAccount(userAccountEntity);
-        }
-
+    public void createUserAccount(UserAccountEntity userAccountEntity) throws ParseException {
+//        UserAccountEntity userAccountEntity = new UserAccountEntity();
+//        if(ss.equals("Customer")) {
+//            userAccountEntity.setEmail(request.getParameter("email"));
+//            userAccountEntity.setPassword(request.getParameter("password"));
+//            userAccountEntity.setUserName(request.getParameter("userName"));
+//            userAccountEntity.setStatus(Boolean.valueOf(true));
+//            userAccountEntity.setFirstName(request.getParameter("firstName"));
+//            userAccountEntity.setLastName(request.getParameter("lastName"));
+//            userAccountEntity.setDateOfBirth(request.getParameter("dateOfBirth"));
+//            userAccountEntity.setAge(Integer.getInteger(request.getParameter("age")));
+//            userAccountEntity.setStreet(request.getParameter("street"));
+//            userAccountEntity.setCity(request.getParameter("city"));
+//            userAccountEntity.setState(request.getParameter("state"));
+//            userAccountEntity.setZip(request.getParameter("zip"));
+//            userAccountEntity.setPhone(request.getParameter("phone"));
+//            userAccountEntity.setIsSmallBusiness(Boolean.valueOf(request.getParameter("isSmallBusiness")));
+//            userAccountEntity.setIsFamily(Boolean.valueOf(request.getParameter("isFamily")));
+//            userAccountEntity.setIncomeStatus(request.getParameter("incomeStatus"));
+//
+//            userRepository.addUserAccount(userAccountEntity);
+//        }
+        userRepository.addUserAccount(userAccountEntity);
     }
 }

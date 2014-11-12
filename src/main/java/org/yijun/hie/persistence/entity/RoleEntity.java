@@ -25,11 +25,11 @@ public class RoleEntity {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             targetEntity = UserAccountEntity.class, mappedBy = "roleEntity")
-    private List<UserAccountEntity> userAccountEntities = new LinkedList<>();
+    private List<UserAccountEntity> userAccountEntities = new LinkedList<UserAccountEntity>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "Role_Privilege", joinColumns = @JoinColumn(name = "id_role"), inverseJoinColumns = @JoinColumn(name = "id_privilege"))
-    private List<PrivilegeEntity> privilegeEntityList  = new LinkedList<>();
+    private List<PrivilegeEntity> privilegeEntityList  = new LinkedList<PrivilegeEntity>();
 
     public List<UserAccountEntity> getUserAccountEntities() {
         return userAccountEntities;

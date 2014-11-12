@@ -30,7 +30,7 @@ public class OrderEntity {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             targetEntity = PaymentEntity.class, mappedBy = "orderEntity")
-    List<PaymentEntity> paymentEntityList = new LinkedList<>();
+    List<PaymentEntity> paymentEntityList = new LinkedList<PaymentEntity>();
 
     public List<PaymentEntity> getPaymentEntityList() {
         return paymentEntityList;

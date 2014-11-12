@@ -19,7 +19,7 @@ public class PrivilegeEntity {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Role_Privilege", joinColumns = @JoinColumn(name = "id_privilege"), inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private List<RoleEntity> roleEntityList  = new LinkedList<>();
+    private List<RoleEntity> roleEntityList  = new LinkedList<RoleEntity>();
 
     public List<RoleEntity> getRoleEntityList() {
         return roleEntityList;
