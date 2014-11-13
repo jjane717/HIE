@@ -29,7 +29,7 @@ public class HomeController {
     @RequestMapping(value="/userSignIn", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public String register (UserAccountEntity userAccountEntity) throws ParseException {
+    public String register (UserAccountEntity userAccountEntity){
 
 //        String userName = request.getParameter("userName");
         String roleType = "Customer";
@@ -43,8 +43,49 @@ public class HomeController {
         }
     }
 
+    @RequestMapping(value="/userUpdate", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public String update (UserAccountEntity userAccountEntity){
+        loginService.updateUserAccount(userAccountEntity);
+        return "OK";
+    }
+
+
     @RequestMapping(value = "/system", method = RequestMethod.GET)
     public String managementSystem (UserAccountEntity userAccountEntity){
         return "html/manage.html";
     }
+
+    @RequestMapping(value = "/manageUserAccounts", method = RequestMethod.GET)
+    public String manageUserAccounts (){
+        return "html/manageUserAccounts.html";
+    }
+
+    @RequestMapping(value = "/manageEmployees", method = RequestMethod.GET)
+    public String manageEmployees (){
+        return "html/manageEmployees.html";
+    }
+
+    @RequestMapping(value = "/manageEnterprises", method = RequestMethod.GET)
+    public String manageEnterprises (){
+        return "html/manageEnterprises.html";
+    }
+
+    @RequestMapping(value = "/manageOffers", method = RequestMethod.GET)
+    public String manageOffers (){
+        return "html/manageOffers.html";
+    }
+
+    @RequestMapping(value = "/manageProducts", method = RequestMethod.GET)
+    public String manageProducts (){
+        return "html/manageProducts.html";
+    }
+
+    @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
+    public String viewAccount (){
+
+        return "html/viewAccount.html";
+    }
+
 }

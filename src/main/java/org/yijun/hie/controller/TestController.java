@@ -1,7 +1,10 @@
 package org.yijun.hie.controller;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonGenerator;
 import org.eclipse.jetty.util.ajax.JSON;
 import org.hibernate.SessionFactory;
+import org.hibernate.internal.jaxb.cfg.ObjectFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ import org.yijun.hie.persistence.repository.UserRepository;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -67,17 +73,47 @@ public class TestController {
     @RequestMapping(value="/pp", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<PrivilegeEntity> pp () {
-        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+    public String pp () throws JSONException {
+        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
-        return privilegeEntityList;
+        JSONObject jsonObject = new JSONObject();
+
+        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
+            jsonObject.put(privilegeEntity.getPrivilegeName(),privilegeEntity.getPrivilegeFile());
+        }
+
+        System.out.println(jsonObject);
+        return jsonObject.toString();
     }
 
-    @RequestMapping(value="/oo", method = RequestMethod.GET)
-    @ResponseBody
-    public JSON oo (JSON o) {
-        JSON json = new JSON();
+//    @RequestMapping(value="/po", method = RequestMethod.GET)
+//    @ResponseBody
+//    @Transactional
+//    public List<PrivilegeEntity> po (){
+//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+//        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+////        JSONObject jsonObject = new JSONObject();
+////
+////        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
+////            jsonObject.put(privilegeEntity.getIdPrivilege().toString(),privilegeEntity.getPrivilegeName());
+////        }
+////
+////        System.out.println(jsonObject);
+//        return privilegeEntityList;
+//    }
 
-        return json;
-    }
+//    @RequestMapping(value="/oo", method = RequestMethod.GET)
+//    @Transactional
+//    public String oo (HttpServletRequest request) {
+//        HttpSession session = request.getSession();
+//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+//        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+//        List list = new LinkedList();
+//        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
+//            list.add(privilegeEntity.getPrivilegeName());
+//        }
+//        session.setAttribute("test",list);
+//
+//        return "html/test";
+//    }
 }

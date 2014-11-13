@@ -18,12 +18,23 @@ public class PrivilegeEntity {
     @Column(name = "privilege_name")
     private String privilegeName;
 
+    @Column(name = "privilege_file")
+    private String privilegeFile;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Role_Privilege", joinColumns = @JoinColumn(name = "id_privilege"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<RoleEntity> roleEntityList  = new LinkedList<RoleEntity>();
 
     public List<RoleEntity> getRoleEntityList() {
         return roleEntityList;
+    }
+
+    public String getPrivilegeFile() {
+        return privilegeFile;
+    }
+
+    public void setPrivilegeFile(String privilegeFile) {
+        this.privilegeFile = privilegeFile;
     }
 
     public void setRoleEntityList(List<RoleEntity> roleEntityList) {

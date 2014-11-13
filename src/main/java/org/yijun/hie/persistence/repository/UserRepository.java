@@ -41,6 +41,12 @@ public class UserRepository {
         session.flush();
     }
 
+    public void updateUserAccount (UserAccountEntity userAccountEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(userAccountEntity);
+        session.flush();
+    }
+
     public List<EnterpriseEntity> getEnterprise () {
         Session session = sessionFactory.getCurrentSession();
         List<EnterpriseEntity> enterpriseEntityList;

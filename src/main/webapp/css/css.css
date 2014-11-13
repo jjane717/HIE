@@ -1,3 +1,5 @@
+
+
 #register:hover{
     text-decoration: underline;
     background-color: lightyellow;
@@ -148,4 +150,9 @@ body {
 #progressbar li.active:before,  #progressbar li.active:after{
     background: #27AE60;
     color: white;
+}
+
+#view_acc{
+    margin:10px;
+    padding: 10px;
 }

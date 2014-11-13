@@ -1,0 +1,1181 @@
+
+    #login-system{
+        margin:-37px 0 0 768px;
+    }
+
+    #account-menu{
+        margin:-37px 0 0 838px;
+    }
+
+    #cart-system{
+        margin:-37px 0 0 828px;
+    }
+
+    #c-right{
+        float:right;
+    }
+
+    #c-left img{
+        width:645px;
+        height:252px;
+    }
+
+    #c-left{
+        width:645px;
+        height:410px;
+    }
+
+    #header{
+        height:120px;
+    }
+
+
+body{
+    margin:0;
+    padding:0;
+    font:13px arial;
+    color:#745F84;
+}
+
+h1, h2, h3, h4, h5{
+    color:#594864;
+}
+
+a{
+    text-decoration:none;
+    color:#685576;
+}
+
+.hidden{
+    display:none;
+}
+
+.lightblue{
+    background-color:#C5DEFF;
+}
+
+.validateTips{
+    color:red;
+}
+
+.yellow{
+    background-color:#F1C40F;
+}
+
+.darkorange{
+    background-color:#F1C40F;
+    color:white;
+    padding:20px;
+}
+
+.clickdarkorange{
+    background-color:#F1C40F;
+    color:white;
+    padding:20px;
+}
+
+.holdlightblue{
+    background-color:#DEF0FF;
+    color:#A8B6C1;
+    padding:16px;
+}
+
+.lightyellow{
+    background-color:#FFFBD7;
+}
+
+.one{
+    color:#D35400;
+}
+
+.two{
+    color:#E67E22;
+}
+
+.three{
+    color:#F39C12;
+}
+
+.four{
+    color:#F1C40F;
+}
+
+.five{
+    color:#E74C3C;
+}
+
+.bg_blue{
+    background-color:#2980B9;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:10px;
+    padding:10px;
+}
+
+.bg_blue_hover{
+    background-color:#3498DB;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:10px;
+    padding:12px;
+}
+
+.submit_button{
+    background-color:#3498DB;
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    border-radius:10px;
+    padding:8px;
+    cursor:pointer;
+}
+
+.disabledtext{
+    border:0;
+    width:150px;
+    height:20px;
+    font-size:14px;
+    color:#745F84;
+    text-align:center;
+}
+
+.addressoption{
+    color:blue;
+    text-decoration:underline;
+}
+
+
+.addressoption .editeaddress{
+    border-right:1px solid black;
+}
+
+.addressoption label{
+    padding:0 10px;
+    cursor:pointer;
+}
+
+.viewbook{
+    width:28px;
+    height:28px;
+    cursor:pointer;
+}
+
+#searchstring{
+    text-align:center;
+}
+
+#wrap{
+    width:100%;
+}
+
+#headerholder{
+    width:100%;
+    height:120px;
+    margin:0;
+    padding:0;
+}
+
+#header{
+    width:100%;
+    margin:0 auto;
+/*//background:url("../images/bg_body.png");*/
+/*//background-size:100% 100%;*/
+/*//background-repeat:no-repeat;*/
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+#h-left{
+    width:300px;
+    height:100%;
+    float:left;
+    margin-left:128px;
+}
+
+#h-left img{
+    width:300px;
+    height:100%;
+}
+
+#h-middle{
+    width:450px;
+    height:80px;
+    margin:15px 0;
+    margin-left:10px;
+    float:left;
+    border-radius:10px;
+    border:1px solid lightgray;
+}
+
+#h-middle [type="text"]{
+    border:200px;
+    font-size:16px;
+    width:255px;
+    height:50px;
+    margin:12px 8px 12px 10px;
+}
+
+#find_book_button{
+    width:160px;
+    height:60px;
+    background-color:#D35400;
+    float:right;
+    margin-top:8px;
+    margin-right:10px;
+    border-radius:10px;
+    position:relative;
+    cursor:pointer;
+}
+
+#find_book_button:hover{
+    background-color:#E67E22;
+}
+
+#find_book_button [type="submit"]{
+    position:absolute;
+    padding:18px 6px;
+    cursor:pointer;
+    font-size:18px;
+    color:white;
+    font-weight:bold;
+    border:0px;
+    background:none;
+}
+
+#h-right{
+    font-size:16px;
+    width:250px;
+    height:80px;
+    margin:15px 0;
+    margin-left:10px;
+    float:left;
+    border-radius:5px;
+/*border:1px solid lightgray;*/
+}
+
+#div-login{
+    width: 140px;
+    height: 60px;
+    float:left;
+    border-radius:10px;
+    background-color:#BDC3C7;
+    color:white;
+    margin-top:8px;
+}
+
+#div-login div{
+    width:120px;
+    margin-top:10px;
+    margin-left:10px;
+    position:absolute;
+}
+
+#login_link{
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+    margin-left:10px;
+}
+
+#login_user{
+    margin-left:10px;
+}
+
+#account_link{
+    cursor:pointer;
+    margin-top:5px;
+}
+
+#account_up_down{
+    width:10px;
+    height:10px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+#div-cart{
+    width:98px;
+    margin-top:19px;
+    margin-left:10px;
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+    float:right;
+    background-color:#F1C40F;
+    border-radius:10px;
+}
+
+#cart_up_down{
+    width:15px;
+    height:15px;
+    cursor:pointer;
+    float:right;
+    margin:15px 4px 0 0px;
+}
+
+#div-cart span{
+    margin:10px;
+    position:absolute;
+}
+
+#div-cart img{
+    width:40%;
+    height:40%;
+    margin-left:30px;
+    margin-top:3px;
+    cursor:pointer;
+}
+
+#login-system{
+    border:1px solid gray;
+    width: 250px;
+    height:350px;
+    display: none;
+    position: absolute;
+    float:right;
+    z-index:10;
+    position:absolute;
+    opacity:1;
+    padding:0 20px;
+    background-color:white;
+    border-radius:10px;
+}
+
+#login-form{
+    border-top:1px dotted gray;
+    border-bottom:1px dotted gray;
+    padding:10px;
+    padding-bottom:15px;
+}
+
+#login-form b{
+    color:red;
+    width:200px;
+}
+
+#login-form h3{
+    margin:5px 0px;
+}
+
+#login-form [type]{
+    width:200px;
+    height:20px;
+}
+
+#login-form [type]:hover{
+    background-color:#C5DEFF;
+}
+
+#login_submit div{
+    width:200px;
+    margin:10px;
+    height:30px;
+    text-align:center;
+    padding-top:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:white;
+    background-color:#F39C12;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#login_submit div:hover{
+    background-color:#F1C40F;
+}
+
+#login_submit a p{
+    color:blue;
+    text-decoration:underline;
+    margin-left:10px;
+}
+
+#account-menu{
+    border:1px solid gray;
+    width: 180px;
+    height:180px;
+    display: none;
+    position: absolute;
+    float:right;
+    z-index:10;
+    position:absolute;
+    opacity:1;
+    padding-left:20px;
+    background-color:white;
+    border-radius:10px;
+}
+
+#account-menu ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    font-size:13px;
+    font-weight:bold;
+}
+
+#account-menu li{
+    margin:10px;
+}
+
+#account-menu a{
+    color:#685576;
+    text-decoration:none;
+}
+
+#account-menu a:hover{
+    text-decoration:underline;
+}
+
+#logout{
+    cursor:pointer;
+}
+
+#cart-system{
+    border:1px solid gray;
+    width: 280px;
+    height:450px;
+    display: none;
+    position: absolute;
+    float:right;
+    z-index:10;
+    position:absolute;
+    opacity:1;
+    padding:0 20px;
+    background-color:white;
+    border-radius:10px;
+}
+
+#cart{
+    border-top:1px dotted gray;
+    border-bottom:1px dotted gray;
+    height:200px;
+    overflow:scroll;
+}
+
+#cart img{
+    width:60px;
+    float:left;
+}
+
+#cart p{
+    margin:5px 0;
+}
+
+#cart .itemdetails{
+    float:left;
+}
+
+#cart .itemdetails .info label{
+    margin-right:8px;
+}
+
+#cart .itemdetails .more{
+    text-decoration:underline;
+}
+
+
+#cart_submit div{
+    width:200px;
+    margin:10px;
+    height:30px;
+    text-align:center;
+    padding-top:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:white;
+    background-color:#F39C12;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#cart_submit div:hover{
+    background-color:#F1C40F;
+}
+
+#dialog-form{
+    display:none;
+}
+
+#container{
+    width:1024px;
+    height:600px;
+    margin:0 auto;
+}
+
+#container-main{
+    width:1024px;
+    height:500px;
+    margin:0 auto;
+}
+
+#c-left{
+    padding-top:50px;
+/*//border:1px solid black;*/
+    overflow:scroll;
+    margin:0;
+    float:left;
+}
+
+#c-left p{
+    padding-left:50px;
+    font-weight:bold;
+}
+
+#c-left h2{
+    padding-left:20px;
+    color:#E74C3C;
+}
+
+#c-right{
+    width:300px;;
+    height:410px;
+    padding-top:50px;
+}
+
+#c-right div{
+    width:300px;
+    height:60px;
+    border-radius:10px;
+    margin:30px 0;
+    border:1px solid gray;
+    font-size:22px;
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    cursor:pointer;
+    background-color: #685576;
+}
+
+#c-right div:hover{
+    background-color:#8E74A1;
+}
+
+#c-right p{
+    text-align:center;
+    margin:15px 0;;
+}
+
+  #seller-signup{
+      width:1024px;
+  }
+
+#seller-signup a{
+    text-decoration:underline;
+}
+
+#seller-signup b{
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+#customer-topmenu{
+    width:320px;
+    height:500px;
+    margin-right:20px;
+    float: left;
+}
+
+#customer-topmenu ul{
+    width:320px;
+    list-style:none;
+    text-align: center;
+    margin:0;
+    padding:0;
+}
+
+#customer-topmenu ul li{
+    font-size:22px;
+    font-weight:bold;
+    margin-right:15px;
+    margin-top:20px;
+    border-radius:10px;
+    position:relative;
+    top:20px;
+    cursor:pointer;
+}
+
+#customer-topmenu label{
+    cursor:pointer;
+}
+
+#customer-container{
+    width:600px;
+    height:700px;
+    border:1px solid #A8B6C1;
+    border-radius:10px;
+    overflow:scroll;
+    float:left;
+}
+
+#account-status{
+    width:1024px;
+    height:500px;
+}
+
+#account-detail{
+    border-right:1px solid gray;
+    margin:10px;
+    padding-right:30px;
+    width:450px;
+    float:left;
+}
+
+#account-detail h1{
+    border-bottom:1px dotted gray;
+    margin:0px;
+    padding:15px 0;
+}
+
+#account-detail h2{
+    width:180px;
+    float:left;
+}
+
+#account-detail div{
+    float:left;
+}
+
+#account-balance{
+    margin-left:20px;
+}
+
+#balance-to-card{
+    cursor:pointer;
+
+}
+
+#card-to-balance{
+    cursor:pointer;
+    margin-top:10px;
+    clear:both;
+}
+
+#btc{
+    width:200px;
+    margin-left:30px;
+    margin-top:5px;
+}
+
+#btc [type="text"]{
+    margin-top:5px;
+}
+
+#btc div{
+    float:right;
+}
+
+#ctb{
+    width:200px;
+    margin-top:15px;
+    margin-left:30px;
+}
+
+#ctb [type="text"]{
+    margin-top:5px;
+}
+
+#ctb div{
+    float:right;
+}
+
+#account-card{
+    margin-left:20px;
+}
+
+#view_link{
+    color:blue;
+    text-decoration:underline;
+    margin-top:22px;
+    cursor:pointer;
+}
+
+#card_table{
+    margin-top:10px;
+    width:420px;
+}
+
+#card_table table th{
+    width:100px;
+    height:30px;
+    text-align:center;
+}
+
+#card_table table td{
+    width:100px;
+    height:30px;
+    text-align:center;
+}
+
+#card_table p{
+    margin:10px;
+}
+
+#card_edit{
+    color:blue;
+    text-decoration:underline;
+    cursor:pointer;
+    margin:0 15px 10px 0;
+}
+
+#card_delete{
+    color:blue;
+    text-decoration:underline;
+    cursor:pointer;
+    margin:0 0 10px 15px;
+}
+
+#create_card{
+    color:blue;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+#card-edit-div{
+    width:370px;
+    clear:both;
+    border:1px solid gray;
+    margin-top:10px;
+    padding-top:20px;
+}
+
+#card-edit-div form table td{
+    width:160px;
+    margin:10px 5px;
+    text-align:center;
+}
+
+#card-edit-div form [type="text"]{
+    width:150px;
+}
+
+#card-tips{
+    color:red;
+    margin:0;
+    margin-left:20px;
+}
+
+#card-edit-div div{
+    float:right;
+    margin:10px 45px;
+}
+
+#transfer_tips{
+    margin:8px;
+    color:red;
+}
+
+#account-information{
+    float:right;
+    width:450px;
+    border-left:1px solid gray;
+    margin:10px;
+    padding-left:30px;
+}
+
+#account-information h1{
+    border-bottom:1px dotted gray;
+    margin:0px;
+    padding:15px 0;
+}
+
+#account-information table{
+    width:350px;
+    margin-top:10px;
+    margin-left:40px;
+//text-align:center;
+}
+
+#account-information table input[type]{
+    text-align:center;
+}
+
+#account_edit_button{
+    float:right;
+    margin-right:140px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+#account_edit_button label{
+    cursor:pointer;
+}
+
+#account_save_button{
+    float:right;
+    margin-right:20px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+#account_save_button label{
+    cursor:pointer;
+}
+
+#account_cancel_button{
+    float:right;
+    margin-right:20px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+#account_cancel_button label{
+    cursor:pointer;
+}
+
+#acctips{
+    color:red;
+    margin-top:15px;
+}
+
+
+#add-table{
+    width:900px;
+    text-align:center;
+    margin:10px 50px;
+    font-size:14px;
+}
+
+#add-table th{
+    font-size:18px;
+}
+
+#add-table td{
+    height:100px;
+    border-bottom: 1px solid gray;
+    width:225px;
+    text-align:center;
+}
+
+#create_address_button{
+    float:left;
+    margin:40px 40px;
+}
+
+#p-notice{
+    margin:40px 40px;
+}
+
+
+#sellerbooktable{
+    text-align:center;
+    margin:20px;
+}
+
+#sellerbooktable select{
+    margin-left:30px;
+}
+
+#sellerbooktable th{
+    font-size:20px;
+}
+
+#sellerbooktable tr{
+    height:50px;
+}
+
+#sellerbooktable td{
+    border-bottom:1px solid gray;
+}
+
+#sellerbooktable .deletesellerbook{
+    text-decoration:underline;
+    color:blue;
+    cursor:pointer;
+}
+
+#sellerbooktable .bookname{
+    width:250px;
+}
+
+#sellerbooktable .isSale, .isNew, .isRental{
+    width:30px;
+}
+
+#sellerbooktable .saleprice, .rentalprice, .discount{
+    width:28px;
+}
+
+#sellerbooktable .viewsellerbookrow{
+    height:300px;
+    text-align:left;
+    background-color:#FFFBD7;
+}
+
+#sellerbooktable .viewsellerbookrow img{
+    float:left;
+}
+
+#sellerbooktable .viewsellerbookrow .pub{
+    float:left;
+}
+
+#sellerbooktable .viewsellerbookrow .sellerbookdetail{
+    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:10px;
+}
+
+#sellerbooktable .viewsellerbookrow [type="text"]{
+    background-color:#FFFBD7;
+}
+
+#sellerbooktable .viewsellerbookrow label{
+    font-weight:bold;
+    font-size:18px;
+
+}
+
+#sellerbooktable .viewsellerbookrow .describe, .comments{
+    width:400px;
+    height:50px;
+}
+
+#sellerbooktable .option{
+    clear:both;
+    width:400px;
+    height:30px;
+}
+
+#sellerbooktable .viewsellerbookrow .type, .condition{
+    float:left;
+}
+
+#sellerbooktable textarea{
+    background-color:#FFFBD7;
+    text-align:left;
+}
+
+#sellerbooktable .action{
+    float:right;
+}
+
+#sellerbooktable .action div{
+    float:right;
+    margin-right:20px;
+    cursor:pointer;
+}
+
+#detail{
+    width:1024px;
+    border:1px solid #A8B6C1;
+    border-radius:10px;
+    overflow:scroll;
+    height:500px;
+    margin-top:20px;
+}
+
+#book{
+    width:980px;
+    padding:20px;
+    height:300px;
+}
+
+#image{
+    float:left;
+}
+
+#bookname{
+    margin:20px;
+}
+
+#author{
+    margin:20px 20px;
+}
+
+#bookdetail{
+    padding-left:20px;
+    float:left;
+}
+
+#bookdetail b{
+    color:#C0392B;
+    margin-right:10px;
+}
+
+#describe{
+    width:300px;
+}
+
+#bookmarket{
+    width:980px;
+    clear:both;
+    padding-top:30px;
+}
+
+#option{
+    float:right;
+}
+
+#option div{
+    width:250px;
+    height:60px;
+    border-radius:10px;
+    margin:0px 30px;
+    margin-right:100px;
+    border:1px solid gray;
+    font-size:22px;
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    cursor:pointer;
+    background-color: #685576;
+}
+
+#option div:hover{
+    background-color:#8E74A1;
+}
+
+#option p{
+    text-align:center;
+    margin:15px 0;;
+}
+
+#booktable{
+    width:980px;
+    text-align:center;
+}
+
+#booktable img{
+    cursor:pointer;
+}
+
+#booktable th{
+    color:#C0392B;
+}
+
+#addnewbook{
+    padding:30px;
+}
+
+#findisbn .one{
+    font-size:18px;
+    font-weight:bold;
+}
+
+#book-left{
+    width:420px;
+    float:left;
+}
+
+#isbn-div{
+    margin-bottom:20px;
+}
+
+#isbn{
+    margin-left:10px;
+    width:150px;
+}
+
+#isbn-div .submit_button{
+    float:right;
+}
+
+#create-div #newbook_button{
+    float:left;
+    width:150px;
+    height:25px;
+    font-size:18px;
+    background-color:#E67E22;
+}
+
+#newbook{
+    width:450px;
+    clear:both;
+    padding:20px;
+    font-size:14px;
+}
+
+#newbook table{
+    border:1px solid gray;
+}
+
+#newbook td{
+    padding:5px;
+}
+
+#newbook input[type="text"]{
+    width:220px;
+}
+
+#newbook .submit_button{
+    float:left;
+    margin-left:20px;
+    margin-top:20px;
+}
+
+#book-right{
+    width:480px;
+    border-left:1px solid gray;
+    float:right;
+    padding-left:30px;
+}
+
+#selectbook{
+    border-bottom:1px dotted gray;
+    padding-bottom:20px;
+}
+
+#book-right p{
+    margin:0;
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#selectbook td{
+    font-weight:bold;
+    color:#E74C3C;
+    font-size:14px;
+    padding:5px 20px;
+}
+
+#selectbook [type="text"]{
+    width:300px;
+}
+
+#createsellerbook{
+    margin-top:20px;
+}
+
+#createsellerbook .validateTips{
+    font-size:14px;
+    font-weight:normal;
+}
+
+#createsellerbook table{
+    border:1px solid gray;
+    margin-left:20px;
+}
+
+#createsellerbook td{
+    padding:5px;
+    font-size:14px;
+}
+
+#createsellerbook [type="text"]{
+    width:220px;
+}
+
+#createsellerbook select{
+    width:100px;
+}
+
+#createsellerbook .submit_button{
+    margin:10px;
+    float:left;
+}
+
+#footer{
+    width:100%;
+    border:0;
+    height:80px;
+}
+

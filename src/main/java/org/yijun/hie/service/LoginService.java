@@ -36,7 +36,7 @@ public class LoginService {
         }
     }
 
-    public void createUserAccount(UserAccountEntity userAccountEntity, String ss) throws ParseException {
+    public void createUserAccount(UserAccountEntity userAccountEntity, String ss){
 //        UserAccountEntity userAccountEntity = new UserAccountEntity();
         if(ss.equals("Customer")) {
 //            userAccountEntity.setEmail(request.getParameter("email"));
@@ -58,6 +58,13 @@ public class LoginService {
             userAccountEntity.setRoleEntity(userRepository.getRole("Customer").get(0));
             userRepository.addUserAccount(userAccountEntity);
         }
+    }
+
+    public void updateUserAccount(UserAccountEntity userAccountEntity){
+        userAccountEntity.setRoleEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getRoleEntity());
+        userAccountEntity.setIdEmployee(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getIdEmployee());
+        userAccountEntity.setEnterpriseEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getEnterpriseEntity());
+        userRepository.updateUserAccount(userAccountEntity);
     }
 
 

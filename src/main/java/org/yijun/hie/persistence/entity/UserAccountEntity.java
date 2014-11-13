@@ -67,7 +67,7 @@ public class UserAccountEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = EnterpriseEntity.class)
     @JoinColumn(name = "id_enterprise")
     public EnterpriseEntity enterpriseEntity;
 
