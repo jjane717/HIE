@@ -8,7 +8,15 @@
 
             success: function(data){
                 $.each(data,function(i){
-                    $("#enterpriseTable").append("<tr id=\"userAccountInfo-" + data[i]["idUserAccount"] + "\"><td>" + data[i]["userName"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["firstName"] + " " + data[i]["lastName"] + "</td><td>" + data[i]["roleEntity"]["roleName"] + "</td><td><input type=\"checkbox\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>");
+                    var content = "<tr id=\"userAccountInfo-" + data[i]["idUserAccount"] + "\"><td>" + data[i]["userName"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["firstName"] + " " + data[i]["lastName"] + "</td><td>" + data[i]["roleEntity"]["roleName"] + "</td>";
+                    if(data[i]["status"] == "1"){
+                        content = content + "<td><input type=\"checkbox\" checked=\"true\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
+                    }else{
+                        content = content + "<td><input type=\"checkbox\" checked=\"true\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
+                    }
+
+                    $("#enterpriseTable").append(content);
+
                     $("#enterpriseTable tr").hover(function(){
                         $(this).addClass("one");
                     },function(){
