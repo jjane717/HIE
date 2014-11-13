@@ -1,5 +1,7 @@
 package org.yijun.hie.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -83,6 +85,7 @@ public class UserAccountEntity {
         this.roleEntity = roleEntity;
     }
 
+    @JsonIgnore
     public EnterpriseEntity getEnterpriseEntity() {
         return enterpriseEntity;
     }

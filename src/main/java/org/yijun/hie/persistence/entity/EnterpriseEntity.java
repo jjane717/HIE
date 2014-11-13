@@ -45,7 +45,7 @@ public class EnterpriseEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             targetEntity = UserAccountEntity.class, mappedBy = "enterpriseEntity")
     List<UserAccountEntity> userAccountEntityList = new LinkedList<UserAccountEntity>();
 

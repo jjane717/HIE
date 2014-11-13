@@ -73,4 +73,14 @@ public class ManageController {
         loginService.deleteEnterpriseFromService(enterpriseEntity);
         return "You have already Delete this Enterprise.";
     }
+
+    @RequestMapping(value="/userAccountForEnterprise", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<UserAccountEntity> getUserAccountsByEnterprise(){
+        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+
+        List<UserAccountEntity> userAccountEntityList =  loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
+        return userAccountEntityList;
+    }
 }

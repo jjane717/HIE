@@ -89,4 +89,8 @@ public class LoginService {
         userRepository.deleteEnterpriseFromUR(enterpriseEntity);
     }
 
+    public List<UserAccountEntity> getUserAccountsByEnterpriseFromService (EnterpriseEntity enterpriseEntity){
+        return userRepository.getUserAccountsByEnterpriseFromUR(enterpriseEntity);
+    }
+
 }

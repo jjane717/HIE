@@ -22,10 +22,11 @@ public class UserRepository {
     private SessionFactory sessionFactory;
 
     private String getUserByNameHql = "from UserAccountEntity where userName = :userName";
-    private String getEnterprise = "from EnterpriseEntity";
-    private String getEnterpriseOne = "from EnterpriseEntity where idEnterprise = :idEnterprise";
-    private String getRoleByName = "from RoleEntity where roleName = :roleName";
-    private String getPrivilegeByName = "from PrivilegeEntity where privilegeName = :privilegeName";
+    //private String getUserByEnterpriseHql = "from UserAccountEntity where  "
+    private String getEnterpriseHql = "from EnterpriseEntity";
+    private String getEnterpriseOneHql = "from EnterpriseEntity where idEnterprise = :idEnterprise";
+    private String getRoleByNameHql = "from RoleEntity where roleName = :roleName";
+    private String getPrivilegeByNameHql = "from PrivilegeEntity where privilegeName = :privilegeName";
 
     public List<UserAccountEntity> getUserByName (String userName) {
         Session session = sessionFactory.getCurrentSession();
@@ -51,21 +52,21 @@ public class UserRepository {
         Session session = sessionFactory.getCurrentSession();
         List<EnterpriseEntity> enterpriseEntityList;
 
-        enterpriseEntityList = session.createQuery(getEnterprise).list();
+        enterpriseEntityList = session.createQuery(getEnterpriseHql).list();
         return enterpriseEntityList;
     }
 
     public List<RoleEntity> getRole (String roleName) {
         Session session = sessionFactory.getCurrentSession();
         List<RoleEntity> roleEntityList;
-        roleEntityList = session.createQuery(getRoleByName).setString("roleName", roleName).list();
+        roleEntityList = session.createQuery(getRoleByNameHql).setString("roleName", roleName).list();
         return roleEntityList;
     }
 
     public List<PrivilegeEntity> getPrivilege (String privilegeName) {
         Session session = sessionFactory.getCurrentSession();
         List<PrivilegeEntity> privilegeEntityList;
-        privilegeEntityList = session.createQuery(getPrivilegeByName).setString("privilegeName", privilegeName).list();
+        privilegeEntityList = session.createQuery(getPrivilegeByNameHql).setString("privilegeName", privilegeName).list();
         return privilegeEntityList;
     }
 
@@ -87,7 +88,7 @@ public class UserRepository {
     public EnterpriseEntity getEnterpriseOneFromUR (Integer idEnterprise){
         Session session = sessionFactory.getCurrentSession();
         EnterpriseEntity enterpriseEntity;
-        enterpriseEntity = (EnterpriseEntity)session.createQuery(getEnterpriseOne).setInteger("idEnterprise",idEnterprise).list().get(0);
+        enterpriseEntity = (EnterpriseEntity)session.createQuery(getEnterpriseOneHql).setInteger("idEnterprise",idEnterprise).list().get(0);
         return enterpriseEntity;
     }
 
@@ -108,5 +109,10 @@ public class UserRepository {
         Session session = sessionFactory.getCurrentSession();
         session.delete(enterpriseEntity);
         session.flush();
+    }
+
+    public List<UserAccountEntity> getUserAccountsByEnterpriseFromUR (EnterpriseEntity enterpriseEntity){
+        return enterpriseEntity.getUserAccountEntityList();
+
     }
 }
