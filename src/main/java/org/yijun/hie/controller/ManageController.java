@@ -56,4 +56,21 @@ public class ManageController {
         loginService.updateEnterpriseFromService(enterpriseEntity);
         return "OK";
     }
+
+    @RequestMapping(value="/addEnterprise", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public EnterpriseEntity addEnterprise (EnterpriseEntity enterpriseEntity) {
+        return loginService.addEnterpriseFromService(enterpriseEntity);
+    }
+
+    @RequestMapping(value="/deleteEnterprise", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public String deleteEnterprise (String id) {
+        Integer idEnterprise = Integer.valueOf(id);
+        EnterpriseEntity enterpriseEntity = loginService.getEnterpriseOneFromService(idEnterprise);
+        loginService.deleteEnterpriseFromService(enterpriseEntity);
+        return "You have already Delete this Enterprise.";
+    }
 }

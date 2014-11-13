@@ -9,7 +9,14 @@
             success: function(data){
                 $.each(data,function(i){
                     if(!(data[i]["enterpriseName"] == "Admin")) {
-                        $("#enterpriseTable").append("<tr><td id=\"enterpriseInfo-" + data[i]["idEnterprise"] + "\">" + data[i]["enterpriseName"] + "</td><td>" + data[i]["enterpriseType"] + "</td><td>" + data[i]["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data[i]["idEnterprise"] + "\")>Edit</div></td></tr>");
+                        $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data[i]["idEnterprise"] + "\"><td>" + data[i]["enterpriseName"] + "</td><td>" + data[i]["enterpriseType"] + "</td><td>" + data[i]["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data[i]["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data[i]["idEnterprise"] + "\")>Delete</div></div></td></tr>");
+
+                        $("#enterpriseTable tr").hover(function(){
+                            $(this).addClass("one");
+                        },function(){
+                            $(this).removeClass("one");
+                        });
+
                     }
                 });
             },
@@ -17,10 +24,6 @@
                 alert("NO"+ error);
             }
         });
-
-
-
-
     });
 
 </script>
@@ -43,8 +46,16 @@
 
 <style>
     .action{
-        width: 50px;
-        margin-left:50px;
+        width: 100px;
+        float: left;
+    }
+
+    .submit_button{
+        float:left;
+    }
+
+    .edit{
+        margin-right: 3px;
     }
 
     #create{

@@ -77,8 +77,16 @@ public class LoginService {
         return userRepository.getEnterpriseOneFromUR(idEnterprise);
     }
 
-    public  void updateEnterpriseFromService(EnterpriseEntity enterpriseEntity){
+    public void updateEnterpriseFromService(EnterpriseEntity enterpriseEntity){
         userRepository.updateEnterpriseFromUR(enterpriseEntity);
+    }
+
+    public EnterpriseEntity addEnterpriseFromService(EnterpriseEntity enterpriseEntity){
+        return userRepository.addEnterpriseFromUR(enterpriseEntity);
+    }
+
+    public void deleteEnterpriseFromService(EnterpriseEntity enterpriseEntity){
+        userRepository.deleteEnterpriseFromUR(enterpriseEntity);
     }
 
 }

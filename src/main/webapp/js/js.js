@@ -108,12 +108,13 @@ function createEnterprise(){
                 if ( bValid ) {
                     $.ajax({
                         type: "POST",
-                        url : "http://localhost:8080/updateEnterprise",
+                        url : "http://localhost:8080/addEnterprise",
                         data : $("#enterpriseInfoForm").serialize(),
                         cache:true,
 
                         success: function(data){
                             alert("OK"+data);
+                            $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data["idEnterprise"] + "\"><td>" + data["enterpriseName"] + "</td><td>" + data["enterpriseType"] + "</td><td>" + data["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data["idEnterprise"] + "\")>Delete</div></div></td></tr>");
                         },
                         error: function(error){
                             alert("NO"+ error);
@@ -194,7 +195,7 @@ function editEnterprise(id){
                 bValid = bValid && checkLength( email, "email", 6, 80, tips );
 
                 bValid = bValid && checkRegexp( enterpriseName, /^[a-z]([0-9a-z_])+$/i, "Enterprise Name may consist of a-z, 0-9, underscores, begin with a letter.",tips );
-                bValid = bValid && checkRegexp( enterpriseCode, /^([0-9])+$/, "Password field only allow : A-Z a-z 0-9" ,tips);
+                bValid = bValid && checkRegexp( enterpriseCode, /^([0-9])+$/, "Enterprise Code field only allow : 0-9" ,tips);
                 bValid = bValid && checkRegexp( street, /^([0-9a-zA-Z])+$/, "Address Line field only allow : A-Z a-z 0-9." , tips);
                 bValid = bValid && checkRegexp( city, /^([a-zA-Z])+$/, "City field only allow : A-Z a-z.", tips );
                 bValid = bValid && checkRegexp( state, /^([a-zA-Z])+$/, "State field only allow : A-Z a-z.",tips );
@@ -208,7 +209,7 @@ function editEnterprise(id){
                 if ( bValid ) {
                     $.ajax({
                         type: "POST",
-                        url : "http://localhost:8080/addEnterprise",
+                        url : "http://localhost:8080/updateEnterprise",
                         data : $("#enterpriseInfoForm").serialize(),
                         cache:true,
 
@@ -232,6 +233,25 @@ function editEnterprise(id){
         close: function() {
             allFields.val( "" ).removeClass( "ui-state-error" );
             $( this ).dialog( "close" );
+        }
+    });
+}
+
+function deleteEnterprise(id){
+    var deleteID = "#enterpriseInfo-" + id;
+    var deleteTr = $(deleteID);
+    $.ajax({
+        type: "POST",
+        url : "http://localhost:8080/deleteEnterprise",
+        data : {"id":id},
+        cache:true,
+
+        success: function(data){
+            alert("OK" + data);
+            deleteTr.remove();
+        },
+        error: function(error){
+            alert("NO"+ error);
         }
     });
 }

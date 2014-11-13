@@ -97,5 +97,16 @@ public class UserRepository {
         session.flush();
     }
 
+    public EnterpriseEntity addEnterpriseFromUR (EnterpriseEntity enterpriseEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.save(enterpriseEntity);
+        session.flush();
+        return enterpriseEntity;
+    }
 
+    public void deleteEnterpriseFromUR (EnterpriseEntity enterpriseEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(enterpriseEntity);
+        session.flush();
+    }
 }
