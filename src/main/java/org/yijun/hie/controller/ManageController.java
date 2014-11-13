@@ -7,9 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
+
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-12.
@@ -29,5 +32,28 @@ public class ManageController {
         UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
 
         return userAccountEntity;
+    }
+
+    @RequestMapping(value="/enterprise", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<EnterpriseEntity> getEnterpriseList () {
+        return loginService.getEnterpriseList();
+    }
+
+    @RequestMapping(value="/enterprise", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public EnterpriseEntity enterpriseOne (String id) {
+        Integer idEnterprise = Integer.valueOf(id);
+        return loginService.getEnterpriseOneFromService(idEnterprise);
+    }
+
+    @RequestMapping(value="/updateEnterprise", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public String updateEnterprise (EnterpriseEntity enterpriseEntity) {
+        loginService.updateEnterpriseFromService(enterpriseEntity);
+        return "OK";
     }
 }

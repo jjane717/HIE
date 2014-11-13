@@ -1,7 +1,5 @@
 package org.yijun.hie.persistence.repository;
 
-import org.eclipse.jetty.util.ajax.JSON;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 
 import java.util.List;
+
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -24,6 +23,7 @@ public class UserRepository {
 
     private String getUserByNameHql = "from UserAccountEntity where userName = :userName";
     private String getEnterprise = "from EnterpriseEntity";
+    private String getEnterpriseOne = "from EnterpriseEntity where idEnterprise = :idEnterprise";
     private String getRoleByName = "from RoleEntity where roleName = :roleName";
     private String getPrivilegeByName = "from PrivilegeEntity where privilegeName = :privilegeName";
 
@@ -82,6 +82,19 @@ public class UserRepository {
         List<PrivilegeEntity> privilegeEntityList;
         privilegeEntityList = roleEntity.getPrivilegeEntityList();
         return privilegeEntityList;
+    }
+
+    public EnterpriseEntity getEnterpriseOneFromUR (Integer idEnterprise){
+        Session session = sessionFactory.getCurrentSession();
+        EnterpriseEntity enterpriseEntity;
+        enterpriseEntity = (EnterpriseEntity)session.createQuery(getEnterpriseOne).setInteger("idEnterprise",idEnterprise).list().get(0);
+        return enterpriseEntity;
+    }
+
+    public void updateEnterpriseFromUR (EnterpriseEntity enterpriseEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(enterpriseEntity);
+        session.flush();
     }
 
 

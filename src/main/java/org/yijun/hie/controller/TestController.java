@@ -62,14 +62,6 @@ public class TestController {
         return roleEntity;
     }
 
-    @RequestMapping(value="/tt", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public EnterpriseEntity tt () {
-        EnterpriseEntity enterpriseEntity = userRepository.getEnterprise().get(0);
-        return enterpriseEntity;
-    }
-
     @RequestMapping(value="/pp", method = RequestMethod.GET)
     @ResponseBody
     @Transactional

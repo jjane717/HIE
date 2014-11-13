@@ -4,6 +4,7 @@ import org.eclipse.jetty.util.ajax.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.persistence.repository.UserRepository;
 
@@ -13,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -67,5 +69,16 @@ public class LoginService {
         userRepository.updateUserAccount(userAccountEntity);
     }
 
+    public List<EnterpriseEntity> getEnterpriseList(){
+        return userRepository.getEnterprise();
+    }
+
+    public EnterpriseEntity getEnterpriseOneFromService(Integer idEnterprise){
+        return userRepository.getEnterpriseOneFromUR(idEnterprise);
+    }
+
+    public  void updateEnterpriseFromService(EnterpriseEntity enterpriseEntity){
+        userRepository.updateEnterpriseFromUR(enterpriseEntity);
+    }
 
 }
