@@ -120,11 +120,12 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
-
-        if(!loginService.isUserExist(userAccountEntity.getUserName())){
-            return loginService.createUserAccount(userAccountEntity,"enterprisePart",request);
+        String userName = userAccountEntity.getUserName();
+        if(!loginService.isUserExist(userName)){
+            return loginService.createUserAccount(userAccountEntity,request);
         }else{
             return null;
         }
     }
+
 }

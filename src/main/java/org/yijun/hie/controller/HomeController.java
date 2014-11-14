@@ -26,23 +26,6 @@ public class HomeController {
         return "html/index.html";
     }
 
-    @RequestMapping(value="/userSignIn", method = RequestMethod.POST)
-    @ResponseBody
-    @Transactional
-    public String register (UserAccountEntity userAccountEntity, HttpServletRequest request){
-
-//        String userName = request.getParameter("userName");
-        String roleType = "Customer";
-
-        if(!loginService.isUserExist(userAccountEntity.getUserName())) {
-
-            UserAccountEntity userAccount = loginService.createUserAccount(userAccountEntity, roleType, request);
-
-            return "success";
-        } else {
-            return "This User has already been used. User name or email may be duplicated.";
-        }
-    }
 
     @RequestMapping(value="/userUpdate", method = RequestMethod.POST)
     @ResponseBody

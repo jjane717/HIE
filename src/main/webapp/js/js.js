@@ -303,56 +303,6 @@ function changeUserStatus(id){
     }
 }
 
-function chooseEnterprise(){
-    var idRole = $(".roleOption").val();
-    alert(idRole);
-    var roleType = "";
-    $.ajax({
-        type: "POST",
-        url : "http://localhost:8080/idRole",
-        data:{"id": 3},
-        cache:true,
-
-        success: function(data){
-            roleType = data["roleName"];
-        },
-        error: function(error){
-            alert("NO"+ error);
-        }
-    });
-
-    alert(roleType);
-    var enterpriseGroup = "";
-    if(roleType == "Admin"){
-        enterpriseGroup = "Admin";
-    }else if(roleType == "HIEAdmin"){
-        enterpriseGroup = "HIE";
-        alert(enterpriseGroup);
-    }else if(roleType == "InsuranceAdmin"){
-        enterpriseGroup = "Insurance";
-    }
-
-    alert(enterpriseGroup);
-
-    $.ajax({
-        type: "GET",
-        url : "http://localhost:8080/enterpriseGroup",
-        data:{"enterpriseType":enterpriseGroup},
-        cache:true,
-
-        success: function(data){
-            $.each(data,function(i){
-                alert("OK");
-                $(".enterpriseOption").append("<option value=\"" + data[i]["idEnterprise"] + "\">" + data[i]["enterpriseName"] + "</option>");
-            });
-        },
-        error: function(error){
-            alert("NO"+ error);
-        }
-    });
-
-}
-
 function createUserAccount(){
     var userName = $( "#userName" ),
         password = $( "#password" ),
@@ -370,6 +320,8 @@ function createUserAccount(){
         phone = $( "#phone" ),
         allFields = $( [] ).add( userName ).add( password).add( firstName).add( lastName).add(dateOfBirth).add(age).add(street).add(city).add(zip).add(state).add(email).add(phone),
         tips = $( ".validateTips" );
+    idEnterprise.html("");
+    idRole.html("");
     allFields.val("");
 
     $.ajax({
@@ -414,7 +366,6 @@ function createUserAccount(){
                             success: function(data){
                                 $(".enterpriseOption").html("");
                                 $.each(data,function(i){
-
                                     $(".enterpriseOption").append("<option value=\"" + data[i]["idEnterprise"] + "\">" + data[i]["enterpriseName"] + "</option>");
                                 });
                             },
@@ -436,7 +387,7 @@ function createUserAccount(){
 
     $( "#dialog-form" ).dialog({
         autoOpen: true,
-        height: 380,
+        height: 450,
         width: 400,
         modal: true,
         buttons: {
@@ -474,15 +425,19 @@ function createUserAccount(){
                         cache:true,
 
                         success: function(data){
-                            alert("OK"+data);
-                            $("#userAccountInfoForm").append("<tr id=\"userAccountInfo-" + data["idUserAccount"] + "\"><td>" + data["userName"] + "</td><td>" + data["email"] + "</td><td>" + data["firstName"] + " " + data["lastName"] + "</td><td>" + data["roleEntity"]["roleName"] + "</td><td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data["idUserAccount"] + "\")></td></tr>");
+                            if(data["userName"] != null) {
+                                $("#enterpriseTable").append("<tr id=\"userAccountInfo-" + data["idUserAccount"] + "\"><td>" + data["userName"] + "</td><td>" + data["email"] + "</td><td>" + data["firstName"] + " " + data["lastName"] + "</td><td>" + data["roleEntity"]["roleName"] + "</td><td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data["idUserAccount"] + "\")></td></tr>");
+                                alert("You have already add an User");
+                                $( this ).dialog( "close" );
+                            }else{
+                                alert("Duplicated User.");
+                            }
                         },
                         error: function(error){
                             alert("NO"+ error);
+                            $( this ).dialog( "close" );
                         }
                     });
-
-                    $( this ).dialog( "close" );
                 }
 
             },
@@ -526,30 +481,4 @@ function checkRegexp( o, regexp, n, tips ) {
     } else {
         return true;
     }
-}
-
-function loadManageEnterprise(){
-    $.ajax({
-        type: "Get",
-        url : "http://localhost:8080/enterprise",
-        cache:true,
-
-        success: function(data){
-            $.each(data,function(i){
-                if(!(data[i]["enterpriseName"] == "Admin")) {
-                    $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data[i]["idEnterprise"] + "\"><td>" + data[i]["enterpriseName"] + "</td><td>" + data[i]["enterpriseType"] + "</td><td>" + data[i]["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data[i]["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data[i]["idEnterprise"] + "\")>Delete</div></div></td></tr>");
-
-                    $("#enterpriseTable tr").hover(function(){
-                        $(this).addClass("one");
-                    },function(){
-                        $(this).removeClass("one");
-                    });
-
-                }
-            });
-        },
-        error: function(error){
-            alert("NO"+ error);
-        }
-    });
 }

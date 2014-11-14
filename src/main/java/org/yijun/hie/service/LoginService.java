@@ -31,8 +31,7 @@ public class LoginService {
         return userRepository.getUserByName(userName).get(0);
     }
 
-    @Transactional
-    public boolean isUserExist(String userName){
+    public Boolean isUserExist(String userName){
         if(userRepository.getUserByName(userName).size() > 0){
             return true;
         }else{
@@ -40,38 +39,17 @@ public class LoginService {
         }
     }
 
-    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, String ss, HttpServletRequest request){
-//        UserAccountEntity userAccountEntity = new UserAccountEntity();
-        if(ss.equals("Customer")) {
-//            userAccountEntity.setEmail(request.getParameter("email"));
-//            userAccountEntity.setPassword(request.getParameter("password"));
-//            userAccountEntity.setUserName(request.getParameter("userName"));
-//            userAccountEntity.setStatus(Boolean.valueOf(true));
-//            userAccountEntity.setFirstName(request.getParameter("firstName"));
-//            userAccountEntity.setLastName(request.getParameter("lastName"));
-//            userAccountEntity.setDateOfBirth(request.getParameter("dateOfBirth"));
-//            userAccountEntity.setAge(Integer.getInteger(request.getParameter("age")));
-//            userAccountEntity.setStreet(request.getParameter("street"));
-//            userAccountEntity.setCity(request.getParameter("city"));
-//            userAccountEntity.setState(request.getParameter("state"));
-//            userAccountEntity.setZip(request.getParameter("zip"));
-//            userAccountEntity.setPhone(request.getParameter("phone"));
-//            userAccountEntity.setIsSmallBusiness(Boolean.valueOf(request.getParameter("isSmallBusiness")));
-//            userAccountEntity.setIsFamily(Boolean.valueOf(request.getParameter("isFamily")));
-//            userAccountEntity.setIncomeStatus(request.getParameter("incomeStatus"));
-            userAccountEntity.setRoleEntity((CustomerRoleEntity)userRepository.getRole("Customer").get(0));
-            return userRepository.addUserAccount(userAccountEntity);
-        }else{
-            String idRole = request.getParameter("idRole");
-            userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
-            userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
-            return userRepository.addUserAccount(userAccountEntity);
-        }
+    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
+        String idRole = request.getParameter("idRole");
+        userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
+        userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
+        userAccountEntity.setStatus(true);
+        return userRepository.addUserAccount(userAccountEntity);
+
     }
 
     public void updateUserAccount(UserAccountEntity userAccountEntity){
         userAccountEntity.setRoleEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getRoleEntity());
-        userAccountEntity.setIdEmployee(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getIdEmployee());
         userAccountEntity.setEnterpriseEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getEnterpriseEntity());
         userRepository.updateUserAccount(userAccountEntity);
     }

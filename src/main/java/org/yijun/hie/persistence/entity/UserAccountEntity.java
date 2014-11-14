@@ -39,9 +39,6 @@ public class UserAccountEntity {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "id_employee")
-    private Integer idEmployee;
-
     @Column(name = "is_small_business")
     private Boolean isSmallBusiness;
 
@@ -158,14 +155,6 @@ public class UserAccountEntity {
         this.age = age;
     }
 
-    public Integer getIdEmployee() {
-        return idEmployee;
-    }
-
-    public void setIdEmployee(Integer idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-
     public Boolean getIsSmallBusiness() {
         return isSmallBusiness;
     }
@@ -246,7 +235,6 @@ public class UserAccountEntity {
         UserAccountEntity that = (UserAccountEntity) o;
 
         if (age != that.age) return false;
-        if (idEmployee != that.idEmployee) return false;
         if (idUserAccount != that.idUserAccount) return false;
         if (isFamily != that.isFamily) return false;
         if (isSmallBusiness != that.isSmallBusiness) return false;

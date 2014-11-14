@@ -10,6 +10,7 @@
     <title>Welcome to HIEs! Please Signin First!</title>
 
     <link href="../css/css.css" rel="stylesheet">
+    <link href="../css/css2.css" rel="stylesheet">
     <script src="../js/js.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -113,96 +114,23 @@
 
         $(".submit").click(function(){
             $.ajax({
-                    type: "Post",
-                    url : "http://localhost:8080/userSignIn",
-                    data : $("#msform").serialize(),
-                    cache:true,
+                type: "POST",
+                url : "http://localhost:8080/createUserAccount",
+                data : $("#msform").serialize(),
+                cache:true,
 
-                    success: function(data){
-                        alert("OK" + data);
-
-                    },
-                    error: function(error){
-                        alert("NO"+ error);
+                success: function(data){
+                    if(data["userName"] != null){
+                        alert("You have been registered.");
+                    }else{
+                        alert("Duplicated User.");
                     }
-                });
 
-//            var email = $( "#email" ),
-//                    username = $("#username"),
-//                    password = $( "#pass" ),
-//                    cpass= $("#cpass"),
-//                    fname=$("#fname"),
-//                    lname=$("#lname"),
-//                    mm=$("#mm"),
-//                    dd=$("#dd"),
-//                    yyyy=$("#yyyy"),
-//                    age=$("#age"),
-//                    street=$("#street"),
-//                    city=$("#city"),
-//                    state=$("#state"),
-//                    zip=$("#zip"),
-//                    phone=$("#phone"),
-//                    isSmallBusiness = $("#smallBusiness"),
-//                    isFamily= $("#family"),
-//                    income = $("#income"),
-//                    tips = $( "#tips" );
-//
-//            var bValid = true;
-//
-//
-//            bValid = bValid && checkLength( username, "username", 3, 16, tips );
-//            bValid = bValid && checkLength( password, "password", 5, 16, tips );
-//            bValid = bValid && checkLength( cpass, "confirm pass", 5, 16, tips );
-//            bValid = bValid && checkLength( fname, "First Name", 2, 16, tips );
-//            bValid = bValid && checkLength( lname, "Last Name", 2, 16, tips );
-//            bValid = bValid && checkLength( email, "email", 6, 80, tips );
-//            bValid = bValid && checkLength( mm, "mm", 2, 2, tips );
-//            bValid = bValid && checkLength( dd, "dd", 2, 2, tips );
-//            bValid = bValid && checkLength( yyyy, "yyyy", 4, 4, tips );
-//            bValid = bValid && checkLength( age, "age", 1, 3, tips );
-//            bValid = bValid && checkLength( street, "street", 2, 80, tips );
-//            bValid = bValid && checkLength( city, "City", 2, 16, tips );
-//            bValid = bValid && checkLength( state, "State", 2, 16, tips );
-//            bValid = bValid && checkLength( zip, "Zip", 5, 8, tips );
-//            bValid = bValid && checkLength( phone, "Phone", 8, 12, tips );
-//
-//            bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter.",tips );
-//            bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : A-Z a-z 0-9" ,tips);
-//            bValid = bValid && checkRegexp( fname, /^([a-zA-Z])+$/, "First Name field only allow : A-Z a-z." , tips);
-//            bValid = bValid && checkRegexp( lname, /^([a-zA-Z])+$/, "Last Name field only allow : A-Z a-z.", tips );
-//            bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" ,tips);
-//            bValid = bValid && checkRegexp( mm, /^([0-9])+$/, "Month field only allow : 0-9.", tips );
-//            bValid = bValid && checkRegexp( dd, /^([0-9])+$/, "Day field only allow : 0-9.", tips );
-//            bValid = bValid && checkRegexp( yyyy, /^([0-9])+$/, "Year field only allow : 0-9.", tips );
-//            bValid = bValid && checkRegexp( age, /^([0-9])+$/, "Age field only allow : 0-9.", tips );
-//            bValid = bValid && checkRegexp( street, /^([0-9a-zA-Z])+$/, "Address Line field only allow : A-Z a-z 0-9." , tips);
-//            bValid = bValid && checkRegexp( city, /^([a-zA-Z])+$/, "City field only allow : A-Z a-z.", tips );
-//            bValid = bValid && checkRegexp( state, /^([a-zA-Z])+$/, "State field only allow : A-Z a-z.",tips );
-//            bValid = bValid && checkRegexp( zip, /^([0-9])+$/, "Zip field only allow :0-9." ,tips);
-//            bValid = bValid && checkRegexp( phone, /^([0-9])+$/, "Phone field only allow : 0-9.", tips );
-//
-//            if(password.val() != cpass.val){
-//                bValid = false;
-//            }
-//
-//            if(bValid){
-//                $.ajax({
-//                    type: "Post",
-//                    url : "http://localhost:8080/register",
-//                    data : {"email":email.val(),"username":username.val(),"password":password.val(),"firstname":fname.val(),"lastname":lname.val(),"mm":mm.val(),"dd":dd.val(),"yyyy":yyyy.val(),"age":age.val(),"street":street.val(),"city":city.val(),"state":state.val(),"zip":zip.val(),"phone":phone.val(),"isSmallBusiness":isSmallBusiness.val(),"isFamily":isFamily.val(),"income":income.val()},
-//                    cache:false,
-//
-//                    success: function(data){
-//                        alert(data);
-//
-//                    },
-//                    error: function(error){
-//                        alert(error);
-//                    }
-//                });
-//            }
-//
-//            return false;
+                },
+                error: function(error){
+                    alert("NO"+ error);
+                }
+            });
 
         });
 
@@ -245,7 +173,7 @@
 
     <form class="form-signin" role="form">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="text" class="form-control" placeholder="User Name" required="" autofocus="">
         <input type="password" class="form-control" placeholder="Password" required="">
         <div class="checkbox">
             <label>
@@ -277,8 +205,8 @@
     <fieldset>
         <h2 class="fs-title">Create your account</h2>
         <h3 class="fs-subtitle">This is step 1</h3>
-        <input type="text" name="idRole" id="idRole" calss="hidden" value="1"/>
-        <input type="text" name="idEnterprise" id="idEnterprise" calss="hidden" value="3"/>
+        <input type="text" name="idRole" id="idRole" class="hidden" value="1"/>
+        <input type="text" name="idEnterprise" id="idEnterprise" class="hidden" value="3"/>
         <input type="text" name="email" id="email" placeholder="Email" />
         <input type="text" name="userName" id="userName" placeholder="User Name" />
         <input type="password" name="password" id="password" placeholder="Password" />
@@ -317,7 +245,7 @@
             </select>
         </label>
         <input type="button" name="previous" class="previous action-button" value="Previous" />
-        <input type="submit" name="submit" class="submit action-button" value="Submit" />
+        <input type="button" name="submit" class="submit action-button" value="Submit" />
     </fieldset>
 </form>
 
