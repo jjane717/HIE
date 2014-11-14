@@ -527,3 +527,29 @@ function checkRegexp( o, regexp, n, tips ) {
         return true;
     }
 }
+
+function loadManageEnterprise(){
+    $.ajax({
+        type: "Get",
+        url : "http://localhost:8080/enterprise",
+        cache:true,
+
+        success: function(data){
+            $.each(data,function(i){
+                if(!(data[i]["enterpriseName"] == "Admin")) {
+                    $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data[i]["idEnterprise"] + "\"><td>" + data[i]["enterpriseName"] + "</td><td>" + data[i]["enterpriseType"] + "</td><td>" + data[i]["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data[i]["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data[i]["idEnterprise"] + "\")>Delete</div></div></td></tr>");
+
+                    $("#enterpriseTable tr").hover(function(){
+                        $(this).addClass("one");
+                    },function(){
+                        $(this).removeClass("one");
+                    });
+
+                }
+            });
+        },
+        error: function(error){
+            alert("NO"+ error);
+        }
+    });
+}

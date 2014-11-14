@@ -23,30 +23,28 @@
                     //alert("OK" + data);
 
                     $.each($.parseJSON(data),function(key,val){
-
                         $("#privilege").append("<li class=\"holdlightblue\" source=\"" + val + ".html\"><label>" + key + "</label></li>");
-                        $("#customer-topmenu ul li").hover(function(){
-                            $(this).removeClass("holdlightblue");
-                            $(this).addClass("darkorange");
-                        },function(){
-                            $(this).removeClass("darkorange");
-                            if(!$(this).hasClass("clickdarkorange")){
-                                $(this).addClass("holdlightblue");
-                            }
+                    });
 
-                        });
+                    $("#customer-topmenu ul li").hover(function(){
+                        $(this).removeClass("holdlightblue");
+                        $(this).addClass("darkorange");
+                    },function(){
+                        $(this).removeClass("darkorange");
+                        if(!$(this).hasClass("clickdarkorange")){
+                            $(this).addClass("holdlightblue");
+                        }
 
-                        $("#customer-topmenu ul li").click(function(){
-                            $("#customer-topmenu ul li").removeClass("clickdarkorange");
-                            $("#customer-topmenu ul li").addClass("holdlightblue");
-                            $(this).removeClass("holdlightblue");
-                            $(this).addClass("clickdarkorange");
+                    });
 
-                            var urll = $(this).attr("source");
-                            $("#customer-container").load(urll);
-                        });
+                    $("#customer-topmenu ul li").click(function(){
+                        $("#customer-topmenu ul li").removeClass("clickdarkorange");
+                        $("#customer-topmenu ul li").addClass("holdlightblue");
+                        $(this).removeClass("holdlightblue");
+                        $(this).addClass("clickdarkorange");
 
-
+                        var urll = $(this).attr("source");
+                        $("#customer-container").load(urll);
                     });
 
                 },
