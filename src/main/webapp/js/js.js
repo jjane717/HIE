@@ -468,7 +468,7 @@ function createUserAccount(){
                     $.ajax({
                         type: "POST",
                         url : "http://localhost:8080/createUserAccount",
-                        data : $("#enterpriseInfoForm").serialize(),
+                        data : $("#userAccountInfoForm").serialize(),
                         cache:true,
 
                         success: function(data){
