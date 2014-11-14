@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -30,8 +32,14 @@ public class ManageController {
     @Transactional
     public UserAccountEntity viewAccount (){
         UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
-
         return userAccountEntity;
+    }
+
+    @RequestMapping(value="/enterpriseGroup", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<EnterpriseEntity> getEnterpriseGroupList (String enterpriseType) {
+        return loginService.getEnterpriseGroupListFromService(enterpriseType);
     }
 
     @RequestMapping(value="/enterprise", method = RequestMethod.GET)
@@ -39,6 +47,21 @@ public class ManageController {
     @Transactional
     public List<EnterpriseEntity> getEnterpriseList () {
         return loginService.getEnterpriseList();
+    }
+
+    @RequestMapping(value="/role", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<RoleEntity> getRoleList () {
+        return loginService.getRoleListFromService();
+    }
+
+    @RequestMapping(value="/idRole", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public RoleEntity getRoleByID (String id) {
+        Integer idRole = Integer.valueOf(id);
+        return loginService.getRoleByIDFromService(idRole);
     }
 
     @RequestMapping(value="/enterprise", method = RequestMethod.POST)
@@ -82,5 +105,26 @@ public class ManageController {
 
         List<UserAccountEntity> userAccountEntityList =  loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
         return userAccountEntityList;
+    }
+
+    @RequestMapping(value="/updateUserAccountStatus", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void updateUserAccountStatus(HttpServletRequest request){
+        Integer idUserAccount = Integer.valueOf(request.getParameter("id"));
+        Boolean status = Boolean.valueOf(request.getParameter("status"));
+        loginService.getUserAccountByIDFromService(idUserAccount, status);
+    }
+
+    @RequestMapping(value="/createUserAccount", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
+
+        if(!loginService.isUserExist(userAccountEntity.getUserName())){
+            return loginService.createUserAccount(userAccountEntity,"enterprisePart", request);
+        }else{
+            return null;
+        }
     }
 }

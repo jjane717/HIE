@@ -4,7 +4,9 @@ import org.eclipse.jetty.util.ajax.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.yijun.hie.persistence.entity.CustomerRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.persistence.repository.UserRepository;
 
@@ -38,7 +40,7 @@ public class LoginService {
         }
     }
 
-    public void createUserAccount(UserAccountEntity userAccountEntity, String ss){
+    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, String ss, HttpServletRequest request){
 //        UserAccountEntity userAccountEntity = new UserAccountEntity();
         if(ss.equals("Customer")) {
 //            userAccountEntity.setEmail(request.getParameter("email"));
@@ -57,8 +59,12 @@ public class LoginService {
 //            userAccountEntity.setIsSmallBusiness(Boolean.valueOf(request.getParameter("isSmallBusiness")));
 //            userAccountEntity.setIsFamily(Boolean.valueOf(request.getParameter("isFamily")));
 //            userAccountEntity.setIncomeStatus(request.getParameter("incomeStatus"));
-            userAccountEntity.setRoleEntity(userRepository.getRole("Customer").get(0));
-            userRepository.addUserAccount(userAccountEntity);
+            userAccountEntity.setRoleEntity((CustomerRoleEntity)userRepository.getRole("Customer").get(0));
+            return userRepository.addUserAccount(userAccountEntity);
+        }else{
+            userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(request.getParameter("idRole"))));
+            userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
+            return userRepository.addUserAccount(userAccountEntity);
         }
     }
 
@@ -71,6 +77,10 @@ public class LoginService {
 
     public List<EnterpriseEntity> getEnterpriseList(){
         return userRepository.getEnterprise();
+    }
+
+    public List<EnterpriseEntity> getEnterpriseGroupListFromService(String enterpriseType){
+        return userRepository.getEnterpriseGroupFromUR(enterpriseType);
     }
 
     public EnterpriseEntity getEnterpriseOneFromService(Integer idEnterprise){
@@ -91,6 +101,20 @@ public class LoginService {
 
     public List<UserAccountEntity> getUserAccountsByEnterpriseFromService (EnterpriseEntity enterpriseEntity){
         return userRepository.getUserAccountsByEnterpriseFromUR(enterpriseEntity);
+    }
+
+    public void getUserAccountByIDFromService (Integer idUserAccount, Boolean status){
+        UserAccountEntity userAccountEntity = userRepository.getUserAccountByIDFromUR(idUserAccount);
+        userAccountEntity.setStatus(status);
+        updateUserAccount(userAccountEntity);
+    }
+
+    public List<RoleEntity> getRoleListFromService (){
+        return userRepository.getRoleListFromUR();
+    }
+
+    public RoleEntity getRoleByIDFromService(Integer idRole){
+        return userRepository.getRoleByIDFromUR(idRole);
     }
 
 }
