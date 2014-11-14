@@ -119,10 +119,10 @@ public class ManageController {
     @RequestMapping(value="/createUserAccount", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity){
+    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
 
         if(!loginService.isUserExist(userAccountEntity.getUserName())){
-            return loginService.createUserAccount(userAccountEntity,"enterprisePart");
+            return loginService.createUserAccount(userAccountEntity,"enterprisePart",request);
         }else{
             return null;
         }

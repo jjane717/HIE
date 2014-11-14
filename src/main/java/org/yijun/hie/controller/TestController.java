@@ -108,4 +108,11 @@ public class TestController {
 //
 //        return "html/test";
 //    }
+
+
+    @RequestMapping(value = "/offers", method = RequestMethod.GET)
+    @Transactional
+    public String manageOffers(){
+        return "html/hello.html";
+    }
 }

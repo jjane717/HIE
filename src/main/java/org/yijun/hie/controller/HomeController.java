@@ -29,14 +29,14 @@ public class HomeController {
     @RequestMapping(value="/userSignIn", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public String register (UserAccountEntity userAccountEntity){
+    public String register (UserAccountEntity userAccountEntity, HttpServletRequest request){
 
 //        String userName = request.getParameter("userName");
         String roleType = "Customer";
 
         if(!loginService.isUserExist(userAccountEntity.getUserName())) {
 
-            UserAccountEntity userAccount = loginService.createUserAccount(userAccountEntity, roleType);
+            UserAccountEntity userAccount = loginService.createUserAccount(userAccountEntity, roleType, request);
 
             return "success";
         } else {

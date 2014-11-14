@@ -358,6 +358,8 @@ function createUserAccount(){
         password = $( "#password" ),
         idEnterprise = $( "#idEnterprise"),
         idRole = $ ( "#idRole"),
+        firstName = $( "#firstName" ),
+        lastName = $( "#lastName" ),
         dateOfBirth = $ ( "#dateOfBirth"),
         age = $ ( "#age"),
         street = $( "#street" ),
@@ -366,7 +368,7 @@ function createUserAccount(){
         zip = $( "#zip" ),
         email = $( "#email" ),
         phone = $( "#phone" ),
-        allFields = $( [] ).add( userName ).add( password).add(dateOfBirth).add(age).add(street).add(city).add(zip).add(state).add(email).add(phone),
+        allFields = $( [] ).add( userName ).add( password).add( firstName).add( lastName).add(dateOfBirth).add(age).add(street).add(city).add(zip).add(state).add(email).add(phone),
         tips = $( ".validateTips" );
     allFields.val("");
 

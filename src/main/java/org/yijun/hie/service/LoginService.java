@@ -40,7 +40,7 @@ public class LoginService {
         }
     }
 
-    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, String ss){
+    public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, String ss, HttpServletRequest request){
 //        UserAccountEntity userAccountEntity = new UserAccountEntity();
         if(ss.equals("Customer")) {
 //            userAccountEntity.setEmail(request.getParameter("email"));
@@ -62,9 +62,9 @@ public class LoginService {
             userAccountEntity.setRoleEntity((CustomerRoleEntity)userRepository.getRole("Customer").get(0));
             return userRepository.addUserAccount(userAccountEntity);
         }else{
-//            String idRole = request.getParameter("idRole");
-//            userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
-//            userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
+            String idRole = request.getParameter("idRole");
+            userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
+            userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
             return userRepository.addUserAccount(userAccountEntity);
         }
     }
