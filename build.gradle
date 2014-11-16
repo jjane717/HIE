@@ -19,6 +19,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.1.8.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-jetty:1.1.8.RELEASE")
     compile("org.springframework.boot:spring-boot-autoconfigure:1.1.8.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-security:1.1.8.RELEASE")
     compile("org.springframework.security:spring-security-crypto:3.2.5.RELEASE")
     compile("org.springframework:spring-orm:4.1.1.RELEASE")
     compile("org.hibernate:hibernate-core:4.3.6.Final")
