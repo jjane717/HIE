@@ -2,7 +2,7 @@ package org.yijun.hie.controller;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.eclipse.jetty.util.ajax.JSON;
+//import org.eclipse.jetty.util.ajax.JSON;
 import org.hibernate.SessionFactory;
 import org.hibernate.internal.jaxb.cfg.ObjectFactory;
 import org.json.JSONException;
@@ -53,13 +53,18 @@ public class TestController {
     }
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public RoleEntity test () {
+     @ResponseBody
+     @Transactional
+     public RoleEntity test () {
         RoleEntity roleEntity = userRepository.getRole("Customer").get(0);
         PrivilegeEntity privilegeEntity = userRepository.getPrivilege("A").get(0);
         userRepository.addPrivilege(roleEntity, privilegeEntity);
         return roleEntity;
+    }
+
+    @RequestMapping(value="/testJsp", method = RequestMethod.GET)
+    public String testJsp () {
+        return "jsp/test.jsp";
     }
 
     @RequestMapping(value="/pp", method = RequestMethod.GET)
@@ -104,9 +109,9 @@ public class TestController {
 //        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
 //            list.add(privilegeEntity.getPrivilegeName());
 //        }
-//        session.setAttribute("test",list);
+//        session.setAttribute("test.jsp",list);
 //
-//        return "html/test";
+//        return "html/test.jsp";
 //    }
 
 
