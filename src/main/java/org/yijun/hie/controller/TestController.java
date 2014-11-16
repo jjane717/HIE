@@ -89,7 +89,7 @@ public class TestController {
 //    @Transactional
 //    public String oo (HttpServletRequest request) {
 //        HttpSession session = request.getSession();
-//        UserAccountEntity userAccountEntity = loginService.userLogin("aaa", "aaaaa");
+//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
 //        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
 //        List list = new LinkedList();
 //        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
