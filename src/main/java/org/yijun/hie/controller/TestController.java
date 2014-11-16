@@ -7,9 +7,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.internal.jaxb.cfg.ObjectFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +23,11 @@ import org.yijun.hie.service.UserRolePrivilegeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -29,6 +35,7 @@ import java.util.List;
 
 @Controller
 public class TestController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -82,7 +89,7 @@ public class TestController {
 //    @Transactional
 //    public String oo (HttpServletRequest request) {
 //        HttpSession session = request.getSession();
-//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+//        UserAccountEntity userAccountEntity = loginService.userLogin("aaa", "aaaaa");
 //        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
 //        List list = new LinkedList();
 //        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
@@ -98,5 +105,20 @@ public class TestController {
     @Transactional
     public String manageOffers(){
         return "html/hello.html";
+    }
+
+    @RequestMapping(value = "/testjsp", method = RequestMethod.GET)
+    public String home(Locale locale, Model model) {
+        logger.info("Welcome home! The client locale is {}.", locale);
+
+        Date date = new Date();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+        String formattedDate = dateFormat.format(date);
+
+        model.addAttribute("serverTime", formattedDate );
+
+        return "html/test";
+
     }
 }
