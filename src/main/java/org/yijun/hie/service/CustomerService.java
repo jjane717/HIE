@@ -2,11 +2,13 @@ package org.yijun.hie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yijun.hie.persistence.entity.OrderEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.persistence.repository.CustomerRepository;
 import org.yijun.hie.persistence.repository.UserRepository;
 
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 /**
@@ -60,4 +62,15 @@ public class CustomerService {
         }
         return productEntityList;
     }
+
+    public ProductEntity getProductEntityByIDFromService(Integer idProduct){
+        return customerRepository.getProductEntityByIDFromRepository(idProduct);
+    }
+
+    public OrderEntity getOrderEntityByIDFromService(Integer idOrder){
+        return customerRepository.getOrderEntityByIDFromRepository(idOrder);
+    }
+
+
+
 }

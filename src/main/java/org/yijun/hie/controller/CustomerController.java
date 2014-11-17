@@ -32,4 +32,6 @@ public class CustomerController {
         productEntityList = customerService.getProductEntityListForMarketFromService(customerService.getMarket(userAccountEntity));
         return productEntityList;
     }
+
+
 }

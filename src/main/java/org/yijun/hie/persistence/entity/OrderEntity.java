@@ -16,9 +16,6 @@ public class OrderEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idOrder;
 
-    @Column(name = "id_user_account")
-    private Integer idUserAccount;
-
     @Column(name = "create_date")
     private Timestamp createDate;
 
@@ -29,7 +26,11 @@ public class OrderEntity {
     @JoinColumn(name = "id_product")
     public ProductEntity productEntity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = UserAccountEntity.class)
+    @JoinColumn(name = "id_user_account")
+    public UserAccountEntity userAccountEntity;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             targetEntity = PaymentEntity.class, mappedBy = "orderEntity")
     List<PaymentEntity> paymentEntityList = new LinkedList<PaymentEntity>();
 
@@ -57,12 +58,12 @@ public class OrderEntity {
         this.idOrder = idOrder;
     }
 
-    public Integer getIdUserAccount() {
-        return idUserAccount;
+    public UserAccountEntity getUserAccountEntity() {
+        return userAccountEntity;
     }
 
-    public void setIdUserAccount(Integer idUserAccount) {
-        this.idUserAccount = idUserAccount;
+    public void setUserAccountEntity(UserAccountEntity userAccountEntity) {
+        this.userAccountEntity = userAccountEntity;
     }
 
     public Timestamp getCreateDate() {
@@ -89,7 +90,6 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
 
         if (idOrder != that.idOrder) return false;
-        if (idUserAccount != that.idUserAccount) return false;
         if (Double.compare(that.totalAmount, totalAmount) != 0) return false;
         if (createDate != null ? !createDate.equals(that.createDate) : that.createDate != null) return false;
 

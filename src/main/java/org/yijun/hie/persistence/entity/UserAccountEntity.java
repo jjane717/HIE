@@ -74,6 +74,18 @@ public class UserAccountEntity {
     @JoinColumn(name = "id_role")
     private RoleEntity roleEntity;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+            targetEntity = OrderEntity.class, mappedBy = "userAccountEntity")
+    List<OrderEntity> orderEntityList = new LinkedList<OrderEntity>();
+
+    public List<OrderEntity> getOrderEntityList() {
+        return orderEntityList;
+    }
+
+    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
+        this.orderEntityList = orderEntityList;
+    }
+
     public RoleEntity getRoleEntity() {
         return roleEntity;
     }
