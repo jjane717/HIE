@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.persistence.repository.UserRepository;
 import org.yijun.hie.service.LoginService;
@@ -54,20 +55,21 @@ public class TestController {
     }
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
-     @ResponseBody
-     @Transactional
-     public RoleEntity test () {
+    @ResponseBody
+    @Transactional
+    public RoleEntity test () {
         RoleEntity roleEntity = userRepository.getRole("Customer").get(0);
         PrivilegeEntity privilegeEntity = userRepository.getPrivilege("A").get(0);
         userRepository.addPrivilege(roleEntity, privilegeEntity);
         return roleEntity;
     }
 
-//    @RequestMapping(value="/testJsp", method = RequestMethod.GET)
-//    public String testJsp (HttpServletRequest request) {
-//        request.setAttribute("key", "val1");
-//        return "jsp/test.jsp";
-//    }
+    @RequestMapping(value="/testJsp", method = RequestMethod.GET)
+    public ModelAndView testJsp (HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("test");
+        modelAndView.addObject("key", "Hello world!");
+        return modelAndView;
+    }
 
     @RequestMapping(value="/pp", method = RequestMethod.GET)
     @ResponseBody
@@ -80,7 +82,6 @@ public class TestController {
         for (PrivilegeEntity privilegeEntity:privilegeEntityList){
             jsonObject.put(privilegeEntity.getPrivilegeName(),privilegeEntity.getPrivilegeFile());
         }
-
         System.out.println(jsonObject);
         return jsonObject.toString();
     }

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -30,15 +31,15 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
         new SpringApplicationBuilder(AppEntrance.class).properties().run(args);
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("images/**").addResourceLocations("images/");
-        registry.addResourceHandler("css/**").addResourceLocations("css/");
-        registry.addResourceHandler("js/**").addResourceLocations("js/");
-        registry.addResourceHandler("html/**").addResourceLocations("html/");
-        registry.addResourceHandler("jsp/**").addResourceLocations("jsp/");
-        registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("images/**").addResourceLocations("images/");
+//        registry.addResourceHandler("css/**").addResourceLocations("css/");
+//        registry.addResourceHandler("js/**").addResourceLocations("js/");
+//        registry.addResourceHandler("html/**").addResourceLocations("html/");
+//        registry.addResourceHandler("jsp/**").addResourceLocations("jsp/");
+//        registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
+//    }
 
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {
@@ -48,10 +49,15 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        //viewResolver.setPrefix("");
-        //viewResolver.setSuffix(".html");
+        viewResolver.setPrefix("/WEB-INF/jsp/");
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
+//    @Override
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
 
     /* *
         * Here we register the Hibernate4Module into an ObjectMapper, then set this custom-configured ObjectMapper
