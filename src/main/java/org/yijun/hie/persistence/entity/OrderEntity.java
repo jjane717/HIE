@@ -1,5 +1,7 @@
 package org.yijun.hie.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -58,6 +60,7 @@ public class OrderEntity {
         this.idOrder = idOrder;
     }
 
+    @JsonIgnore
     public UserAccountEntity getUserAccountEntity() {
         return userAccountEntity;
     }

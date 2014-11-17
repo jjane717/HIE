@@ -1,5 +1,7 @@
 package org.yijun.hie.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -30,6 +32,7 @@ public class PaymentEntity {
     @JoinColumn(name = "id_order")
     public OrderEntity orderEntity;
 
+    @JsonIgnore
     public OrderEntity getOrderEntity() {
         return orderEntity;
     }

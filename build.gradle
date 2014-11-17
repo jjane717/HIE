@@ -30,6 +30,7 @@ dependencies {
     //jsp
     compile("javax.servlet.jsp.jstl:jstl:1.2")
     compile("org.apache.taglibs:taglibs-standard-impl:1.2.1")
+    compile("jstl:jstl:1.2")
     compile("org.json:json:20090211")
     compile("org.json:json:20140107")
 

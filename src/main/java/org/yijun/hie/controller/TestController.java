@@ -111,8 +111,14 @@ public class TestController {
 
         uiModel.addAttribute("privilegeEntityList",privilegeEntityList);
         uiModel.addAttribute("key","Yijun Liu");
+        List<String> list = new LinkedList<String>();
 
-        return "jsp/test.jsp";
+        list.add("one");
+        list.add("two");
+
+        uiModel.addAttribute("pp", list);
+
+        return "WEB-INF/jsp/test.jsp";
     }
 
 

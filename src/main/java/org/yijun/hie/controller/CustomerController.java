@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yijun.hie.persistence.entity.OrderEntity;
+import org.yijun.hie.persistence.entity.PaymentEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.CustomerService;
@@ -31,6 +33,26 @@ public class CustomerController {
         List<ProductEntity> productEntityList;
         productEntityList = customerService.getProductEntityListForMarketFromService(customerService.getMarket(userAccountEntity));
         return productEntityList;
+    }
+
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<OrderEntity> getOrderEntityListByUserAccount(){
+        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        List<OrderEntity> orderEntityList;
+        orderEntityList = userAccountEntity.getOrderEntityList();
+        return orderEntityList;
+    }
+
+    @RequestMapping(value = "/payments", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<PaymentEntity> getPaymentEntityListByOrder(Integer idOrder){
+        idOrder = 1;
+        List<PaymentEntity> paymentEntityList;
+        paymentEntityList = customerService.getOrderEntityByIDFromService(idOrder).getPaymentEntityList();
+        return paymentEntityList;
     }
 
 

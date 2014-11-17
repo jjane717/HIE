@@ -13,8 +13,12 @@
 
 Hello! The time is now <%= date %>
 ${key}
-<%--<c:forEach items="${privilegeEntityList}" var="privilegeEntity">--%>
-    <%--<h1>${privilegeEntity.privilegeName}</h1>--%>
-<%--</c:forEach>--%>
+<c:forEach items="${privilegeEntityList}" var="privilegeEntity">
+    <h1>${privilegeEntity.privilegeName}</h1>
+</c:forEach>
+<c:forEach items="${pp}" var="name">
+    <h1>${name}</h1>
+</c:forEach>
+
 </BODY>
 </HTML>
