@@ -65,9 +65,17 @@ public class TestController {
     }
 
     @RequestMapping(value="/testJsp", method = RequestMethod.GET)
+    @Transactional
     public ModelAndView testJsp (HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("test");
         modelAndView.addObject("key", "Hello world!");
+        List<String> testList = new LinkedList<>();
+        testList.add("A");
+        testList.add("B");
+        testList.add("C");
+        testList.add("D");
+        testList.add("E");
+        modelAndView.addObject("list", testList);
         return modelAndView;
     }
 

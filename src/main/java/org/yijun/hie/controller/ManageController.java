@@ -12,6 +12,7 @@ import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.PrivilegeEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.repository.UserRepository;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
@@ -26,6 +27,9 @@ import java.util.List;
 public class ManageController {
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private UserRolePrivilegeService userRolePrivilegeService;
 
@@ -104,9 +108,8 @@ public class ManageController {
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
-
-        List<UserAccountEntity> userAccountEntityList =  loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
-        return userAccountEntityList;
+        EnterpriseEntity enterpriseEntity = userRepository.getEnterpriseOneFromUR(userAccountEntity.getEnterpriseId());
+        return enterpriseEntity.getUserAccountEntityList();
     }
 
     @RequestMapping(value="/updateUserAccountStatus", method = RequestMethod.POST)

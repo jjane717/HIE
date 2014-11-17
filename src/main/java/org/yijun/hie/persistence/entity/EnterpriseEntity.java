@@ -45,11 +45,11 @@ public class EnterpriseEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             targetEntity = UserAccountEntity.class, mappedBy = "enterpriseEntity")
     List<UserAccountEntity> userAccountEntityList = new LinkedList<UserAccountEntity>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_enterprise"), inverseJoinColumns = @JoinColumn(name = "id_product"))
     private List<ProductEntity> productEntityList  = new LinkedList<ProductEntity>();
 
