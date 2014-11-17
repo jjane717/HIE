@@ -37,7 +37,7 @@ CREATE TABLE `Enterprise` (
   `phone` varchar(20) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`id_enterprise`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `Enterprise` (
 
 LOCK TABLES `Enterprise` WRITE;
 /*!40000 ALTER TABLE `Enterprise` DISABLE KEYS */;
-INSERT INTO `Enterprise` VALUES (1,'BosHIE','HIE',0,9658,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(2,'BosInsurance','Insurance',0,8728,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com');
+INSERT INTO `Enterprise` VALUES (1,'BosHIE','HIE',0,9658,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(2,'BosInsurance','Insurance',0,9089,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(3,'Admin','Admin',0,8728,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(4,'ConnHIE','HIE',0,9090,'oooooooo','Cone','CT','00022','000000000','lll@g.com');
 /*!40000 ALTER TABLE `Enterprise` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `Enterprise_Product` (
   `id_enterprise` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   PRIMARY KEY (`id_enterprise_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `Enterprise_Product` (
 
 LOCK TABLES `Enterprise_Product` WRITE;
 /*!40000 ALTER TABLE `Enterprise_Product` DISABLE KEYS */;
-INSERT INTO `Enterprise_Product` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2);
+INSERT INTO `Enterprise_Product` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,1,3),(6,1,4),(7,1,5),(8,2,10),(9,1,7),(10,1,8),(11,1,9),(12,1,10),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8),(19,2,9);
 /*!40000 ALTER TABLE `Enterprise_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `Order` (
   `create_date` datetime NOT NULL,
   `total_amount` double NOT NULL,
   PRIMARY KEY (`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +98,7 @@ CREATE TABLE `Order` (
 
 LOCK TABLES `Order` WRITE;
 /*!40000 ALTER TABLE `Order` DISABLE KEYS */;
+INSERT INTO `Order` VALUES (1,4,7,'2014-11-17 07:48:48',10800);
 /*!40000 ALTER TABLE `Order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,10 +114,10 @@ CREATE TABLE `Payment` (
   `id_order` int(11) NOT NULL,
   `due_date` datetime NOT NULL,
   `pay_date` datetime DEFAULT NULL,
-  `is_pay` tinyint(1) NOT NULL,
+  `is_pay` tinyint(1) DEFAULT '0',
   `amount` double NOT NULL,
   PRIMARY KEY (`id_payment`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +126,7 @@ CREATE TABLE `Payment` (
 
 LOCK TABLES `Payment` WRITE;
 /*!40000 ALTER TABLE `Payment` DISABLE KEYS */;
+INSERT INTO `Payment` VALUES (1,1,'2014-07-17 00:00:00','2014-07-17 00:00:00',1,5400),(2,1,'2015-01-17 00:00:00',NULL,0,5400);
 /*!40000 ALTER TABLE `Payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,8 +140,9 @@ DROP TABLE IF EXISTS `Privilege`;
 CREATE TABLE `Privilege` (
   `id_privilege` int(11) NOT NULL AUTO_INCREMENT,
   `privilege_name` varchar(100) DEFAULT NULL,
+  `privilege_file` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +151,7 @@ CREATE TABLE `Privilege` (
 
 LOCK TABLES `Privilege` WRITE;
 /*!40000 ALTER TABLE `Privilege` DISABLE KEYS */;
-INSERT INTO `Privilege` VALUES (1,'A'),(2,'B'),(3,'C'),(4,'D');
+INSERT INTO `Privilege` VALUES (1,'Manage UserAccounts','manageUserAccounts'),(2,'Manage Employees','manageEmployees'),(3,'Manage Enterprises','manageEnterprises'),(4,'Manage Products','manageProducts'),(5,'Manage Offers','manageOffers'),(6,'View Account','viewAccount');
 /*!40000 ALTER TABLE `Privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +173,7 @@ CREATE TABLE `Product` (
   `status` tinyint(1) NOT NULL,
   `target_market` varchar(100) NOT NULL,
   PRIMARY KEY (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +182,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ',0,'LowIncomeMarket'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE',1,'SeniorMarket');
+INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ',1,'LowIncomeMarket'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE',1,'SeniorMarket'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF',1,'AdultMarket'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF',1,'FamilyMarket'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF',1,'LowIncomeFamilyMarket'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF',0,'LowIncomeSmallBusinessFamilyMarket'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK',1,'SmallBusinessFamilyMarket'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK',1,'SmallBusinessIndividualMarket'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK',1,'LowIncomeSmallBusinessIndividualMarket'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK',1,'LowIncomeSmallBusinessFamilyMarket');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +223,7 @@ CREATE TABLE `Role_Privilege` (
   `id_privilege` int(11) NOT NULL,
   `id_role` int(11) NOT NULL,
   PRIMARY KEY (`id_role_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +232,7 @@ CREATE TABLE `Role_Privilege` (
 
 LOCK TABLES `Role_Privilege` WRITE;
 /*!40000 ALTER TABLE `Role_Privilege` DISABLE KEYS */;
-INSERT INTO `Role_Privilege` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2);
+INSERT INTO `Role_Privilege` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2),(5,5,2),(6,6,2),(7,1,3),(8,2,3),(9,4,3),(10,6,3),(11,1,4),(12,2,4),(13,5,4),(14,6,4);
 /*!40000 ALTER TABLE `Role_Privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,27 +245,26 @@ DROP TABLE IF EXISTS `User_Account`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User_Account` (
   `id_user_account` int(11) NOT NULL AUTO_INCREMENT,
-  `id_enterprise` int(11) DEFAULT NULL,
-  `id_role` int(11) NOT NULL,
-  `user_name` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
-  `date_of_birth` datetime NOT NULL,
-  `age` int(11) NOT NULL,
-  `id_employee` int(11) DEFAULT NULL,
-  `is_small_business` tinyint(1) NOT NULL,
-  `is_family` tinyint(1) NOT NULL,
-  `income_status` varchar(45) NOT NULL,
-  `street` varchar(45) NOT NULL,
-  `city` varchar(45) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  `zip` varchar(15) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `email` varchar(45) NOT NULL,
+  `id_enterprise` int(11) DEFAULT '3',
+  `id_role` int(11) NOT NULL DEFAULT '1',
+  `user_name` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `date_of_birth` varchar(25) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `is_small_business` tinyint(1) DEFAULT NULL,
+  `is_family` tinyint(1) DEFAULT NULL,
+  `income_status` varchar(45) DEFAULT NULL,
+  `street` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `zip` varchar(15) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_user_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +273,7 @@ CREATE TABLE `User_Account` (
 
 LOCK TABLES `User_Account` WRITE;
 /*!40000 ALTER TABLE `User_Account` DISABLE KEYS */;
-INSERT INTO `User_Account` VALUES (1,NULL,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17 00:00:00',24,NULL,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,NULL,2,'bbb','bbbbb',1,'Yijun','Liu','1989-07-17 00:00:00',24,NULL,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17 00:00:00',24,NULL,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17 00:00:00',24,NULL,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com');
+INSERT INTO `User_Account` VALUES (1,3,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,3,2,'bbb','bbbbb',0,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(5,3,2,'admin','admin',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(6,3,1,'asdfa','asdfads',1,'asdfasdf','asdfasdf','19900909',24,0,0,'low','oioiooo','oooo','ooo','02111','000000000','ads@sdff.cl'),(7,3,1,'adfas','',1,'','','',NULL,NULL,NULL,'none','','','','','',''),(8,1,3,'eee','eeeee',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com');
 /*!40000 ALTER TABLE `User_Account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -284,4 +286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-11 17:14:59
+-- Dump completed on 2014-11-17 18:02:36

@@ -103,7 +103,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
 
         List<UserAccountEntity> userAccountEntityList =  loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
         return userAccountEntityList;
@@ -134,7 +134,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         JSONObject jsonObject = new JSONObject();
 
