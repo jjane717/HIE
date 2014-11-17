@@ -109,6 +109,7 @@ public class TestController {
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
 
         uiModel.addAttribute("privilegeEntityList",privilegeEntityList);
+        uiModel.addAttribute("key","Yijun Liu");
 
         return "jsp/test.jsp";
     }

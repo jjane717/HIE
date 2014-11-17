@@ -8,7 +8,7 @@
     java.util.Date date = new java.util.Date();
 %>
 
-Hello! The time is now <%= date %>
+Hello! The time is now <%= date %> ${key}
 <c:forEach items="${privilegeEntityList}" var="privilegeEntity">
     <h1>${privilegeEntity.privilegeName}</h1>
 </c:forEach>
