@@ -1,5 +1,7 @@
 package org.yijun.hie.controller;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.PrivilegeEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.LoginService;
@@ -125,6 +128,22 @@ public class ManageController {
         }else{
             return null;
         }
+    }
+
+    @RequestMapping(value="/privileges", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public String pp () throws JSONException {
+        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+        JSONObject jsonObject = new JSONObject();
+
+        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
+            jsonObject.put(privilegeEntity.getPrivilegeName(),privilegeEntity.getPrivilegeFile());
+        }
+
+        System.out.println(jsonObject);
+        return jsonObject.toString();
     }
 
 }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,10 +63,11 @@ public class TestController {
         return roleEntity;
     }
 
-    @RequestMapping(value="/testJsp", method = RequestMethod.GET)
-    public String testJsp () {
-        return "jsp/test.jsp";
-    }
+//    @RequestMapping(value="/testJsp", method = RequestMethod.GET)
+//    public String testJsp (HttpServletRequest request) {
+//        request.setAttribute("key", "val1");
+//        return "jsp/test.jsp";
+//    }
 
     @RequestMapping(value="/pp", method = RequestMethod.GET)
     @ResponseBody
@@ -99,20 +101,17 @@ public class TestController {
 //        return privilegeEntityList;
 //    }
 
-//    @RequestMapping(value="/oo", method = RequestMethod.GET)
-//    @Transactional
-//    public String oo (HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
-//        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
-//        List list = new LinkedList();
-//        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
-//            list.add(privilegeEntity.getPrivilegeName());
-//        }
-//        session.setAttribute("test.jsp",list);
-//
-//        return "html/test.jsp";
-//    }
+    @RequestMapping(value="/oo", method = RequestMethod.GET)
+    @Transactional
+    public String oo (Model uiModel) {
+
+        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+
+        uiModel.addAttribute("privilegeEntityList",privilegeEntityList);
+
+        return "jsp/test.jsp";
+    }
 
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
