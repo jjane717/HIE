@@ -41,6 +41,7 @@ public class ProductController {
         EnterpriseEntity enterpriseEntity = enterpriseEntityList.get(0);
         Hibernate.initialize(enterpriseEntity.getProductEntityList());
         return enterpriseEntity.getProductEntityList();
+
         //return userAccountEntity.getEnterpriseEntity().getProductEntityList();
     }
 }
