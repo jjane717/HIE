@@ -62,7 +62,7 @@ CREATE TABLE `Enterprise_Product` (
   `id_enterprise` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   PRIMARY KEY (`id_enterprise_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `Enterprise_Product` (
 
 LOCK TABLES `Enterprise_Product` WRITE;
 /*!40000 ALTER TABLE `Enterprise_Product` DISABLE KEYS */;
-INSERT INTO `Enterprise_Product` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,1,3),(6,1,4),(7,1,5),(8,2,10),(9,1,7),(10,1,8),(11,1,9),(12,1,10),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8),(19,2,9);
+INSERT INTO `Enterprise_Product` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,1,3),(6,1,4),(7,1,5),(8,2,10),(9,1,7),(10,1,8),(11,1,9),(12,1,10),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8),(19,2,9),(20,1,6);
 /*!40000 ALTER TABLE `Enterprise_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +273,7 @@ CREATE TABLE `User_Account` (
 
 LOCK TABLES `User_Account` WRITE;
 /*!40000 ALTER TABLE `User_Account` DISABLE KEYS */;
-INSERT INTO `User_Account` VALUES (1,3,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,3,2,'bbb','bbbbb',0,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(5,3,2,'admin','admin',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(6,3,1,'asdfa','asdfads',1,'asdfasdf','asdfasdf','19900909',24,0,0,'low','oioiooo','oooo','ooo','02111','000000000','ads@sdff.cl'),(7,3,1,'adfas','',1,'','','',NULL,NULL,NULL,'none','','','','','',''),(8,1,3,'eee','eeeee',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com');
+INSERT INTO `User_Account` VALUES (1,3,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,3,2,'bbb','bbbbb',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(5,3,2,'admin','admin',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(8,1,3,'eee','eeeee',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com');
 /*!40000 ALTER TABLE `User_Account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -286,4 +286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-17 18:02:36
+-- Dump completed on 2014-11-17 21:11:04
