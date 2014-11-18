@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class ProductRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private String getProductEntityForEnterpriseEntityHql ="select ProductEntity from EnterpriseProductEntity where idEnterprise = :idEnterprise";
+    private String getProductEntityForEnterpriseEntityHql ="from ProductEntity where idProduct = (select idProduct from EnterpriseProductEntity where idEnterprise = :idEnterprise)";
 
     public List<ProductEntity> getProductEntityForEnterpriseFromRepository(Integer idEnterprise){
         Session session = sessionFactory.getCurrentSession();

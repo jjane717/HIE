@@ -17,8 +17,6 @@ import java.util.List;
 @Service
 public class CustomerService {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private CustomerRepository customerRepository;
 
     public String getMarket(UserAccountEntity userAccountEntity){
