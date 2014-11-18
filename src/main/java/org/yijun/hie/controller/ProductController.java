@@ -30,7 +30,8 @@ public class ProductController {
     @Transactional
     public List<ProductEntity> getProductsForEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
-        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
-        return productService.getProductsForEnterpriseFromService(idEnterprise);
+//        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
+//        return productService.getProductsForEnterpriseFromService(idEnterprise);
+        return userAccountEntity.getEnterpriseEntity().getProductEntityList();
     }
 }
