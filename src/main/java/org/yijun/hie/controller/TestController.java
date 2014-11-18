@@ -51,7 +51,7 @@ public class TestController {
     @ResponseBody
     @Transactional
     public UserAccountEntity login (String u, String p) {
-        return loginService.userLogin(u,p);
+        return loginService.userLogin();
     }
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
@@ -83,7 +83,7 @@ public class TestController {
     @ResponseBody
     @Transactional
     public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         JSONObject jsonObject = new JSONObject();
 
@@ -98,7 +98,7 @@ public class TestController {
 //    @ResponseBody
 //    @Transactional
 //    public List<PrivilegeEntity> po (){
-//        UserAccountEntity userAccountEntity = loginService.userLogin("bbb", "bbbbb");
+//        UserAccountEntity userAccountEntity = loginService.userLogin();
 //        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
 ////        JSONObject jsonObject = new JSONObject();
 ////
@@ -114,7 +114,7 @@ public class TestController {
     @Transactional
     public String oo (Model uiModel) {
 
-        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
 
         uiModel.addAttribute("privilegeEntityList",privilegeEntityList);

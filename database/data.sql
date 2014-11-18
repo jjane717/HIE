@@ -98,7 +98,7 @@ CREATE TABLE `Order` (
 
 LOCK TABLES `Order` WRITE;
 /*!40000 ALTER TABLE `Order` DISABLE KEYS */;
-INSERT INTO `Order` VALUES (1,4,7,'2014-11-17 07:48:48',10800);
+INSERT INTO `Order` VALUES (1,1,7,'2014-11-17 07:48:48',10800);
 /*!40000 ALTER TABLE `Order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,14 +164,15 @@ DROP TABLE IF EXISTS `Product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Product` (
   `id_product` int(11) NOT NULL AUTO_INCREMENT,
-  `offer_name` varchar(45) NOT NULL,
-  `co_Pay` double NOT NULL,
-  `deductible` double NOT NULL,
-  `co_Insurance` double NOT NULL,
-  `offer_price` double NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `target_market` varchar(100) NOT NULL,
+  `offer_name` varchar(45) DEFAULT NULL,
+  `co_Pay` double DEFAULT NULL,
+  `deductible` double DEFAULT NULL,
+  `co_Insurance` double DEFAULT NULL,
+  `offer_price` double DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `target_market` varchar(100) DEFAULT NULL,
+  `insurance_enterprise_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_product`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -182,7 +183,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ',1,'LowIncomeMarket'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE',1,'SeniorMarket'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF',1,'AdultMarket'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF',1,'FamilyMarket'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF',1,'LowIncomeFamilyMarket'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF',0,'LowIncomeSmallBusinessFamilyMarket'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK',1,'SmallBusinessFamilyMarket'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK',1,'SmallBusinessIndividualMarket'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK',1,'LowIncomeSmallBusinessIndividualMarket'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK',1,'LowIncomeSmallBusinessFamilyMarket');
+INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ',1,'LowIncomeMarket','BosInsurance'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE',1,'SeniorMarket','BosInsurance'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF',1,'AdultMarket','BosInsurance'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF',1,'FamilyMarket','BosInsurance'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF',1,'LowIncomeFamilyMarket','BosInsurance'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF',0,'LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK',1,'SmallBusinessFamilyMarket','BosInsurance'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK',1,'SmallBusinessIndividualMarket','BosInsurance'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK',1,'LowIncomeSmallBusinessIndividualMarket','BosInsurance'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK',1,'LowIncomeSmallBusinessFamilyMarket','BosInsurance');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-17 21:11:04
+-- Dump completed on 2014-11-18  2:04:14

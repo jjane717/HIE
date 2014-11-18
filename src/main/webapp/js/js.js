@@ -181,7 +181,7 @@ function editEnterprise(id){
         width: 400,
         modal: true,
         buttons: {
-            "Create": function() {
+            "Update": function() {
                 var bValid = true;
                 allFields.removeClass( "ui-state-error" );
 
@@ -481,7 +481,7 @@ function changeProductStatus(id){
         if(checkBox.hasClass("checkStatus")){
             $.ajax({
                 type: "POST",
-                url : "http://localhost:8080/updateProduct",
+                url : "http://localhost:8080/updateProductStatus",
                 data: {"status": "false", "id":id},
                 cache:true,
 
@@ -513,6 +513,148 @@ function changeProductStatus(id){
         }
     }else{
 
+    }
+}
+
+function createProduct(){
+    var offerName = $( "#offerName" ),
+        coPay = $( "#coPay"),
+        deductible = $( "#deductible" ),
+        coInsurance= $("#coInsurance"),
+        offerPrice=$("#offerPrice"),
+        description = $( "#description" ),
+        targetMarket = $( "#targetMarket" ),
+        allFields = $( [] ).add( offerName ).add( coPay).add(deductible).add(coInsurance).add(offerPrice).add(description),
+        tips = $( ".validateTips" );
+
+    $( "#dialog-form" ).dialog({
+        autoOpen: true,
+        height: 380,
+        width: 500,
+        modal: true,
+        buttons: {
+            "Create": function() {
+                var bValid = true;
+                allFields.removeClass( "ui-state-error" );
+
+                bValid = bValid && checkLength( offerName, "Offer Name", 3, 16, tips );
+                bValid = bValid && checkLength( coPay, "CoPay", 1, 5, tips );
+                bValid = bValid && checkLength( deductible, "Deductible", 1, 5, tips );
+                bValid = bValid && checkLength( coInsurance, "CoInsurance", 1, 5, tips );
+                bValid = bValid && checkLength( offerPrice, "Offer Price", 1, 5, tips );
+                bValid = bValid && checkLength( description, "Description", 2, 20, tips );
+
+                bValid = bValid && checkRegexp( offerName, /^[a-z]([0-9a-z_])+$/i, "Offer Name may consist of a-z, 0-9, underscores, begin with a letter.",tips );
+                bValid = bValid && checkRegexp( coPay, /^([0-9.])+$/, "CoPay field only allow : 0-9" ,tips);
+                bValid = bValid && checkRegexp( deductible, /^([0-9.])+$/, "Deductible field only allow : 0-9" ,tips);
+                bValid = bValid && checkRegexp( coInsurance, /^([0-9.])+$/, "CoInsurance field only allow : 0-9" ,tips);
+                bValid = bValid && checkRegexp( offerPrice, /^([0-9.])+$/, "Offer Price field only allow :0-9." ,tips);
+                bValid = bValid && checkRegexp( description, /^[a-z]([0-9a-z_])+$/i, "Description may consist of a-z, 0-9, underscores, begin with a letter.",tips );
+
+
+
+
+                if ( bValid ) {
+                    $.ajax({
+                        type: "POST",
+                        url : "http://localhost:8080/createProduct",
+                        data : $("#enterpriseInfoForm").serialize(),
+                        cache:true,
+
+                        success: function(data){
+                            alert("You have already created this product");
+
+                        },
+                        error: function(error){
+                            alert("NO"+ error);
+                        }
+                    });
+                    $( this ).dialog( "close" );
+                }
+            },
+            Cancel: function() {
+                allFields.val( "" ).removeClass( "ui-state-error" );
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            allFields.val( "" ).removeClass( "ui-state-error" );
+            $( this ).dialog( "close" );
+        }
+    });
+
+}
+
+function filterProduct(){
+    $(".main").removeClass("hidden");
+    $(".detailsTr").addClass("hidden");
+    $(".detailsTd").removeClass("down");
+    $(".detailsTd").addClass("up");
+
+    var targetMarket = "." + $("#targetMarket").val();
+
+    if(targetMarket != ".All"){
+        $(".main").addClass("hidden");
+        $(targetMarket).removeClass("hidden");
+    }
+}
+
+function chooseOffer(){
+    var radios = document.getElementById("chooseOffer").selectOffer;
+    var id = null;
+    for(var i=0; i<radios.length;i++){
+        if(radios[i].checked){
+            id = radios[i].value;
+        }
+    }
+    if(id==null){
+        alert("Please Choose One Offer.");
+    }else{
+        $.ajax({
+            type: "Get",
+            url : "http://localhost:8080/chooseOffer",
+            data : {"id":id},
+            cache:true,
+
+            success: function(data){
+                $("#customer-container").load("chooseOffer");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }
+}
+
+function backPlaceProducts(){
+    $("#customer-container").load("placeProducts");
+}
+
+function placeProduct(){
+    var radios = document.getElementById("chooseHIE").selectHIE;
+    var id = null;
+    for(var i=0; i<radios.length;i++){
+        if(radios[i].checked){
+            id = radios[i].value;
+        }
+    }
+    if(id==null){
+        alert("Please Choose One Enterprise.");
+    }else{
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/placeProducts",
+            data : {"id":id},
+            cache:true,
+
+            success: function(data){
+                alert("You have already placed a product.");
+                $("#customer-container").load("placeProducts");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
     }
 }
 

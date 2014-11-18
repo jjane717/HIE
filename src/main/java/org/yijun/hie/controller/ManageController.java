@@ -34,7 +34,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public UserAccountEntity viewAccount (){
-        UserAccountEntity userAccountEntity = loginService.userLogin("admin", "admin");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         return userAccountEntity;
     }
 
@@ -70,8 +70,7 @@ public class ManageController {
     @RequestMapping(value="/enterprise", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public EnterpriseEntity enterpriseOne (String id) {
-        Integer idEnterprise = Integer.valueOf(id);
+    public EnterpriseEntity getEnterpriseById (Integer idEnterprise) {
         return loginService.getEnterpriseOneFromService(idEnterprise);
     }
 
@@ -104,7 +103,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<UserAccountEntity> userAccountEntityList = loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
         return userAccountEntityList;
     }
@@ -134,7 +133,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         JSONObject jsonObject = new JSONObject();
 

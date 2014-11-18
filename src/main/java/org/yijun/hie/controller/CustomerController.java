@@ -29,7 +29,7 @@ public class CustomerController {
     @ResponseBody
     @Transactional
     public List<ProductEntity> getProductEntityListForMarket(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<ProductEntity> productEntityList;
         productEntityList = customerService.getProductEntityListForMarketFromService(customerService.getMarket(userAccountEntity));
         return productEntityList;
@@ -39,7 +39,7 @@ public class CustomerController {
     @ResponseBody
     @Transactional
     public List<OrderEntity> getOrderEntityListByUserAccount(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        UserAccountEntity userAccountEntity = loginService.userLogin();
         List<OrderEntity> orderEntityList;
         orderEntityList = userAccountEntity.getOrderEntityList();
         return orderEntityList;

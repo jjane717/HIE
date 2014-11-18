@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,9 @@ import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.ProductService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,23 +33,88 @@ public class ProductController {
     private LoginService loginService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private EnterpriseController enterpriseController;
+    @Autowired
+    private ManageController manageController;
 
     @RequestMapping(value="/products", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<ProductEntity> getProductsForEnterprise(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
-        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
-        Hibernate.initialize(enterpriseEntity.getProductEntityList());
-        return enterpriseEntity.getProductEntityList();
+    public List<EnterpriseProductEntity> getProductsForEnterprise(){
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+//        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
+//        Hibernate.initialize(enterpriseEntity.getProductEntityList());
+//        return enterpriseEntity.getProductEntityList();
+        return productService.getProductEntityForEnterpriseFromService(userAccountEntity.getEnterpriseEntity().getIdEnterprise());
     }
 
-    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+    @RequestMapping(value="/findInsuranceEnterpriseForProduct", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public EnterpriseEntity findInsuranceEnterpriseForProduct(Integer idProduct){
+        return productService.findInsuranceForProductsFromService(idProduct);
+        //handle balance
+    }
+
+    @RequestMapping(value="/findHIEsForProduct")
+    public List getHIEEnterpriseListByIdProduct(Integer idProduct){
+        return productService.getHIEEnterpriseListByIdProductFromService(idProduct);
+    }
+
+    @RequestMapping(value = "/updateProductStatus", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
     public void updateProductStatus(HttpServletRequest request){
-        Integer idProduct = Integer.valueOf(request.getParameter("id"));
+        Integer idEnterpriseProduct = Integer.valueOf(request.getParameter("id"));
         Boolean status = Boolean.valueOf(request.getParameter("status"));
-        productService.updateProductStatusFromService(idProduct, status);
+        productService.updateProductStatusFromService(idEnterpriseProduct, status);
     }
+
+    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public ProductEntity getProductEntityByID(HttpServletRequest request){
+        return productService.getProductEntityByIDFromService(Integer.valueOf(request.getParameter("id")));
+    }
+
+    @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public ProductEntity updateProductEntity(ProductEntity productEntity){
+        return productService.createProductEntityFromService(productEntity);
+    }
+
+    @RequestMapping(value = "/chooseOffer", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void chooseOffer(HttpServletRequest request){
+        ProductEntity productEntity = getProductEntityByID(request);
+        HttpSession session = request.getSession();
+        synchronized (session){
+        session.setAttribute("tempProduct", productEntity);
+        }
+    }
+
+    @RequestMapping(value = "/chooseOffer", method = RequestMethod.GET)
+    @Transactional
+    public String chooseHIE (Model model){
+        List<EnterpriseEntity> enterpriseEntityList= enterpriseController.getHIEEnterpriseList();
+        model.addAttribute("hies",enterpriseEntityList);
+        return "chooseHIEEnterprise";
+    }
+
+    @RequestMapping(value = "/placeProducts", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public String placeProduct(HttpServletRequest request) {
+        EnterpriseEntity enterpriseEntity = manageController.getEnterpriseById(Integer.valueOf(request.getParameter("id")));
+        HttpSession session = request.getSession();
+        synchronized (session) {
+            ProductEntity productEntity = (ProductEntity) session.getAttribute("tempProduct");
+            productService.placeProductFromService(enterpriseEntity,productEntity);
+        }
+        return "placeProducts";
+    }
+
 }

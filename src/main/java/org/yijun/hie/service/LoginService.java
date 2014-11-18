@@ -27,8 +27,8 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserAccountEntity userLogin (String userName, String password) {
-        return userRepository.getUserByName(userName).get(0);
+    public UserAccountEntity userLogin () {
+        return userRepository.getUserByName("ddd").get(0);
     }
 
     public Boolean isUserExist(String userName){

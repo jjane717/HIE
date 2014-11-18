@@ -1,61 +1,132 @@
-<script src="../js/js.js"></script>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script>
     $(document).ready(function(){
-        $.ajax({
-            type: "Get",
-            url : "http://localhost:8080/enterprise",
-            cache:true,
-
-            success: function(data){
-                $.each(data,function(i){
-                    if(!(data[i]["enterpriseName"] == "Admin")) {
-                        $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data[i]["idEnterprise"] + "\"><td>" + data[i]["enterpriseName"] + "</td><td>" + data[i]["enterpriseType"] + "</td><td>" + data[i]["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data[i]["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data[i]["idEnterprise"] + "\")>Delete</div></div></td></tr>");
-
-                        $("#enterpriseTable tr").hover(function(){
-                            $(this).addClass("one");
-                        },function(){
-                            $(this).removeClass("one");
-                        });
-
-                    }
-                });
-            },
-            error: function(error){
-                alert("NO"+ error);
-            }
+        $("#enterpriseTable tr").hover(function(){
+            $(this).addClass("one");
+        },function(){
+            $(this).removeClass("one");
         });
     });
 
 </script>
-<div id="create">
-    <div id="account_save_button" class="submit_button" onclick="createEnterprise()">
-        <label>Create New Enterprise</label>
-    </div>
-</div>
 
-<div id="enterpriseInfo">
+<div>
+    <div id="create">
+        <div id="account_save_button" class="submit_button" onclick="createProduct()">
+            <label>Create New Product</label>
+        </div>
+    </div>
     <table id="enterpriseTable" cellspacing="0">
         <tr>
-            <th>Enterprise Name</th>
-            <th>Enterprise Type</th>
-            <th>Enterprise Code</th>
-            <th></th>
+            <th class="details"></th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Description</th>
         </tr>
+        <c:forEach items="${products}" var="product">
+            <tr>
+                <td id="original_${product.productEntity.idProduct}" class="details up detailsTd" onclick=showProductDetails("${product.productEntity.idProduct}")></td>
+                <td>${product.productEntity.offerName}</td>
+                <td>${product.productEntity.offerPrice}</td>
+                <td>${product.productEntity.description}</td>
+            </tr>
+            <tr id="detail_${product.productEntity.idProduct}" class="hidden detailsTr">
+                <td colspan="5">
+                    <div class="detailsDiv">
+                        <table class="detailsTable" cellspacing="0">
+                            <tr>
+                                <td class="detailsTitle">CoPay:</td><td>${product.productEntity.coPay}</td>
+                                <td class="detailsTitle">CoInsurance:</td><td>${product.productEntity.coInsurance}</td>
+                            </tr>
+                            <tr>
+                                <td class="detailsTitle">Deductible:</td><td>${product.productEntity.deductible}</td>
+                                <td class="detailsTitle">Offer Price</td><td>${product.productEntity.offerPrice}</td>
+                            </tr>
+                            <tr>
+                                <td class="detailsTitle">Description:</td><td colspan="3">${product.productEntity.description}</td>
+                            </tr>
+                            <tr>
+                                <td class="detailsTitle">Target Market:</td><td colspan="3">${product.productEntity.targetMarket}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 
+<div id="dialog-form" title="Product" class="hidden">
+    <p class="validateTips hidden">All form fields are required.</p>
+
+    <form id="enterpriseInfoForm">
+        <fieldset>
+            <table>
+                <tr>
+                    <td><label for="offerName">Offer Name: </label></td>
+                    <td><input type="text" name="offerName" id="offerName" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="coPay">CoPay: </label></td>
+                    <td><input type="text" name="coPay" id="coPay" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="deductible">Deductible: </label></td>
+                    <td><input type="text" name="deductible" id="deductible" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="coInsurance">CoInsurance: </label></td>
+                    <td><input type="text" name="coInsurance" id="coInsurance" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="offerPrice">Offer Price:</label></td>
+                    <td><input type="text" name="offerPrice" id="offerPrice" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Description:</label></td>
+                    <td><input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all"></td>
+                </tr>
+                <tr>
+                    <td><label for="targetMarket">Target Market: </label></td>
+                    <td>
+                        <select id="targetMarket" name="targetMarket" class="text ui-widget-content ui-corner-all" width="150px">
+                            <option value="AdultMarket">Adult Market</option>
+                            <option value="SeniorMarket">Senior Market</option>
+                            <option value="FamilyMarket">Family Market</option>
+                            <option value="SmallBusinessFamilyMarket">Small Business Family Market</option>
+                            <option value="SmallBusinessIndividualMarket">Small Business Individual Market</option>
+                            <option value="LowIncomeMarket">Low Income Market</option>
+                            <option value="LowIncomeFamilyMarket">Low Income Family Market</option>
+                            <option value="LowIncomeSmallBusinessFamilyMarket">Low Income Small Business Family Market</option>
+                            <option value="LowIncomeSmallBusinessIndividualMarket">Low Income Small Business Individual Market</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+
 <style>
-    .action{
-        width: 100px;
-        float: left;
-    }
 
     .submit_button{
         float:left;
     }
 
-    .edit{
-        margin-right: 3px;
+    .details{
+        width: 50px;
+        cursor: pointer;
+    }
+
+    .detailsDiv{
+        background-color: lightgoldenrodyellow;
+    }
+
+    .detailsTable{
+        margin:0px 50px;
+        width: 450px;
     }
 
     #create{
@@ -63,10 +134,14 @@
         height:50px;
     }
 
-    #enterpriseInfo{
-        margin: 20px;
+    .detailsTitle{
+        color: #6d3353;
+        font-weight: bolder;
+        font-size: 16px;
     }
+
     #enterpriseTable{
+        margin-top: 10px;
         width:570px;
     }
 
@@ -83,61 +158,8 @@
     }
     #enterpriseTable td{
         height: 50px;
-        width: 100px;
+        width: auto;
         border-bottom: 1px solid lightgray;
     }
 
 </style>
-
-<div id="dialog-form" title="Enterprise" class="hidden">
-    <p class="validateTips hidden">All form fields are required.</p>
-
-    <form id="enterpriseInfoForm">
-        <input type="text" name="idEnterprise" id="idEnterprise" class="hidden">
-        <fieldset>
-            <table>
-                <tr>
-                    <td><label for="enterpriseName">Enterprise Name: </label></td>
-                    <td><input type="text" name="enterpriseName" id="enterpriseName" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="enterpriseCode">Enterprise Code: </label></td>
-                    <td><input type="text" name="enterpriseCode" id="enterpriseCode" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="enterpriseType">Enterprise Type: </label></td>
-                    <td>
-                        <select id="enterpriseType" name="enterpriseType" class="text ui-widget-content ui-corner-all">
-                            <option value="HIE">HIE</option>
-                            <option value="Insurance">Insurance</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="street">Street: </label></td>
-                    <td><input type="text" name="street" id="street" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="city">City: </label></td>
-                    <td><input type="text" name="city" id="city" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="state">State:</label></td>
-                    <td><input type="text" name="state" id="state" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="zip">Zip:</label></td>
-                    <td><input type="text" name="zip" id="zip" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="phone">Phone:</label></td>
-                    <td><input type="text" name="phone" id="phone" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email:</label></td>
-                    <td><input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all"></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form>
-</div>

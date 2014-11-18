@@ -25,9 +25,21 @@ public class EnterpriseProductEntity {
     @Column(name = "id_product", insertable = false, updatable = false)
     private int idProduct;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ProductEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
     @JoinColumn(name = "id_product")
     private ProductEntity productEntity;
+
+    @Column(name = "status")
+    private Boolean status;
+
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public int getIdEnterpriseProduct() {
         return idEnterpriseProduct;

@@ -1,11 +1,15 @@
 package org.yijun.hie.service;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.repository.ProductRepository;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,14 +19,47 @@ import java.util.List;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private LoginService loginService;
 
     public ProductEntity getProductEntityByIDFromService(Integer idProduct){
         return productRepository.getProductByIDFromRepository(idProduct);
     }
 
-    public void updateProductStatusFromService(Integer idProduct, Boolean status){
-        ProductEntity productEntity = getProductEntityByIDFromService(idProduct);
-        productEntity.setStatus(status);
-        productRepository.updateProductStatusFromRepository(productEntity);
+    public void updateProductStatusFromService(Integer idEnterpriseProduct, Boolean status){
+        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByID(idEnterpriseProduct);
+        enterpriseProductEntity.setStatus(status);
+        productRepository.updateEnterpriseProductStatusFromRepository(enterpriseProductEntity);
+    }
+
+    public EnterpriseEntity findInsuranceForProductsFromService(Integer idProduct){
+        return productRepository.findInsuranceForProductFromRepository(getProductEntityByIDFromService(idProduct));
+    }
+
+    public List<EnterpriseProductEntity> getProductEntityForEnterpriseFromService(Integer idEnterprise){
+        return productRepository.getProductEntityForEnterpriseFromRepository(idEnterprise);
+    }
+
+    public List getHIEEnterpriseListByIdProductFromService(Integer idProduct){
+        return productRepository.getProductEntityForEnterpriseFromRepository(idProduct);
+    }
+
+    public ProductEntity createProductEntityFromService(ProductEntity productEntity){
+        EnterpriseEntity enterpriseEntity = loginService.userLogin().getEnterpriseEntity();
+        List<EnterpriseEntity> enterpriseEntityList = new LinkedList<EnterpriseEntity>();
+        enterpriseEntityList.add(enterpriseEntity);
+        productEntity.setEnterpriseEntities(enterpriseEntityList);
+        productEntity.setInsuranceEnterpriseName(enterpriseEntity.getEnterpriseName());
+        return productRepository.createProductEntityFromRepository(productEntity);
+    }
+
+    public void placeProductFromService(EnterpriseEntity enterpriseEntity, ProductEntity productEntity){
+        EnterpriseProductEntity enterpriseProductEntity = new EnterpriseProductEntity();
+        enterpriseProductEntity.setIdEnterprise(enterpriseEntity.getIdEnterprise());
+        enterpriseProductEntity.setIdProduct(productEntity.getIdProduct());
+        enterpriseProductEntity.setEnterpriseEntity(enterpriseEntity);
+        enterpriseProductEntity.setProductEntity(productEntity);
+        enterpriseProductEntity.setStatus(false);
+        productRepository.placeProductFromRepository(enterpriseProductEntity);
     }
 }

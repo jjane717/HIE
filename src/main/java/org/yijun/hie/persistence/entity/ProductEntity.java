@@ -34,11 +34,11 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status")
-    private Boolean status;
-
     @Column(name = "target_market")
     private String targetMarket;
+
+    @Column(name = "insurance_enterprise_name")
+    private String insuranceEnterpriseName;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_product"), inverseJoinColumns = @JoinColumn(name = "id_enterprise"))
@@ -48,12 +48,12 @@ public class ProductEntity {
             targetEntity = OrderEntity.class, mappedBy = "productEntity")
     List<OrderEntity> orderEntityList = new LinkedList<OrderEntity>();
 
-    public Boolean getStatus() {
-        return status;
+    public String getInsuranceEnterpriseName() {
+        return insuranceEnterpriseName;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setInsuranceEnterpriseName(String insuranceEnterpriseName) {
+        this.insuranceEnterpriseName = insuranceEnterpriseName;
     }
 
     public String getTargetMarket() {
