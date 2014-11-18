@@ -38,38 +38,38 @@ public class HomeController {
 
     @RequestMapping(value = "/system", method = RequestMethod.GET)
     public String managementSystem (UserAccountEntity userAccountEntity){
-        return "html/manage.html";
+        return "manage";
     }
 
     @RequestMapping(value = "/manageUserAccounts", method = RequestMethod.GET)
     public String manageUserAccounts (){
-        return "html/manageUserAccounts.html";
+        return "manageUserAccounts";
     }
 
     @RequestMapping(value = "/manageEmployees", method = RequestMethod.GET)
     public String manageEmployees (){
-        return "html/manageEmployees.html";
+        return "manageEmployees";
     }
 
     @RequestMapping(value = "/manageEnterprises", method = RequestMethod.GET)
     public String manageEnterprises (){
-        return "html/manageEnterprises.html";
+        return "manageEnterprises";
     }
 
     @RequestMapping(value = "/manageOffers", method = RequestMethod.GET)
     public String manageOffers (){
-        return "html/manageOffers.html";
+        return "manageOffers";
     }
 
     @RequestMapping(value = "/manageProducts", method = RequestMethod.GET)
     public String manageProducts (){
-        return "html/manageProducts.html";
+        return "manageProducts";
     }
 
     @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
     public String viewAccount (){
 
-        return "html/viewAccount.html";
+        return "viewAccount";
     }
 
 }

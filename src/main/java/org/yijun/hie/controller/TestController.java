@@ -69,7 +69,7 @@ public class TestController {
     public ModelAndView testJsp (HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("test");
         modelAndView.addObject("key", "Hello world!");
-        List<String> testList = new LinkedList<>();
+        List<String> testList = new LinkedList<String>();
         testList.add("A");
         testList.add("B");
         testList.add("C");
@@ -126,7 +126,7 @@ public class TestController {
 
         uiModel.addAttribute("pp", list);
 
-        return "WEB-INF/jsp/test.jsp";
+        return "test";
     }
 
 

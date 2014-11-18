@@ -8,10 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yijun.hie.persistence.entity.EnterpriseEntity;
-import org.yijun.hie.persistence.entity.PrivilegeEntity;
-import org.yijun.hie.persistence.entity.RoleEntity;
-import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.persistence.repository.UserRepository;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
@@ -107,9 +104,9 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
-        EnterpriseEntity enterpriseEntity = userRepository.getEnterpriseOneFromUR(userAccountEntity.getEnterpriseId());
-        return enterpriseEntity.getUserAccountEntityList();
+        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        List<UserAccountEntity> userAccountEntityList = loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
+        return userAccountEntityList;
     }
 
     @RequestMapping(value="/updateUserAccountStatus", method = RequestMethod.POST)
@@ -137,7 +134,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
+        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         JSONObject jsonObject = new JSONObject();
 
@@ -148,5 +145,15 @@ public class ManageController {
         System.out.println(jsonObject);
         return jsonObject.toString();
     }
+
+//    @RequestMapping(value="/products", method = RequestMethod.GET)
+//    @ResponseBody
+//    @Transactional
+//    public  List<ProductEntity> getProductsForEnterprise(){
+//        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+//        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
+//        List<ProductEntity> productEntityList = enterpriseEntity.getProductEntityList();
+//        return productEntityList;
+//    }
 
 }

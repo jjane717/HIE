@@ -18,9 +18,6 @@ public class UserAccountEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idUserAccount;
 
-    @Column(name = "id_enterprise", insertable = false, updatable = false)
-    private Integer enterpriseId;
-
     @Column(name = "user_name")
     private String userName;
 
@@ -112,14 +109,6 @@ public class UserAccountEntity {
 
     public void setIdUserAccount(Integer idUserAccount) {
         this.idUserAccount = idUserAccount;
-    }
-
-    public Integer getEnterpriseId() {
-        return enterpriseId;
-    }
-
-    public void setEnterpriseId(Integer enterpriseId) {
-        this.enterpriseId = enterpriseId;
     }
 
     public String getUserName() {

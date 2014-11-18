@@ -1,5 +1,7 @@
 package org.yijun.hie.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -8,13 +10,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Enterprise_Product", schema = "", catalog = "hiedb")
 public class EnterpriseProductEntity {
-    private int idEnterpriseProduct;
-    private int idEnterprise;
-    private int idProduct;
-
     @Id
     @Column(name = "id_enterprise_product")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int idEnterpriseProduct;
+
+    @Column(name = "id_enterprise")
+    private int idEnterprise;
+
+    @Column(name = "id_product")
+    private int idProduct;
+
     public int getIdEnterpriseProduct() {
         return idEnterpriseProduct;
     }
@@ -23,8 +29,6 @@ public class EnterpriseProductEntity {
         this.idEnterpriseProduct = idEnterpriseProduct;
     }
 
-    @Basic
-    @Column(name = "id_enterprise")
     public int getIdEnterprise() {
         return idEnterprise;
     }
@@ -33,8 +37,6 @@ public class EnterpriseProductEntity {
         this.idEnterprise = idEnterprise;
     }
 
-    @Basic
-    @Column(name = "id_product")
     public int getIdProduct() {
         return idProduct;
     }

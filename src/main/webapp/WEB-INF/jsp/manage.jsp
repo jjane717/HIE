@@ -22,7 +22,7 @@
                     //alert("OK" + data);
 
                     $.each($.parseJSON(data),function(key,val){
-                        $("#privilege").append("<li class=\"holdlightblue\" source=\"" + val + ".jsp\"><label>" + key + "</label></li>");
+                        $("#privilege").append("<li class=\"holdlightblue\" source=\"" + val + "\"><label>" + key + "</label></li>");
                     });
 
                     $("#customer-topmenu ul li").hover(function(){
