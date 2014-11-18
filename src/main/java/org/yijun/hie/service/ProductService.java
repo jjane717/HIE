@@ -32,6 +32,12 @@ public class ProductService {
         productRepository.updateEnterpriseProductStatusFromRepository(enterpriseProductEntity);
     }
 
+    public void updateProductPriceFromService(Integer idEnterpriseProduct, Double totalPrice){
+        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByID(idEnterpriseProduct);
+        enterpriseProductEntity.setTotalPrice(totalPrice);
+        productRepository.updateEnterpriseProductStatusFromRepository(enterpriseProductEntity);
+    }
+
     public EnterpriseEntity findInsuranceForProductsFromService(Integer idProduct){
         return productRepository.findInsuranceForProductFromRepository(getProductEntityByIDFromService(idProduct));
     }

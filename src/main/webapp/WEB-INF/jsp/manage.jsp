@@ -16,6 +16,17 @@
 <script>
     $(document).ready(function(){
         $("#headerholder").load("userLogin");
+
+        $("#customer-topmenu ul li").hover(function(){
+            $(this).removeClass("holdlightblue");
+            $(this).addClass("darkorange");
+        },function(){
+            $(this).removeClass("darkorange");
+            if(!$(this).hasClass("clickdarkorange")){
+                $(this).addClass("holdlightblue");
+            }
+        });
+
         $("#customer-topmenu ul li").click(function(){
             $("#customer-topmenu ul li").removeClass("clickdarkorange");
             $("#customer-topmenu ul li").addClass("holdlightblue");

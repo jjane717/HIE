@@ -497,7 +497,7 @@ function changeProductStatus(id){
         }else{
             $.ajax({
                 type: "POST",
-                url : "http://localhost:8080/updateProduct",
+                url : "http://localhost:8080/updateProductStatus",
                 data: {"status": "true", "id":id},
                 cache:true,
 
@@ -663,6 +663,30 @@ function placeProduct(){
 }
 
 function updatePrice(id){
+    var idInput = "#price_" + id;
+    var price = $(idInput);
+    var bValid = true;
+    var tips = $("#tips");
+
+    bValid = bValid && checkLength( price, "Total Price", 1, 5, tips );
+    bValid = bValid && checkRegexp( price, /^([0-9.])+$/, "Total Price field only allow :0-9." ,tips);
+
+    if(bValid){
+        tips.hide();
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/updateProductPrice",
+            data: {"totalPrice": price.val(), "id":id},
+            cache:true,
+
+            success: function(data){
+                alert("You have already Changed the Price.");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }
 
 }
 

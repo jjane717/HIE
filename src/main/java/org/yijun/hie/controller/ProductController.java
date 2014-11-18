@@ -66,6 +66,15 @@ public class ProductController {
         productService.updateProductStatusFromService(idEnterpriseProduct, status);
     }
 
+    @RequestMapping(value = "/updateProductPrice", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void updateProductPrice(HttpServletRequest request){
+        Integer idEnterpriseProduct = Integer.valueOf(request.getParameter("id"));
+        Double totalPrice = Double.valueOf(request.getParameter("totalPrice"));
+        productService.updateProductPriceFromService(idEnterpriseProduct, totalPrice);
+    }
+
     @RequestMapping(value = "/product", method = RequestMethod.POST)
     @ResponseBody
     @Transactional

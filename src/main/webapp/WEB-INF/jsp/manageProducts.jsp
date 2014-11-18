@@ -23,6 +23,7 @@
 
 <div>
     <form id="productForm">
+        <p id="tips" class="hidden"></p>
         <table id="enterpriseTable" cellspacing="0">
             <tr>
                 <th class="details"></th>
@@ -36,7 +37,7 @@
                     <td id="original_${product.productEntity.idProduct}" class="details up detailsTd" onclick=showProductDetails("${product.productEntity.idProduct}")></td>
                     <td>${product.productEntity.offerName}</td>
                     <td>
-                        <input type="text" class="disabledtext zero" value="${product.totalPrice}"/>
+                        <input id="price_${product.idEnterpriseProduct}" type="text" class="disabledtext zero" value="${product.totalPrice}"/>
                         <div class="action submit_button hidden" onclick="updatePrice(${product.idEnterpriseProduct})">
                             <label>Update</label>
                         </div>

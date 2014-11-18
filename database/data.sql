@@ -61,8 +61,11 @@ CREATE TABLE `Enterprise_Product` (
   `id_enterprise_product` int(11) NOT NULL AUTO_INCREMENT,
   `id_enterprise` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  `target_market` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_enterprise_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +74,7 @@ CREATE TABLE `Enterprise_Product` (
 
 LOCK TABLES `Enterprise_Product` WRITE;
 /*!40000 ALTER TABLE `Enterprise_Product` DISABLE KEYS */;
-INSERT INTO `Enterprise_Product` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,1,3),(6,1,4),(7,1,5),(8,2,10),(9,1,7),(10,1,8),(11,1,9),(12,1,10),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8),(19,2,9),(20,1,6);
+INSERT INTO `Enterprise_Product` VALUES (1,1,1,1,230,'LowIncomeMarket'),(2,1,2,1,300,'SeniorMarket'),(3,2,1,1,200,'LowIncomeMarket'),(4,2,2,1,300,'SeniorMarket'),(5,1,3,1,225,'AdultMarket'),(6,1,4,1,400,'FamilyMarket'),(7,1,5,1,300,'LowIncomeFamilyMarket'),(8,2,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(9,1,7,1,900,'SmallBusinessFamilyMarket'),(10,1,8,1,700,'SmallBusinessIndividualMarket'),(11,1,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(12,1,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(13,2,3,1,225,'AdultMarket'),(14,2,4,1,400,'FamilyMarket'),(15,2,5,1,300,'LowIncomeFamilyMarket'),(16,2,6,1,800,'LowIncomeSmallBusinessFamilyMarket'),(17,2,7,1,900,'SmallBusinessFamilyMarket'),(18,2,8,1,700,'SmallBusinessIndividualMarket'),(19,2,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(20,1,6,0,800,'LowIncomeSmallBusinessFamilyMarket'),(21,2,13,1,90,'AdultMarket'),(22,4,1,0,300,'LowIncomeMarket');
 /*!40000 ALTER TABLE `Enterprise_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +145,7 @@ CREATE TABLE `Privilege` (
   `privilege_name` varchar(100) DEFAULT NULL,
   `privilege_file` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +154,7 @@ CREATE TABLE `Privilege` (
 
 LOCK TABLES `Privilege` WRITE;
 /*!40000 ALTER TABLE `Privilege` DISABLE KEYS */;
-INSERT INTO `Privilege` VALUES (1,'Manage UserAccounts','manageUserAccounts'),(2,'Manage Employees','manageEmployees'),(3,'Manage Enterprises','manageEnterprises'),(4,'Manage Products','manageProducts'),(5,'Manage Offers','manageOffers'),(6,'View Account','viewAccount');
+INSERT INTO `Privilege` VALUES (1,'Manage UserAccounts','manageUserAccounts'),(2,'Manage Employees','manageEmployees'),(3,'Manage Enterprises','manageEnterprises'),(4,'Manage Products','manageProducts'),(5,'Manage Offers','manageOffers'),(6,'View Account','viewAccount'),(7,'Place Products','placeProducts'),(8,'User Home','userHome'),(9,'View Market','viewMarket'),(10,'Order History','orderHistory'),(11,'Make Payment','makePayment');
 /*!40000 ALTER TABLE `Privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,11 +173,10 @@ CREATE TABLE `Product` (
   `co_Insurance` double DEFAULT NULL,
   `offer_price` double DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
   `target_market` varchar(100) DEFAULT NULL,
   `insurance_enterprise_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +185,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ',1,'LowIncomeMarket','BosInsurance'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE',1,'SeniorMarket','BosInsurance'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF',1,'AdultMarket','BosInsurance'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF',1,'FamilyMarket','BosInsurance'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF',1,'LowIncomeFamilyMarket','BosInsurance'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF',0,'LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK',1,'SmallBusinessFamilyMarket','BosInsurance'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK',1,'SmallBusinessIndividualMarket','BosInsurance'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK',1,'LowIncomeSmallBusinessIndividualMarket','BosInsurance'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK',1,'LowIncomeSmallBusinessFamilyMarket','BosInsurance');
+INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ','LowIncomeMarket','BosInsurance'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE','SeniorMarket','BosInsurance'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF','AdultMarket','BosInsurance'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF','FamilyMarket','BosInsurance'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF','LowIncomeFamilyMarket','BosInsurance'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK','SmallBusinessFamilyMarket','BosInsurance'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK','SmallBusinessIndividualMarket','BosInsurance'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK','LowIncomeSmallBusinessIndividualMarket','BosInsurance'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(13,'nlnkl',90,90,90,90,'nlnknl','AdultMarket','BosInsurance');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +226,7 @@ CREATE TABLE `Role_Privilege` (
   `id_privilege` int(11) NOT NULL,
   `id_role` int(11) NOT NULL,
   PRIMARY KEY (`id_role_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +235,7 @@ CREATE TABLE `Role_Privilege` (
 
 LOCK TABLES `Role_Privilege` WRITE;
 /*!40000 ALTER TABLE `Role_Privilege` DISABLE KEYS */;
-INSERT INTO `Role_Privilege` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2),(5,5,2),(6,6,2),(7,1,3),(8,2,3),(9,4,3),(10,6,3),(11,1,4),(12,2,4),(13,5,4),(14,6,4);
+INSERT INTO `Role_Privilege` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2),(5,5,2),(6,6,2),(8,2,3),(9,4,3),(10,6,3),(12,2,4),(13,5,4),(14,6,4),(15,7,4),(16,8,1),(17,6,1),(18,9,1),(19,10,1),(20,11,1);
 /*!40000 ALTER TABLE `Role_Privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-18  2:04:14
+-- Dump completed on 2014-11-18 16:41:20
