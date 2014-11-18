@@ -40,10 +40,6 @@ public class ProductService {
         return productRepository.getProductEntityForEnterpriseFromRepository(idEnterprise);
     }
 
-    public List getHIEEnterpriseListByIdProductFromService(Integer idProduct){
-        return productRepository.getProductEntityForEnterpriseFromRepository(idProduct);
-    }
-
     public ProductEntity createProductEntityFromService(ProductEntity productEntity){
         EnterpriseEntity enterpriseEntity = loginService.userLogin().getEnterpriseEntity();
         List<EnterpriseEntity> enterpriseEntityList = new LinkedList<EnterpriseEntity>();
@@ -61,5 +57,9 @@ public class ProductService {
         enterpriseProductEntity.setProductEntity(productEntity);
         enterpriseProductEntity.setStatus(false);
         productRepository.placeProductFromRepository(enterpriseProductEntity);
+    }
+
+    public List<EnterpriseEntity> getHIEEnterpriseListByIdProductFromService(List<EnterpriseEntity> hieEnterpriseList, Integer idProduct, Boolean isHIE){
+        return productRepository.getHIEEnterpriseListByIdProductFromRepository(hieEnterpriseList,idProduct, isHIE);
     }
 }

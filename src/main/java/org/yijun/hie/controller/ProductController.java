@@ -57,11 +57,6 @@ public class ProductController {
         //handle balance
     }
 
-    @RequestMapping(value="/findHIEsForProduct")
-    public List getHIEEnterpriseListByIdProduct(Integer idProduct){
-        return productService.getHIEEnterpriseListByIdProductFromService(idProduct);
-    }
-
     @RequestMapping(value = "/updateProductStatus", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
@@ -98,9 +93,15 @@ public class ProductController {
 
     @RequestMapping(value = "/chooseOffer", method = RequestMethod.GET)
     @Transactional
-    public String chooseHIE (Model model){
+    public String chooseHIE (Model model, HttpServletRequest request){
         List<EnterpriseEntity> enterpriseEntityList= enterpriseController.getHIEEnterpriseList();
-        model.addAttribute("hies",enterpriseEntityList);
+        List<EnterpriseEntity> hieList= new LinkedList<EnterpriseEntity>();
+        HttpSession session = request.getSession();
+        synchronized (session) {
+            ProductEntity productEntity = (ProductEntity) session.getAttribute("tempProduct");
+            hieList = productService.getHIEEnterpriseListByIdProductFromService(enterpriseEntityList,productEntity.getIdProduct(),false);
+        }
+        model.addAttribute("hies",hieList);
         return "chooseHIEEnterprise";
     }
 
@@ -116,5 +117,4 @@ public class ProductController {
         }
         return "placeProducts";
     }
-
 }

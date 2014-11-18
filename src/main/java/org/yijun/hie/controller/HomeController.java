@@ -14,6 +14,7 @@ import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
 
@@ -34,6 +35,14 @@ public class HomeController {
         return "html/index.html";
     }
 
+    @RequestMapping(value = "/userLogin", method = RequestMethod.GET)
+    @Transactional
+    public String userLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        session.setAttribute("user",userAccountEntity);
+        return "header";
+    }
 
     @RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
     @ResponseBody
@@ -42,7 +51,6 @@ public class HomeController {
         loginService.updateUserAccount(userAccountEntity);
         return "OK";
     }
-
 
     @RequestMapping(value = "/system", method = RequestMethod.GET)
     public String managementSystem(UserAccountEntity userAccountEntity) {

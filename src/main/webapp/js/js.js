@@ -611,7 +611,7 @@ function chooseOffer(){
         alert("Please Choose One Offer.");
     }else{
         $.ajax({
-            type: "Get",
+            type: "POST",
             url : "http://localhost:8080/chooseOffer",
             data : {"id":id},
             cache:true,
@@ -633,10 +633,14 @@ function backPlaceProducts(){
 function placeProduct(){
     var radios = document.getElementById("chooseHIE").selectHIE;
     var id = null;
-    for(var i=0; i<radios.length;i++){
-        if(radios[i].checked){
-            id = radios[i].value;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
         }
+    }else{
+        id = radios.value;
     }
     if(id==null){
         alert("Please Choose One Enterprise.");
@@ -648,7 +652,7 @@ function placeProduct(){
             cache:true,
 
             success: function(data){
-                alert("You have already placed a product.");
+                alert("Succeed! You have placed a product.");
                 $("#customer-container").load("placeProducts");
             },
             error: function(error){

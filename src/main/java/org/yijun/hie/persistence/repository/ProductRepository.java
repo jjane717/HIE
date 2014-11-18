@@ -53,14 +53,23 @@ public class ProductRepository {
         return enterpriseEntity;
     }
 
-    public List getHIEEnterpriseNameListByIdProductFromUR(Integer idProduct){
+    public List<EnterpriseEntity> getHIEEnterpriseListByIdProductFromRepository(List<EnterpriseEntity> hieEnterpriseList, Integer idProduct, Boolean isHIE){
         Session session = sessionFactory.getCurrentSession();
-        List list = new LinkedList();
         List<EnterpriseProductEntity> enterpriseProductEntityList = session.createQuery(getEnterpriseProductByIdProductForProductHql).setInteger("idProduct", idProduct).list();
-        for(EnterpriseProductEntity enterpriseProductEntity: enterpriseProductEntityList){
-            list.add(enterpriseProductEntity.getEnterpriseEntity().getEnterpriseName());
+        List<EnterpriseEntity> newHIEList = new LinkedList<EnterpriseEntity>();
+        for(EnterpriseEntity enterpriseEntity:hieEnterpriseList){
+            Boolean flag = false;
+            for(EnterpriseProductEntity enterpriseProductEntity:enterpriseProductEntityList){
+                if(enterpriseProductEntity.getIdEnterprise() == enterpriseEntity.getIdEnterprise()){
+                    flag = true;
+                }
+            }
+            if(flag == isHIE){
+                newHIEList.add(enterpriseEntity);
+            }
         }
-        return list;
+
+        return newHIEList;
     }
 
 

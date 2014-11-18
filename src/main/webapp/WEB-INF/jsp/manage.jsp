@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -12,7 +14,7 @@
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script>
         $(document).ready(function(){
-
+            $("#headerholder").load("userLogin");
             $.ajax({
                 type: "GET",
                 url : "http://localhost:8080/privileges",
@@ -59,12 +61,17 @@
 <body>
 <h1 id="h"></h1>
 <div id="wrap">
-    <div id="headerholder"></div>
+    <div id="headerholder">
+        <%--<jsp:include page="header.jsp"/>--%>
+    </div>
     <div id="container">
         <div id="customer-topmenu">
             <ul id="privilege"></ul>
         </div>
         <div id="customer-container">
+            <div style="text-align: center; margin-top:150px">
+                <h1>Manage System</h1>
+            </div>
         </div>
         <div id="test"></div>
     </div>

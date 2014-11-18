@@ -4,6 +4,7 @@ package org.yijun.hie.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.yijun.hie.persistence.entity.CustomerRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
@@ -11,6 +12,7 @@ import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.persistence.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -27,8 +29,13 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private HttpSession session;
+
     public UserAccountEntity userLogin () {
-        return userRepository.getUserByName("ddd").get(0);
+        UserAccountEntity userAccountEntity = userRepository.getUserByName("ddd").get(0);
+        session.setAttribute("user",userAccountEntity);
+        return userAccountEntity;
     }
 
     public Boolean isUserExist(String userName){
