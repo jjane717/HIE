@@ -1,5 +1,6 @@
 package org.yijun.hie.controller;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,9 @@ public class ProductController {
         //List<EnterpriseProductEntity> enterpriseProductEntityList = productRepository.getProductsByEnterpriseId(2);
         List<EnterpriseEntity> enterpriseEntityList = productRepository.getEnterprise(2);
         Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
-        return productService.getProductsForEnterpriseFromService(idEnterprise);
+        EnterpriseEntity enterpriseEntity = enterpriseEntityList.get(0);
+        Hibernate.initialize(enterpriseEntity.getProductEntityList());
+        return enterpriseEntity.getProductEntityList();
         //return userAccountEntity.getEnterpriseEntity().getProductEntityList();
     }
 }
