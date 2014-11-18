@@ -16,7 +16,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductEntity> getProductsForEnterpriseFromService(Integer idEnterprise){
-        return productRepository.getProductEntityForEnterpriseFromRepository(idEnterprise);
-    }
+//    public List<ProductEntity> getProductsForEnterpriseFromService(Integer idEnterprise){
+//        return productRepository.getProductEntityForEnterpriseFromRepository(idEnterprise);
+//    }
 }

@@ -15,11 +15,19 @@ public class EnterpriseProductEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idEnterpriseProduct;
 
-    @Column(name = "id_enterprise")
+    @Column(name = "id_enterprise", insertable = false, updatable = false)
     private int idEnterprise;
 
-    @Column(name = "id_product")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
+    @JoinColumn(name = "id_enterprise")
+    private EnterpriseEntity enterpriseEntity;
+
+    @Column(name = "id_product", insertable = false, updatable = false)
     private int idProduct;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ProductEntity.class)
+    @JoinColumn(name = "id_product")
+    private ProductEntity productEntity;
 
     public int getIdEnterpriseProduct() {
         return idEnterpriseProduct;
@@ -43,6 +51,22 @@ public class EnterpriseProductEntity {
 
     public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
+    }
+
+    public EnterpriseEntity getEnterpriseEntity() {
+        return enterpriseEntity;
+    }
+
+    public void setEnterpriseEntity(EnterpriseEntity enterpriseEntity) {
+        this.enterpriseEntity = enterpriseEntity;
+    }
+
+    public ProductEntity getProductEntity() {
+        return productEntity;
+    }
+
+    public void setProductEntity(ProductEntity productEntity) {
+        this.productEntity = productEntity;
     }
 
     @Override

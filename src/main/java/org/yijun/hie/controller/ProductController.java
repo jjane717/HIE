@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
+import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.repository.ProductRepository;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.ProductService;
 
@@ -24,12 +26,15 @@ public class ProductController {
     private LoginService loginService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping(value="/products", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
     public List<ProductEntity> getProductsForEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        List<EnterpriseProductEntity> enterpriseProductEntityList = productRepository.getProductsByEnterpriseId(2);
 //        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
 //        return productService.getProductsForEnterpriseFromService(idEnterprise);
         return userAccountEntity.getEnterpriseEntity().getProductEntityList();
