@@ -8,6 +8,7 @@ import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -19,25 +20,31 @@ public class ProductRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private String getProductEntityForEnterpriseEntityHql ="from EnterpriseProductEntity where idEnterprise = :idEnterprise";
-    private String getEnterpriseHql ="from EnterpriseEntity where idEnterprise = :idEnterprise";
+    //private String getProductEntityForEnterpriseEntityHql ="from EnterpriseProductEntity where idEnterprise = :idEnterprise";
+    private String getProductByIDHql = "from ProductEntity where idProduct = :idProduct";
 
-    public List<ProductEntity> getProductEntityForEnterpriseFromRepository(Integer idEnterprise){
+    public ProductEntity getProductByIDFromRepository(Integer idProduct){
         Session session = sessionFactory.getCurrentSession();
-        List<ProductEntity> productEntityList = session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", idEnterprise).list();
-        return productEntityList;
+        ProductEntity productEntity = (ProductEntity)session.createQuery(getProductByIDHql).setInteger("idProduct",idProduct).list().get(0);
+        return productEntity;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<EnterpriseProductEntity> getProductsByEnterpriseId(int enterpriseId) {
+    public void updateProductStatusFromRepository(ProductEntity productEntity){
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", enterpriseId).list();
+        session.update(productEntity);
+        session.flush();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<EnterpriseEntity> getEnterprise(int enterpriseId) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery(getEnterpriseHql).setInteger("idEnterprise", enterpriseId).list();
-    }
+//    public List<ProductEntity> getProductEntityForEnterpriseFromRepository(Integer idEnterprise){
+//        Session session = sessionFactory.getCurrentSession();
+//        List<ProductEntity> productEntityList = session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", idEnterprise).list();
+//        return productEntityList;
+//    }
+
+//    @SuppressWarnings("unchecked")
+//    public List<EnterpriseProductEntity> getProductsByEnterpriseId(int enterpriseId) {
+//        Session session = sessionFactory.getCurrentSession();
+//        return session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", enterpriseId).list();
+//    }
 
 }

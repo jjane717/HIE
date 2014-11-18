@@ -24,7 +24,7 @@ public class OrderEntity {
     @Column(name = "total_amount")
     private double totalAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ProductEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
     @JoinColumn(name = "id_product")
     public ProductEntity productEntity;
 

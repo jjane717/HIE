@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.yijun.hie.persistence.repository.ProductRepository;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,21 +29,23 @@ public class ProductController {
     private LoginService loginService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductRepository productRepository;
 
     @RequestMapping(value="/products", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
     public List<ProductEntity> getProductsForEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
-        //List<EnterpriseProductEntity> enterpriseProductEntityList = productRepository.getProductsByEnterpriseId(2);
-        List<EnterpriseEntity> enterpriseEntityList = productRepository.getEnterprise(2);
-        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
-        EnterpriseEntity enterpriseEntity = enterpriseEntityList.get(0);
+        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
         Hibernate.initialize(enterpriseEntity.getProductEntityList());
         return enterpriseEntity.getProductEntityList();
+    }
 
-        //return userAccountEntity.getEnterpriseEntity().getProductEntityList();
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void updateProductStatus(HttpServletRequest request){
+        Integer idProduct = Integer.valueOf(request.getParameter("id"));
+        Boolean status = Boolean.valueOf(request.getParameter("status"));
+        productService.updateProductStatusFromService(idProduct, status);
     }
 }

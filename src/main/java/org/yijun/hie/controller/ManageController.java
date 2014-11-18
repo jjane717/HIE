@@ -104,7 +104,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
-        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
         List<UserAccountEntity> userAccountEntityList = loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
         return userAccountEntityList;
     }
@@ -134,7 +134,7 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
+        UserAccountEntity userAccountEntity = loginService.userLogin("ccc", "ccccc");
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         JSONObject jsonObject = new JSONObject();
 
@@ -145,15 +145,5 @@ public class ManageController {
         System.out.println(jsonObject);
         return jsonObject.toString();
     }
-
-//    @RequestMapping(value="/products", method = RequestMethod.GET)
-//    @ResponseBody
-//    @Transactional
-//    public  List<ProductEntity> getProductsForEnterprise(){
-//        UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
-//        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
-//        List<ProductEntity> productEntityList = enterpriseEntity.getProductEntityList();
-//        return productEntityList;
-//    }
 
 }

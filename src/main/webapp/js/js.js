@@ -271,7 +271,7 @@ function changeUserStatus(id){
                 cache:true,
 
                 success: function(data){
-
+                    alert("You have already disabled this user account.");
                 },
                 error: function(error){
                     alert("NO"+ error);
@@ -279,7 +279,7 @@ function changeUserStatus(id){
             });
             checkBox.removeAttr("checked");
             checkBox.removeClass("checkStatus");
-            alert("You have already disabled this user account.");
+
         }else{
             $.ajax({
                 type: "POST",
@@ -288,7 +288,7 @@ function changeUserStatus(id){
                 cache:true,
 
                 success: function(data){
-
+                    alert("You have already enabled this user account.");
                 },
                 error: function(error){
                     alert("NO"+ error);
@@ -296,7 +296,7 @@ function changeUserStatus(id){
             });
             checkBox.attr("checked", "true");
             checkBox.addClass("checkStatus");
-            alert("You have already enabled this user account.");
+
         }
     }else{
 
@@ -451,6 +451,69 @@ function createUserAccount(){
             $( this ).dialog( "close" );
         }
     });
+}
+
+function showProductDetails(id){
+    var originalTdId = "#original_" + id;
+    var detailsTrId = "#detail_" + id;
+    var originalTd = $(originalTdId);
+    var detailsTr = $(detailsTrId);
+
+    if(originalTd.hasClass("up")){
+        $(".detailsTd").removeClass("down");
+        $(".detailsTd").addClass("up")
+        originalTd.removeClass("up");
+        originalTd.addClass("down");
+        $(".detailsTr").addClass("hidden");
+        detailsTr.removeClass("hidden");
+    }else{
+        originalTd.removeClass("down");
+        originalTd.addClass("up");
+        detailsTr.addClass("hidden");
+    }
+}
+
+function changeProductStatus(id){
+    var con = confirm("Do you want to change the status?");
+    if(con){
+        var idBox = "#"+id;
+        var checkBox = $(idBox);
+        if(checkBox.hasClass("checkStatus")){
+            $.ajax({
+                type: "POST",
+                url : "http://localhost:8080/updateProduct",
+                data: {"status": "false", "id":id},
+                cache:true,
+
+                success: function(data){
+                    alert("You have already disabled this product.");
+                },
+                error: function(error){
+                    alert("NO"+ error);
+                }
+            });
+            checkBox.removeAttr("checked");
+            checkBox.removeClass("checkStatus");
+        }else{
+            $.ajax({
+                type: "POST",
+                url : "http://localhost:8080/updateProduct",
+                data: {"status": "true", "id":id},
+                cache:true,
+
+                success: function(data){
+                    alert("You have already enabled this product.");
+                },
+                error: function(error){
+                    alert("NO"+ error);
+                }
+            });
+            checkBox.attr("checked", "checked");
+            checkBox.addClass("checkStatus");
+        }
+    }else{
+
+    }
 }
 
 function updateTips( t,tips ) {

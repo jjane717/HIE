@@ -16,7 +16,13 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductEntity> getProductsForEnterpriseFromService(Integer idEnterprise){
-        return productRepository.getProductEntityForEnterpriseFromRepository(idEnterprise);
+    public ProductEntity getProductEntityByIDFromService(Integer idProduct){
+        return productRepository.getProductByIDFromRepository(idProduct);
+    }
+
+    public void updateProductStatusFromService(Integer idProduct, Boolean status){
+        ProductEntity productEntity = getProductEntityByIDFromService(idProduct);
+        productEntity.setStatus(status);
+        productRepository.updateProductStatusFromRepository(productEntity);
     }
 }

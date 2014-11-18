@@ -156,3 +156,17 @@ body {
     margin:10px;
     padding: 10px;
 }
+
+.up{
+    background:url("../images/icon_up.png");
+    background-size:28px 28px;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+
+.down{
+    background:url("../images/icon_down.png");
+    background-size:28px 28px;
+    background-position: center;
+    background-repeat:no-repeat;
+}
