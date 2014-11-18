@@ -5,8 +5,12 @@
     $(document).ready(function(){
         $("#enterpriseTable tr").hover(function(){
             $(this).addClass("one");
+            $(this).find("input[type='text']").removeClass("zero");
+            $(this).find("input[type='text']").addClass("one");
         },function(){
             $(this).removeClass("one");
+            $(this).find("input[type='text']").removeClass("one");
+            $(this).find("input[type='text']").addClass("zero");
         });
     });
 
@@ -23,18 +27,21 @@
         </tr>
         <c:forEach items="${products}" var="product">
             <tr>
-            <td id="original_${product.productEntity.idProduct}" class="details up detailsTd" onclick=showProductDetails("${product.productEntity.idProduct}")></td>
-            <td>${product.productEntity.offerName}</td>
-            <td>${product.productEntity.offerPrice}</td>
-            <td>${product.productEntity.insuranceEnterpriseName}</td>
-            <td>
-                <c:if test="${product.status == true}">
-                    <input id="${product.productEntity.idProduct}" class="checkStatus" type="checkbox" checked="checked" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
-                </c:if>
-                <c:if test="${product.status == false}">
-                    <input id="${product.productEntity.idProduct}" type="checkbox" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
-                </c:if>
-            </td>
+                <td id="original_${product.productEntity.idProduct}" class="details up detailsTd" onclick=showProductDetails("${product.productEntity.idProduct}")></td>
+                <td>${product.productEntity.offerName}</td>
+                <td>
+                    <input type="text" class="disabledtext zero" value="${product.productEntity.offerPrice}"/>
+
+                </td>
+                <td>${product.productEntity.insuranceEnterpriseName}</td>
+                <td>
+                    <c:if test="${product.status == true}">
+                        <input id="${product.productEntity.idProduct}" class="checkStatus" type="checkbox" checked="checked" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
+                    </c:if>
+                    <c:if test="${product.status == false}">
+                        <input id="${product.productEntity.idProduct}" type="checkbox" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
+                    </c:if>
+                </td>
             </tr>
             <tr id="detail_${product.productEntity.idProduct}" class="hidden detailsTr">
                 <td colspan="5">

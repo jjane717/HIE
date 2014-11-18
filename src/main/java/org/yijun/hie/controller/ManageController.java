@@ -24,11 +24,6 @@ import java.util.List;
 public class ManageController {
     @Autowired
     private LoginService loginService;
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserRolePrivilegeService userRolePrivilegeService;
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     @ResponseBody
@@ -128,21 +123,4 @@ public class ManageController {
             return null;
         }
     }
-
-    @RequestMapping(value="/privileges", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public String pp () throws JSONException {
-        UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
-        JSONObject jsonObject = new JSONObject();
-
-        for (PrivilegeEntity privilegeEntity:privilegeEntityList){
-            jsonObject.put(privilegeEntity.getPrivilegeName(),privilegeEntity.getPrivilegeFile());
-        }
-
-        System.out.println(jsonObject);
-        return jsonObject.toString();
-    }
-
 }

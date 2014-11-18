@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
+import org.yijun.hie.persistence.entity.PrivilegeEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.service.LoginService;
+import org.yijun.hie.service.UserRolePrivilegeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +31,9 @@ public class HomeController {
 
     @Autowired
     private ProductController productController;
+
+    @Autowired
+    private UserRolePrivilegeService userRolePrivilegeService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
@@ -53,7 +58,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/system", method = RequestMethod.GET)
-    public String managementSystem(UserAccountEntity userAccountEntity) {
+    @Transactional
+    public String managementSystem(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+        model.addAttribute("privileges", privilegeEntityList);
         return "manage";
     }
 
@@ -97,6 +106,26 @@ public class HomeController {
         List<EnterpriseProductEntity> enterpriseProductEntityList = productController.getProductsForEnterprise();
         model.addAttribute("products", enterpriseProductEntityList);
         return "placeProducts";
+    }
+
+    @RequestMapping(value = "/userHome", method = RequestMethod.GET)
+    public String userHome() {
+        return "userHome";
+    }
+
+    @RequestMapping(value = "/viewMarket", method = RequestMethod.GET)
+    public String viewMarket() {
+        return "viewMarket";
+    }
+
+    @RequestMapping(value = "/makePayment", method = RequestMethod.GET)
+    public String makePayment() {
+        return "makePayment";
+    }
+
+    @RequestMapping(value = "/orderHistory", method = RequestMethod.GET)
+    public String orderHistory() {
+        return "orderHistory";
     }
 
 }
