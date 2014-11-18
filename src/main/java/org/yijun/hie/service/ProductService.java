@@ -55,6 +55,8 @@ public class ProductService {
         enterpriseProductEntity.setIdProduct(productEntity.getIdProduct());
         enterpriseProductEntity.setEnterpriseEntity(enterpriseEntity);
         enterpriseProductEntity.setProductEntity(productEntity);
+        enterpriseProductEntity.setTargetMarket(productEntity.getTargetMarket());
+        enterpriseProductEntity.setTotalPrice(productEntity.getOfferPrice());
         enterpriseProductEntity.setStatus(false);
         productRepository.placeProductFromRepository(enterpriseProductEntity);
     }

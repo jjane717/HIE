@@ -662,6 +662,10 @@ function placeProduct(){
     }
 }
 
+function updatePrice(id){
+
+}
+
 function updateTips( t,tips ) {
     tips.show()
         .html( t )

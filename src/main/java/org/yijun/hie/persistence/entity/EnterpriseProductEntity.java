@@ -32,6 +32,27 @@ public class EnterpriseProductEntity {
     @Column(name = "status")
     private Boolean status;
 
+    @Column(name = "total_price")
+    private Double totalPrice;
+
+    @Column(name = "target_market")
+    private String targetMarket;
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getTargetMarket() {
+        return targetMarket;
+    }
+
+    public void setTargetMarket(String targetMarket) {
+        this.targetMarket = targetMarket;
+    }
 
     public Boolean getStatus() {
         return status;
