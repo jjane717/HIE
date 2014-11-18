@@ -16,11 +16,11 @@ public class EnterpriseRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private String getHIEEnterprisesHql = "from EnterpriseEntity where enterpriseType = :enterpriseType";
+    private String geEnterpriseFroTypesHql = "from EnterpriseEntity where enterpriseType = :enterpriseType";
 
     public List<EnterpriseEntity> getEnterpriseListForTypeFromRepository(String type){
         Session session = sessionFactory.getCurrentSession();
-        List<EnterpriseEntity> enterpriseEntityList = session.createQuery(getHIEEnterprisesHql).setString("enterpriseType",type).list();
+        List<EnterpriseEntity> enterpriseEntityList = session.createQuery(geEnterpriseFroTypesHql).setString("enterpriseType",type).list();
         return enterpriseEntityList;
     }
 

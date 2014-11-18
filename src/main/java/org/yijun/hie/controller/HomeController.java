@@ -118,6 +118,7 @@ public class HomeController {
         List<EnterpriseProductEntity> enterpriseProductEntityList = customerController.getProductEntityListForMarket();
         List<EnterpriseEntity> enterpriseEntityList = enterpriseController.getEnterpriseListForType("Insurance");
         model.addAttribute("products",enterpriseProductEntityList);
+        model.addAttribute("enterprises", enterpriseEntityList);
         return "viewMarket";
     }
 

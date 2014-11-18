@@ -21,13 +21,10 @@
             <span>Filter By Insurance: </span><br/>
             <select id="targetMarket" name="targetMarket" width="150px" onchange="filterProduct()">
                 <option value="All">All</option>
-                    <c:forEach items="${products}" var="product">
-                        <option value="${product.productEntity.insuranceEnterpriseName}">${product.productEntity.insuranceEnterpriseName}</option>
+                    <c:forEach items="${enterprises}" var="insurance">
+                        <option value="${insurance.enterpriseName}">${insurance.enterpriseName}</option>
                     </c:forEach>
             </select>
-        </div>
-        <div id="account_save_button" class="submit_button" onclick="chooseOffer()">
-            <label>Choose Offer</label>
         </div>
     </div>
     <form id="productForm">
@@ -38,7 +35,7 @@
                 <th>Product Name</th>
                 <th>Product Price</th>
                 <th>Insurance Enterprise</th>
-                <th>Status</th>
+                <th>Choose</th>
             </tr>
             <c:forEach items="${products}" var="product">
                 <tr class="${product.productEntity.insuranceEnterpriseName} main">

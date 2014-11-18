@@ -1,7 +1,5 @@
 package org.yijun.hie.persistence.repository;
 
-import com.sun.tools.javac.comp.Enter;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
-import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
