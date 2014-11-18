@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 
@@ -19,17 +20,24 @@ public class ProductRepository {
     private SessionFactory sessionFactory;
 
     private String getProductEntityForEnterpriseEntityHql ="from EnterpriseProductEntity where idEnterprise = :idEnterprise";
+    private String getEnterpriseHql ="from EnterpriseEntity where idEnterprise = :idEnterprise";
 
-//    public List<ProductEntity> getProductEntityForEnterpriseFromRepository(Integer idEnterprise){
-//        Session session = sessionFactory.getCurrentSession();
-//        List<ProductEntity> productEntityList = session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", idEnterprise).list();
-//        return productEntityList;
-//    }
+    public List<ProductEntity> getProductEntityForEnterpriseFromRepository(Integer idEnterprise){
+        Session session = sessionFactory.getCurrentSession();
+        List<ProductEntity> productEntityList = session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", idEnterprise).list();
+        return productEntityList;
+    }
 
     @SuppressWarnings("unchecked")
     public List<EnterpriseProductEntity> getProductsByEnterpriseId(int enterpriseId) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery(getProductEntityForEnterpriseEntityHql).setInteger("idEnterprise", enterpriseId).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<EnterpriseEntity> getEnterprise(int enterpriseId) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery(getEnterpriseHql).setInteger("idEnterprise", enterpriseId).list();
     }
 
 }

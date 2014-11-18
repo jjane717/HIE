@@ -34,9 +34,10 @@ public class ProductController {
     @Transactional
     public List<ProductEntity> getProductsForEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin("ddd", "ddddd");
-        List<EnterpriseProductEntity> enterpriseProductEntityList = productRepository.getProductsByEnterpriseId(2);
-//        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
-//        return productService.getProductsForEnterpriseFromService(idEnterprise);
-        return userAccountEntity.getEnterpriseEntity().getProductEntityList();
+        //List<EnterpriseProductEntity> enterpriseProductEntityList = productRepository.getProductsByEnterpriseId(2);
+        List<EnterpriseEntity> enterpriseEntityList = productRepository.getEnterprise(2);
+        Integer idEnterprise = userAccountEntity.getEnterpriseEntity().getIdEnterprise();
+        return productService.getProductsForEnterpriseFromService(idEnterprise);
+        //return userAccountEntity.getEnterpriseEntity().getProductEntityList();
     }
 }
