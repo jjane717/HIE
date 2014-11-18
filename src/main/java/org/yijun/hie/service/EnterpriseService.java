@@ -15,7 +15,7 @@ public class EnterpriseService {
     @Autowired
     private EnterpriseRepository enterpriseRepository;
 
-    public List<EnterpriseEntity> getHIEEnterpriseListFromService(){
-        return enterpriseRepository.getHIEEnterpriseListFromRepository();
+    public List<EnterpriseEntity> getEnterpriseListForTypeFromService(String type){
+        return enterpriseRepository.getEnterpriseListForTypeFromRepository(type);
     }
 }

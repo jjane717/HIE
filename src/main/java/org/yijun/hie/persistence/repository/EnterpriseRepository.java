@@ -18,9 +18,9 @@ public class EnterpriseRepository {
 
     private String getHIEEnterprisesHql = "from EnterpriseEntity where enterpriseType = :enterpriseType";
 
-    public List<EnterpriseEntity> getHIEEnterpriseListFromRepository(){
+    public List<EnterpriseEntity> getEnterpriseListForTypeFromRepository(String type){
         Session session = sessionFactory.getCurrentSession();
-        List<EnterpriseEntity> enterpriseEntityList = session.createQuery(getHIEEnterprisesHql).setString("enterpriseType","HIE").list();
+        List<EnterpriseEntity> enterpriseEntityList = session.createQuery(getHIEEnterprisesHql).setString("enterpriseType",type).list();
         return enterpriseEntityList;
     }
 

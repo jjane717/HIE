@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;

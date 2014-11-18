@@ -15,7 +15,7 @@ public class EnterpriseController {
     @Autowired
     private EnterpriseService enterpriseService;
 
-    public List<EnterpriseEntity> getHIEEnterpriseList(){
-        return enterpriseService.getHIEEnterpriseListFromService();
+    public List<EnterpriseEntity> getEnterpriseListForType(String type){
+        return enterpriseService.getEnterpriseListForTypeFromService(type);
     }
 }

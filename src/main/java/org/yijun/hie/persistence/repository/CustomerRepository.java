@@ -4,9 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.OrderEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,15 +19,21 @@ public class CustomerRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private String getProductEntityListForMarketHql = "from ProductEntity where targetMarket = :market";
+    private String getProductEntityListForMarketHql = "from EnterpriseProductEntity where targetMarket = :market";
     private String getProductEntityByIDHql = "from ProductEntity where idProduct = :idProduct";
     private String getOrderEntityByIDHql = "from OrderEntity where idOrder = :idOrder";
 
-    public List<ProductEntity> getProductEntityListForMarketFormRepository(String market){
+    public List<EnterpriseProductEntity> getProductEntityListForMarketFormRepository(String market){
         Session session = sessionFactory.getCurrentSession();
-        List<ProductEntity> productEntityList;
-        productEntityList = session.createQuery(getProductEntityListForMarketHql).setString("market",market).list();
-        return productEntityList;
+        List<EnterpriseProductEntity> enterpriseProductEntityList;
+        enterpriseProductEntityList = session.createQuery(getProductEntityListForMarketHql).setString("market",market).list();
+        List<EnterpriseProductEntity> hieEnterpriseProductEntityList = new LinkedList<EnterpriseProductEntity>();
+        for(EnterpriseProductEntity enterpriseProductEntity:enterpriseProductEntityList){
+            if(enterpriseProductEntity.getEnterpriseEntity().getEnterpriseType().equals("HIE")){
+                hieEnterpriseProductEntityList.add(enterpriseProductEntity);
+            }
+        }
+        return hieEnterpriseProductEntityList;
     }
 
     public ProductEntity getProductEntityByIDFromRepository (Integer idProduct){

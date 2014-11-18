@@ -103,7 +103,7 @@ public class ProductController {
     @RequestMapping(value = "/chooseOffer", method = RequestMethod.GET)
     @Transactional
     public String chooseHIE (Model model, HttpServletRequest request){
-        List<EnterpriseEntity> enterpriseEntityList= enterpriseController.getHIEEnterpriseList();
+        List<EnterpriseEntity> enterpriseEntityList= enterpriseController.getEnterpriseListForType("HIE");
         List<EnterpriseEntity> hieList= new LinkedList<EnterpriseEntity>();
         HttpSession session = request.getSession();
         synchronized (session) {

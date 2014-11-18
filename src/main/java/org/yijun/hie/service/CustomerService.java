@@ -2,6 +2,7 @@ package org.yijun.hie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.OrderEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
@@ -51,14 +52,14 @@ public class CustomerService {
         return market;
     }
 
-    public List<ProductEntity> getProductEntityListForMarketFromService(String market){
-        List<ProductEntity> productEntityList;
+    public List<EnterpriseProductEntity> getProductEntityListForMarketFromService(String market){
+        List<EnterpriseProductEntity> enterpriseProductEntityList;
         if (market.equalsIgnoreCase("No appropriate market.")){
-            productEntityList = null;
+            enterpriseProductEntityList = null;
         }else {
-            productEntityList = customerRepository.getProductEntityListForMarketFormRepository(market);
+            enterpriseProductEntityList = customerRepository.getProductEntityListForMarketFormRepository(market);
         }
-        return productEntityList;
+        return enterpriseProductEntityList;
     }
 
     public ProductEntity getProductEntityByIDFromService(Integer idProduct){

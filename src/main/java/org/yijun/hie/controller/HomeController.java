@@ -8,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
-import org.yijun.hie.persistence.entity.PrivilegeEntity;
-import org.yijun.hie.persistence.entity.ProductEntity;
-import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
@@ -28,12 +25,14 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private LoginService loginService;
-
     @Autowired
     private ProductController productController;
-
     @Autowired
     private UserRolePrivilegeService userRolePrivilegeService;
+    @Autowired
+    private CustomerController customerController;
+    @Autowired
+    private EnterpriseController enterpriseController;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
@@ -91,6 +90,7 @@ public class HomeController {
     @RequestMapping(value = "/manageProducts", method = RequestMethod.GET)
     public String manageProducts(Model model) {
         List<EnterpriseProductEntity> enterpriseProductEntityList = productController.getProductsForEnterprise();
+
         model.addAttribute("products", enterpriseProductEntityList);
         return "manageProducts";
     }
@@ -114,7 +114,10 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/viewMarket", method = RequestMethod.GET)
-    public String viewMarket() {
+    public String viewMarket(Model model) {
+        List<EnterpriseProductEntity> enterpriseProductEntityList = customerController.getProductEntityListForMarket();
+        List<EnterpriseEntity> enterpriseEntityList = enterpriseController.getEnterpriseListForType("Insurance");
+        model.addAttribute("products",enterpriseProductEntityList);
         return "viewMarket";
     }
 

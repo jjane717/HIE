@@ -6,10 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yijun.hie.persistence.entity.OrderEntity;
-import org.yijun.hie.persistence.entity.PaymentEntity;
-import org.yijun.hie.persistence.entity.ProductEntity;
-import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.service.CustomerService;
 import org.yijun.hie.service.LoginService;
 
@@ -28,11 +25,11 @@ public class CustomerController {
     @RequestMapping(value = "/market", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<ProductEntity> getProductEntityListForMarket(){
+    public List<EnterpriseProductEntity> getProductEntityListForMarket(){
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<ProductEntity> productEntityList;
-        productEntityList = customerService.getProductEntityListForMarketFromService(customerService.getMarket(userAccountEntity));
-        return productEntityList;
+        List<EnterpriseProductEntity> enterpriseProductEntityList;
+        enterpriseProductEntityList = customerService.getProductEntityListForMarketFromService(customerService.getMarket(userAccountEntity));
+        return enterpriseProductEntityList;
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
