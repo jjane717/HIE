@@ -602,10 +602,14 @@ function filterProduct(){
 function chooseOffer(){
     var radios = document.getElementById("chooseOffer").selectOffer;
     var id = null;
-    for(var i=0; i<radios.length;i++){
-        if(radios[i].checked){
-            id = radios[i].value;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
         }
+    }else{
+        id = radios.value;
     }
     if(id==null){
         alert("Please Choose One Offer.");
@@ -738,10 +742,14 @@ function updatePrice(id){
 function chooseOrder(){
     var radios = document.getElementById("orderInfo").selectOrder;
     var id = null;
-    for(var i=0; i<radios.length;i++){
-        if(radios[i].checked){
-            id = radios[i].value;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
         }
+    }else{
+        id = radios.value;
     }
     if(id==null){
         alert("Please Choose One Order.");
@@ -755,6 +763,7 @@ function chooseOrder(){
             success: function(data){
                 $("#choosePayment-container").load("choosePayment");
                 $(".submit_button").removeClass("hidden");
+                $("#preparePay").removeClass("hidden");
             },
             error: function(error){
                 alert("NO"+ error);
@@ -766,13 +775,17 @@ function chooseOrder(){
 function makePayment(){
     var radios = document.getElementById("paymentInfo").selectPayment;
     var id = null;
-    for(var i=0; i<radios.length;i++){
-        if(radios[i].checked){
-            id = radios[i].value;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
         }
+    }else{
+        id = radios.value;
     }
     if(id==null){
-        alert("Please Choose One Order.");
+        alert("Please Choose One Payment.");
     }else{
         $.ajax({
             type: "POST",
@@ -783,13 +796,23 @@ function makePayment(){
             success: function(data){
                 alert("You have already make payment.");
                 $("#choosePayment-container").html("");
-                $(".submit_button").removeClass("hidden");
-                $("#preparePay").removeClass("hidden");
+                $(".submit_button").addClass("hidden");
+                $("#preparePay").addClass("hidden");
             },
             error: function(error){
                 alert("NO"+ error);
             }
         });
+    }
+}
+
+function showAllPayment(){
+    if($(".paid").hasClass("hidden")){
+        $(".paid").removeClass("hidden");
+        $(".changeText").find("label").html("Hide Paid");
+    }else{
+        $(".paid").addClass("hidden");
+        $(".changeText").find("label").html("Show All Payment");
     }
 }
 
