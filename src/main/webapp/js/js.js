@@ -754,6 +754,7 @@ function chooseOrder(){
 
             success: function(data){
                 $("#choosePayment-container").load("choosePayment");
+                $(".submit_button").removeClass("hidden");
             },
             error: function(error){
                 alert("NO"+ error);
@@ -773,7 +774,22 @@ function makePayment(){
     if(id==null){
         alert("Please Choose One Order.");
     }else{
-        alert(id);
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/makePayment",
+            data : {"id":id},
+            cache:true,
+
+            success: function(data){
+                alert("You have already make payment.");
+                $("#choosePayment-container").html("");
+                $(".submit_button").removeClass("hidden");
+                $("#preparePay").removeClass("hidden");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
     }
 }
 

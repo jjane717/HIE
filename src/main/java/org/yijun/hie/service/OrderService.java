@@ -21,4 +21,8 @@ public class OrderService {
         return orderRepository.getOrderByIDFromRepository(idOrder);
     }
 
+    public void updatePaymentFromService(Integer idPayment){
+        orderRepository.updatePaymentFromRepository(idPayment);
+    }
+
 }

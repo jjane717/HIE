@@ -5,6 +5,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.yijun.hie.persistence.entity.OrderEntity;
+import org.yijun.hie.persistence.entity.PaymentEntity;
+
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * Created by liuyijun on 14-11-17.
@@ -15,10 +19,21 @@ public class OrderRepository{
     private SessionFactory sessionFactory;
 
     private String getOrderByIDHql = "from OrderEntity where idOrder = :idOrder";
+    private String getPaymentByIDHql = "from PaymentEntity where idPayment = :idPayment";
 
     public OrderEntity getOrderByIDFromRepository(Integer idOrder){
         Session session = sessionFactory.getCurrentSession();
         OrderEntity orderEntity = (OrderEntity)session.createQuery(getOrderByIDHql).setInteger("idOrder",idOrder).list().get(0);
         return orderEntity;
+    }
+
+    public void updatePaymentFromRepository(Integer idPayment){
+        Session session = sessionFactory.getCurrentSession();
+        PaymentEntity paymentEntity = (PaymentEntity)session.createQuery(getPaymentByIDHql).setInteger("idPayment",idPayment).list().get(0);
+        paymentEntity.setIsPay(true);
+        Date date = Date.from(Instant.now());
+        paymentEntity.setPayDate(date);
+        session.update(paymentEntity);
+        session.flush();
     }
 }

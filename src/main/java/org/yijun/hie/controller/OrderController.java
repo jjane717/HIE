@@ -40,4 +40,11 @@ public class OrderController {
             }
         }
     }
+
+    @RequestMapping(value = "/makePayment", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void makePayment(HttpServletRequest request) {
+        orderService.updatePaymentFromService(Integer.valueOf(request.getParameter("id")));
+    }
 }
