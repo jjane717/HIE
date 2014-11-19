@@ -17,12 +17,8 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-//    public OrderEntity createOrderFromService(Integer idProduct, Integer method){
-//        ProductEntity productEntity = orderRepository.getProductByIDFromRepository(idProduct);
-//        OrderEntity orderEntity = new OrderEntity();
-//        Date date = new Date();
-//        orderEntity.setCreateDate((Timestamp)date);
-//
-//        return orderEntity;
-//    }
+    public OrderEntity getOrderByIDFromService(Integer idOrder){
+        return orderRepository.getOrderByIDFromRepository(idOrder);
+    }
+
 }

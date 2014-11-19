@@ -14,6 +14,7 @@ import org.yijun.hie.persistence.entity.EnterpriseProductEntity;
 import org.yijun.hie.persistence.entity.ProductEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 import org.yijun.hie.persistence.repository.ProductRepository;
+import org.yijun.hie.service.EnterpriseService;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.ProductService;
 
@@ -34,7 +35,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private EnterpriseController enterpriseController;
+    private EnterpriseService enterpriseService;
     @Autowired
     private ManageController manageController;
 
@@ -103,7 +104,7 @@ public class ProductController {
     @RequestMapping(value = "/chooseOffer", method = RequestMethod.GET)
     @Transactional
     public String chooseHIE (Model model, HttpServletRequest request){
-        List<EnterpriseEntity> enterpriseEntityList= enterpriseController.getEnterpriseListForType("HIE");
+        List<EnterpriseEntity> enterpriseEntityList= enterpriseService.getEnterpriseListForTypeFromService("HIE");
         List<EnterpriseEntity> hieList= new LinkedList<EnterpriseEntity>();
         HttpSession session = request.getSession();
         synchronized (session) {

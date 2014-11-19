@@ -55,10 +55,4 @@ public class CustomerRepository {
         session.save(orderEntity);
         session.flush();
     }
-
-    public void addPaymentListOrderEntityByIDFromRepository (OrderEntity orderEntity){
-        Session session = sessionFactory.getCurrentSession();
-        session.update(orderEntity);
-        session.flush();
-    }
 }

@@ -108,8 +108,9 @@
     }
 
     #enterpriseTable{
-        margin-top: 10px;
+        margin-top: 25px;
         width:570px;
+        margin-left:15px;
     }
 
     #enterpriseTable input[type="text"]{
@@ -135,7 +136,7 @@
     }
 
     #create{
-        margin: 10px;
+        margin: 30px;
         border-bottom: 2px solid red;
         height:50px;
     }

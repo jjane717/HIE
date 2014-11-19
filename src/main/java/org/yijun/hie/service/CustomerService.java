@@ -2,6 +2,7 @@ package org.yijun.hie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.persistence.repository.CustomerRepository;
 import java.text.ParseException;
@@ -73,7 +74,6 @@ public class CustomerService {
         calendar.setTime(createDate);
         SimpleDateFormat  sdf = new SimpleDateFormat("yyyy-MM-dd");
         orderEntity.setCreateDate(createDate);
-//        customerRepository.createOrderEntityByIDFromRepository(orderEntity);
         List<PaymentEntity> paymentEntityList = new LinkedList<PaymentEntity>();
         int day = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH) + 1;

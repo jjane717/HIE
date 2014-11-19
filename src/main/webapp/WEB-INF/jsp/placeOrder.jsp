@@ -18,7 +18,7 @@
             <div id="account_back_button" class="submit_button" onclick="backViewMarket()">
                 <label>Back</label>
             </div>
-            <div id="account_save_button" class="submit_button" onclick="placeOrder()">
+            <div id="account_save_button" class="submit_button" onclick="placeOrder(${choose.idEnterpriseProduct})">
                 <label>Place Product</label>
             </div>
         </div>

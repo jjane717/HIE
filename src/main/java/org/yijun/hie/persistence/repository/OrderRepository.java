@@ -16,13 +16,6 @@ public class OrderRepository{
 
     private String getOrderByIDHql = "from OrderEntity where idOrder = :idOrder";
 
-    private OrderEntity createOrderFromRepository(OrderEntity orderEntity){
-        Session session = sessionFactory.getCurrentSession();
-        session.save(orderEntity);
-        session.flush();
-        return orderEntity;
-    }
-
     public OrderEntity getOrderByIDFromRepository(Integer idOrder){
         Session session = sessionFactory.getCurrentSession();
         OrderEntity orderEntity = (OrderEntity)session.createQuery(getOrderByIDHql).setInteger("idOrder",idOrder).list().get(0);

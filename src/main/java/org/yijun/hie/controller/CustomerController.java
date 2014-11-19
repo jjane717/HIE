@@ -1,6 +1,4 @@
 package org.yijun.hie.controller;
-
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.service.CustomerService;
 import org.yijun.hie.service.LoginService;
+import org.yijun.hie.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +26,7 @@ public class CustomerController {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private ProductController productController;
-    @Autowired
-    private TestController testController;
+    private ProductService productService;
 
     @RequestMapping(value = "/market", method = RequestMethod.GET)
     @ResponseBody
@@ -65,7 +62,7 @@ public class CustomerController {
     @ResponseBody
     @Transactional
     public void chooseProduct(HttpServletRequest request){
-        EnterpriseProductEntity enterpriseProductEntity = productController.getEnterpriseProductEntityById(Integer.valueOf(request.getParameter("id")));
+        EnterpriseProductEntity enterpriseProductEntity = productService.getEnterpriseProductEntityByIdFromService(Integer.valueOf(request.getParameter("id")));
         HttpSession session = request.getSession();
         synchronized (session){
             session.setAttribute("tempEnterpriseProduct", enterpriseProductEntity);
@@ -76,11 +73,10 @@ public class CustomerController {
     @Transactional
     public String chooseHIE (Model model, HttpServletRequest request) throws ServletException{
         HttpSession session = request.getSession();
-        EnterpriseProductEntity enterpriseProductEntity = new EnterpriseProductEntity();
         synchronized (session) {
-           enterpriseProductEntity = (EnterpriseProductEntity) session.getAttribute("tempEnterpriseProduct");
+            EnterpriseProductEntity enterpriseProductEntity = (EnterpriseProductEntity) session.getAttribute("tempEnterpriseProduct");
+            model.addAttribute("choose",enterpriseProductEntity);
         }
-        model.addAttribute("choose",enterpriseProductEntity);
         return "placeOrder";
     }
 
@@ -88,12 +84,9 @@ public class CustomerController {
     @ResponseBody
     @Transactional
     public void placeProduct(OrderEntity orderEntity, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        synchronized (session) {
-            EnterpriseProductEntity enterpriseProductEntity = (EnterpriseProductEntity) session.getAttribute("tempEnterpriseProduct");
-            orderEntity.setEnterpriseProductEntity(enterpriseProductEntity);
-            orderEntity.setUserAccountEntity(testController.login());
-            customerService.createOrderEntityByIDFromService(orderEntity);
-        }
+        EnterpriseProductEntity enterpriseProductEntity = productService.getEnterpriseProductEntityByIdFromService(Integer.valueOf(request.getParameter("id")));
+        orderEntity.setEnterpriseProductEntity(enterpriseProductEntity);
+        orderEntity.setUserAccountEntity(loginService.userLogin());
+        customerService.createOrderEntityByIDFromService(orderEntity);
     }
 }

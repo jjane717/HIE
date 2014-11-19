@@ -683,7 +683,7 @@ function chooseProduct(id){
     });
 }
 
-function placeOrder(){
+function placeOrder(id){
     var totalAmount = $("#totalAmount").val();
     var paymentType = $("#paymentType").val();
     var duration = $("#duration").val();
@@ -691,7 +691,7 @@ function placeOrder(){
         $.ajax({
             type: "POST",
             url : "http://localhost:8080/placeOrder",
-            data : {"totalAmount":totalAmount,"paymentType":paymentType,"duration":duration},
+            data : {"totalAmount":totalAmount,"paymentType":paymentType,"duration":duration, "id":id},
             cache:true,
 
             success: function(data){
@@ -733,6 +733,48 @@ function updatePrice(id){
         });
     }
 
+}
+
+function chooseOrder(){
+    var radios = document.getElementById("orderInfo").selectOrder;
+    var id = null;
+    for(var i=0; i<radios.length;i++){
+        if(radios[i].checked){
+            id = radios[i].value;
+        }
+    }
+    if(id==null){
+        alert("Please Choose One Order.");
+    }else{
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/choosePayment",
+            data : {"id":id},
+            cache:true,
+
+            success: function(data){
+                $("#choosePayment-container").load("choosePayment");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }
+}
+
+function makePayment(){
+    var radios = document.getElementById("paymentInfo").selectPayment;
+    var id = null;
+    for(var i=0; i<radios.length;i++){
+        if(radios[i].checked){
+            id = radios[i].value;
+        }
+    }
+    if(id==null){
+        alert("Please Choose One Order.");
+    }else{
+        alert(id);
+    }
 }
 
 function updateTips( t,tips ) {

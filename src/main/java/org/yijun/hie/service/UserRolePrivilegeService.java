@@ -19,7 +19,6 @@ public class UserRolePrivilegeService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
     public List<PrivilegeEntity> getParticularPrivileges (UserAccountEntity userAccountEntity) {
         return userRepository.getPrivilegeByRole(userAccountEntity);
     }

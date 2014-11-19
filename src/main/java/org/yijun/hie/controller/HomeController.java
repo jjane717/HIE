@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.service.LoginService;
+import org.yijun.hie.service.OrderService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,8 @@ public class HomeController {
     private CustomerController customerController;
     @Autowired
     private EnterpriseController enterpriseController;
+    @Autowired
+    private OrderController orderController;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
@@ -123,13 +126,32 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/makePayment", method = RequestMethod.GET)
-    public String makePayment() {
+    @Transactional
+    public String chooseOneOrder(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        model.addAttribute("orders", orderEntityList);
         return "makePayment";
     }
 
     @RequestMapping(value = "/orderHistory", method = RequestMethod.GET)
-    public String orderHistory() {
+    @Transactional
+    public String orderHistory(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        model.addAttribute("orders", orderEntityList);
         return "orderHistory";
+    }
+
+    @RequestMapping(value = "/choosePayment", method = RequestMethod.GET)
+    public String chooseOnePayment(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        synchronized (session){
+            OrderEntity orderEntity = (OrderEntity) session.getAttribute("selectOrder");
+            List<PaymentEntity> paymentEntityList = orderEntity.getPaymentEntityList();
+            model.addAttribute("payments", paymentEntityList);
+        }
+        return "choosePayment";
     }
 
 }
