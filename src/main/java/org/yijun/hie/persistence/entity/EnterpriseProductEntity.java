@@ -3,6 +3,8 @@ package org.yijun.hie.persistence.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-10.
@@ -18,7 +20,7 @@ public class EnterpriseProductEntity {
     @Column(name = "id_enterprise", insertable = false, updatable = false)
     private int idEnterprise;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = EnterpriseEntity.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = EnterpriseEntity.class)
     @JoinColumn(name = "id_enterprise")
     private EnterpriseEntity enterpriseEntity;
 
@@ -37,6 +39,10 @@ public class EnterpriseProductEntity {
 
     @Column(name = "target_market")
     private String targetMarket;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = OrderEntity.class, mappedBy = "enterpriseProductEntity")
+    List<OrderEntity> orderEntityList = new LinkedList<OrderEntity>();
 
     public Double getTotalPrice() {
         return totalPrice;

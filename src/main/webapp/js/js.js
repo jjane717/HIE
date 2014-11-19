@@ -630,6 +630,10 @@ function backPlaceProducts(){
     $("#customer-container").load("placeProducts");
 }
 
+function backViewMarket(){
+    $("#customer-container").load("viewMarket");
+}
+
 function placeProduct(){
     var radios = document.getElementById("chooseHIE").selectHIE;
     var id = null;
@@ -659,6 +663,47 @@ function placeProduct(){
                 alert("NO"+ error);
             }
         });
+    }
+}
+
+
+function chooseProduct(id){
+    $.ajax({
+        type: "POST",
+        url : "http://localhost:8080/chooseProduct",
+        data : {"id":id},
+        cache:true,
+
+        success: function(data){
+            $("#customer-container").load("chooseProduct");
+        },
+        error: function(error){
+            alert("NO"+ error);
+        }
+    });
+}
+
+function placeOrder(){
+    var totalAmount = $("#totalAmount").val();
+    var paymentType = $("#paymentType").val();
+    var duration = $("#duration").val();
+    if(totalAmount>0){
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/placeOrder",
+            data : {"totalAmount":totalAmount,"paymentType":paymentType,"duration":duration},
+            cache:true,
+
+            success: function(data){
+                alert("Succeed! You can view this order in order history.");
+                $("#customer-container").load("viewMarket");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }else{
+        alert("Please Choose Correct Option.");
     }
 }
 

@@ -75,7 +75,7 @@ public class ProductRepository {
         return enterpriseProductEntityList;
     }
 
-    public EnterpriseProductEntity getEnterpriseProductEntityByID(Integer idEnterpriseProduct){
+    public EnterpriseProductEntity getEnterpriseProductEntityByIDFromRepository(Integer idEnterpriseProduct){
         Session session = sessionFactory.getCurrentSession();
         return  (EnterpriseProductEntity) session.createQuery(getEnterpriseProductByIDHql).setInteger("idEnterpriseProduct", idEnterpriseProduct).list().get(0);
     }

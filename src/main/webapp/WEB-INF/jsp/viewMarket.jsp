@@ -34,7 +34,8 @@
                 <th class="details"></th>
                 <th>Product Name</th>
                 <th>Product Price</th>
-                <th>Insurance Enterprise</th>
+                <th>Insurance</th>
+                <th>HIE</th>
                 <th>Choose</th>
             </tr>
             <c:forEach items="${products}" var="product">
@@ -42,6 +43,7 @@
                     <td id="original_${product.idEnterpriseProduct}" class="details up detailsTd" onclick=showProductDetails("${product.idEnterpriseProduct}")></td>
                     <td>${product.productEntity.offerName}</td>
                     <td>${product.totalPrice}</td>
+                    <td>${product.enterpriseEntity.enterpriseName}</td>
                     <td>${product.productEntity.insuranceEnterpriseName}</td>
                     <td>
                         <div class="action submit_button hidden" onclick="chooseProduct(${product.idEnterpriseProduct})">

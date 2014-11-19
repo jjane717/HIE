@@ -26,14 +26,18 @@ public class ProductService {
         return productRepository.getProductByIDFromRepository(idProduct);
     }
 
+    public EnterpriseProductEntity getEnterpriseProductEntityByIdFromService(Integer idEnterpriseProduct){
+        return productRepository.getEnterpriseProductEntityByIDFromRepository(idEnterpriseProduct);
+    }
+
     public void updateProductStatusFromService(Integer idEnterpriseProduct, Boolean status){
-        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByID(idEnterpriseProduct);
+        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByIDFromRepository(idEnterpriseProduct);
         enterpriseProductEntity.setStatus(status);
         productRepository.updateEnterpriseProductStatusFromRepository(enterpriseProductEntity);
     }
 
     public void updateProductPriceFromService(Integer idEnterpriseProduct, Double totalPrice){
-        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByID(idEnterpriseProduct);
+        EnterpriseProductEntity enterpriseProductEntity = productRepository.getEnterpriseProductEntityByIDFromRepository(idEnterpriseProduct);
         enterpriseProductEntity.setTotalPrice(totalPrice);
         productRepository.updateEnterpriseProductStatusFromRepository(enterpriseProductEntity);
     }

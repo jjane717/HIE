@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,14 +20,20 @@ public class OrderEntity {
     private Integer idOrder;
 
     @Column(name = "create_date")
-    private Timestamp createDate;
+    private Date createDate;
 
     @Column(name = "total_amount")
     private double totalAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductEntity.class)
-    @JoinColumn(name = "id_product")
-    public ProductEntity productEntity;
+    @Column(name = "payment_type")
+    private String paymentType;
+
+    @Column(name = "duration")
+    private Integer duration;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = EnterpriseProductEntity.class)
+    @JoinColumn(name = "id_enterprise_product")
+    public EnterpriseProductEntity enterpriseProductEntity;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = UserAccountEntity.class)
     @JoinColumn(name = "id_user_account")
@@ -36,6 +43,22 @@ public class OrderEntity {
             targetEntity = PaymentEntity.class, mappedBy = "orderEntity")
     List<PaymentEntity> paymentEntityList = new LinkedList<PaymentEntity>();
 
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     public List<PaymentEntity> getPaymentEntityList() {
         return paymentEntityList;
     }
@@ -44,12 +67,12 @@ public class OrderEntity {
         this.paymentEntityList = paymentEntityList;
     }
 
-    public ProductEntity getProductEntity() {
-        return productEntity;
+    public EnterpriseProductEntity getEnterpriseProductEntity() {
+        return enterpriseProductEntity;
     }
 
-    public void setProductEntity(ProductEntity productEntity) {
-        this.productEntity = productEntity;
+    public void setEnterpriseProductEntity(EnterpriseProductEntity enterpriseProductEntity) {
+        this.enterpriseProductEntity = enterpriseProductEntity;
     }
 
     public Integer getIdOrder() {
@@ -69,11 +92,11 @@ public class OrderEntity {
         this.userAccountEntity = userAccountEntity;
     }
 
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 

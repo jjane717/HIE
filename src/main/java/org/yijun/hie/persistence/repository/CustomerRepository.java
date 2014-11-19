@@ -50,5 +50,15 @@ public class CustomerRepository {
         return orderEntity;
     }
 
+    public void createOrderEntityByIDFromRepository (OrderEntity orderEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.save(orderEntity);
+        session.flush();
+    }
 
+    public void addPaymentListOrderEntityByIDFromRepository (OrderEntity orderEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(orderEntity);
+        session.flush();
+    }
 }

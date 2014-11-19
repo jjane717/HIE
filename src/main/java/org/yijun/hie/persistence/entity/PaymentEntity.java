@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by liuyijun on 14-11-8.
@@ -17,10 +18,10 @@ public class PaymentEntity {
     private Integer idPayment;
 
     @Column(name = "due_date")
-    private Timestamp dueDate;
+    private Date dueDate;
 
     @Column(name = "pay_date")
-    private Timestamp payDate;
+    private Date payDate;
 
     @Column(name = "is_pay")
     private Boolean isPay;
@@ -49,19 +50,19 @@ public class PaymentEntity {
         this.idPayment = idPayment;
     }
 
-    public Timestamp getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Timestamp dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Timestamp getPayDate() {
+    public Date getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(Timestamp payDate) {
+    public void setPayDate(Date payDate) {
         this.payDate = payDate;
     }
 

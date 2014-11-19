@@ -44,10 +44,6 @@ public class ProductEntity {
     @JoinTable(name = "Enterprise_Product", joinColumns = @JoinColumn(name = "id_product"), inverseJoinColumns = @JoinColumn(name = "id_enterprise"))
     private List<EnterpriseEntity> enterpriseEntities  = new LinkedList<EnterpriseEntity>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            targetEntity = OrderEntity.class, mappedBy = "productEntity")
-    List<OrderEntity> orderEntityList = new LinkedList<OrderEntity>();
-
     public String getInsuranceEnterpriseName() {
         return insuranceEnterpriseName;
     }
@@ -62,14 +58,6 @@ public class ProductEntity {
 
     public void setTargetMarket(String targetMarket) {
         this.targetMarket = targetMarket;
-    }
-
-    public List<OrderEntity> getOrderEntityList() {
-        return orderEntityList;
-    }
-
-    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
-        this.orderEntityList = orderEntityList;
     }
 
     public List<EnterpriseEntity> getEnterpriseEntities() {

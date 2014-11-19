@@ -117,13 +117,17 @@ public class ProductController {
     @RequestMapping(value = "/placeProducts", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public String placeProduct(HttpServletRequest request) {
+    public void placeProduct(HttpServletRequest request) {
         EnterpriseEntity enterpriseEntity = manageController.getEnterpriseById(Integer.valueOf(request.getParameter("id")));
         HttpSession session = request.getSession();
         synchronized (session) {
             ProductEntity productEntity = (ProductEntity) session.getAttribute("tempProduct");
             productService.placeProductFromService(enterpriseEntity,productEntity);
         }
-        return "placeProducts";
+    }
+
+    @Transactional
+    public EnterpriseProductEntity getEnterpriseProductEntityById(Integer idEnterpriseProduct){
+        return productService.getEnterpriseProductEntityByIdFromService(idEnterpriseProduct);
     }
 }

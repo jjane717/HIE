@@ -8,6 +8,7 @@
             $(this).addClass("one");
             $(this).find("input[type='text']").removeClass("zero");
             $(this).find("input[type='text']").removeClass("disabledtext");
+            $(this).find("input[type='text']").removeAttr("disabled");
             $(this).find("input[type='text']").addClass("one");
             $(this).find(".action").removeClass("hidden");
         },function(){
@@ -15,6 +16,7 @@
             $(this).find("input[type='text']").removeClass("one");
             $(this).find("input[type='text']").addClass("disabledtext");
             $(this).find("input[type='text']").addClass("zero");
+            $(this).find("input[type='text']").attr("disabled","disabled");
             $(this).find(".action").addClass("hidden");
         });
     });
@@ -37,7 +39,7 @@
                     <td id="original_${product.productEntity.idProduct}" class="details up detailsTd" onclick=showProductDetails("${product.productEntity.idProduct}")></td>
                     <td>${product.productEntity.offerName}</td>
                     <td>
-                        <input id="price_${product.idEnterpriseProduct}" type="text" class="disabledtext zero" value="${product.totalPrice}"/>
+                        <input id="price_${product.idEnterpriseProduct}" type="text" class="disabledtext zero" disabled="disabled" value="${product.totalPrice}"/>
                         <div class="action submit_button hidden" onclick="updatePrice(${product.idEnterpriseProduct})">
                             <label>Update</label>
                         </div>
