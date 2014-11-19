@@ -39,7 +39,7 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
-        return "html/index.html";
+        return "index";
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.GET)
@@ -66,6 +66,15 @@ public class HomeController {
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         model.addAttribute("privileges", privilegeEntityList);
         return "manage";
+    }
+
+    @RequestMapping(value = "/hiUser", method = RequestMethod.GET)
+    @Transactional
+    public String userHome(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
+        model.addAttribute("privileges", privilegeEntityList);
+        return "hiUser";
     }
 
     @RequestMapping(value = "/manageUserAccounts", method = RequestMethod.GET)

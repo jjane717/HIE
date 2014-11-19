@@ -17,7 +17,7 @@
         <div class="submit_button hidden" onclick="makePayment()">
             <label>Make Payment</label>
         </div>
-        <div class="submit_button hidden" onclick="showAllPayment()">
+        <div class="submit_button hidden changeText" onclick="showAllPayment()">
             <label>Show All Payment</label>
         </div>
     </div>
@@ -81,8 +81,8 @@
             </form>
         </div>
     </div>
-    <div id="choosePayment-container">
-    </div>
+</div>
+<div id="choosePayment-container">
 </div>
 
 <style>
@@ -173,7 +173,8 @@
     }
     
     #choosePayment-container{
-        /*position: absolute;*/
+        /*border: 3px solid crimson;*/
+        float: left;
     }
 
 </style>

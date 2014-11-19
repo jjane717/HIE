@@ -65,7 +65,13 @@ public class CustomerController {
         EnterpriseProductEntity enterpriseProductEntity = productService.getEnterpriseProductEntityByIdFromService(Integer.valueOf(request.getParameter("id")));
         HttpSession session = request.getSession();
         synchronized (session){
-            session.setAttribute("tempEnterpriseProduct", enterpriseProductEntity);
+            EnterpriseProductEntity enterpriseProductEntity1 = (EnterpriseProductEntity)session.getAttribute("tempEnterpriseProduct");
+            if(enterpriseProductEntity1!=null){
+                session.removeAttribute("tempEnterpriseProduct");
+                session.setAttribute("tempEnterpriseProduct",enterpriseProductEntity);
+            }else if(enterpriseProductEntity1 == null){
+                session.setAttribute("tempEnterpriseProduct",enterpriseProductEntity);
+            }
         }
     }
 

@@ -52,7 +52,7 @@
                     </td>
                 </tr>
                 <tr id="detail_${product.idEnterpriseProduct}" class="hidden detailsTr">
-                    <td colspan="5">
+                    <td colspan="6">
                         <div class="detailsDiv">
                             <table class="detailsTable" cellspacing="0">
                                 <tr>

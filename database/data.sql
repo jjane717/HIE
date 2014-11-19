@@ -46,7 +46,7 @@ CREATE TABLE `Enterprise` (
 
 LOCK TABLES `Enterprise` WRITE;
 /*!40000 ALTER TABLE `Enterprise` DISABLE KEYS */;
-INSERT INTO `Enterprise` VALUES (1,'BosHIE','HIE',0,9658,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(2,'BosInsurance','Insurance',0,9089,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(3,'Admin','Admin',0,8728,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(4,'ConnHIE','HIE',0,9090,'oooooooo','Cone','CT','00022','000000000','lll@g.com');
+INSERT INTO `Enterprise` VALUES (1,'BosHIE','HIE',0,9658,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(2,'BosInsurance','Insurance',0,9089,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(3,'Admin','Admin',0,8728,'100 Huntington av.','Boston','MA','02151','989987987','boshie@gmail.com'),(4,'ConnHIE','HIE',0,9090,'oooooooo','Cone','CT','00022','000000000','lll@g.com'),(5,'ConnInsurance','Insurance',0,9872,'ppppppppp','Cone','CT','02222','090929999','kk@g.com');
 /*!40000 ALTER TABLE `Enterprise` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `Enterprise_Product` (
   `total_price` double DEFAULT NULL,
   `target_market` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_enterprise_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `Enterprise_Product` (
 
 LOCK TABLES `Enterprise_Product` WRITE;
 /*!40000 ALTER TABLE `Enterprise_Product` DISABLE KEYS */;
-INSERT INTO `Enterprise_Product` VALUES (1,1,1,1,230,'LowIncomeMarket'),(2,1,2,1,300,'SeniorMarket'),(3,2,1,1,200,'LowIncomeMarket'),(4,2,2,1,300,'SeniorMarket'),(5,1,3,1,225,'AdultMarket'),(6,1,4,1,400,'FamilyMarket'),(7,1,5,1,300,'LowIncomeFamilyMarket'),(8,2,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(9,1,7,1,900,'SmallBusinessFamilyMarket'),(10,1,8,1,700,'SmallBusinessIndividualMarket'),(11,1,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(12,1,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(13,2,3,1,225,'AdultMarket'),(14,2,4,1,400,'FamilyMarket'),(15,2,5,1,300,'LowIncomeFamilyMarket'),(16,2,6,1,800,'LowIncomeSmallBusinessFamilyMarket'),(17,2,7,1,900,'SmallBusinessFamilyMarket'),(18,2,8,1,700,'SmallBusinessIndividualMarket'),(19,2,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(20,1,6,0,800,'LowIncomeSmallBusinessFamilyMarket'),(21,2,13,1,90,'AdultMarket'),(22,4,1,0,300,'LowIncomeMarket');
+INSERT INTO `Enterprise_Product` VALUES (1,1,1,1,230,'LowIncomeMarket'),(2,1,2,1,300,'SeniorMarket'),(3,2,1,1,200,'LowIncomeMarket'),(4,2,2,1,300,'SeniorMarket'),(5,1,3,1,225,'AdultMarket'),(6,1,4,1,400,'FamilyMarket'),(7,1,5,1,300,'LowIncomeFamilyMarket'),(8,2,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(9,1,7,1,900,'SmallBusinessFamilyMarket'),(10,1,8,1,700,'SmallBusinessIndividualMarket'),(11,1,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(12,1,10,1,900,'LowIncomeSmallBusinessFamilyMarket'),(13,2,3,1,225,'AdultMarket'),(14,2,4,1,400,'FamilyMarket'),(15,2,5,1,300,'LowIncomeFamilyMarket'),(16,2,6,1,800,'LowIncomeSmallBusinessFamilyMarket'),(17,2,7,1,900,'SmallBusinessFamilyMarket'),(18,2,8,1,700,'SmallBusinessIndividualMarket'),(19,2,9,1,300,'LowIncomeSmallBusinessIndividualMarket'),(20,1,6,0,800,'LowIncomeSmallBusinessFamilyMarket'),(21,2,13,1,90,'AdultMarket'),(22,4,1,0,300,'LowIncomeMarket'),(23,4,2,0,300,'SeniorMarket'),(24,5,11,1,500,'SmallBusinessFamilyMarket'),(25,4,11,1,500,'SmallBusinessFamilyMarket'),(26,4,8,0,700,'SmallBusinessIndividualMarket'),(27,1,13,0,90,'AdultMarket'),(28,4,13,0,90,'AdultMarket');
 /*!40000 ALTER TABLE `Enterprise_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,12 +87,14 @@ DROP TABLE IF EXISTS `Order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Order` (
   `id_order` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user_account` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `total_amount` double NOT NULL,
+  `id_user_account` int(11) DEFAULT NULL,
+  `id_enterprise_product` int(11) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `payment_type` varchar(20) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `total_amount` double DEFAULT NULL,
   PRIMARY KEY (`id_order`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +103,7 @@ CREATE TABLE `Order` (
 
 LOCK TABLES `Order` WRITE;
 /*!40000 ALTER TABLE `Order` DISABLE KEYS */;
-INSERT INTO `Order` VALUES (1,1,7,'2014-11-17 07:48:48',10800);
+INSERT INTO `Order` VALUES (1,1,9,3,'Monthly','2014-11-19 00:02:06',2700),(2,1,25,8,'Quarterly','2014-11-19 00:02:29',4000),(3,1,9,30,'Annually','2014-11-19 00:02:46',27000),(4,1,9,1,'Monthly','2014-11-19 01:46:49',900);
 /*!40000 ALTER TABLE `Order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +122,7 @@ CREATE TABLE `Payment` (
   `is_pay` tinyint(1) DEFAULT '0',
   `amount` double NOT NULL,
   PRIMARY KEY (`id_payment`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +131,7 @@ CREATE TABLE `Payment` (
 
 LOCK TABLES `Payment` WRITE;
 /*!40000 ALTER TABLE `Payment` DISABLE KEYS */;
-INSERT INTO `Payment` VALUES (1,1,'2014-07-17 00:00:00','2014-07-17 00:00:00',1,5400),(2,1,'2015-01-17 00:00:00',NULL,0,5400);
+INSERT INTO `Payment` VALUES (1,1,'2014-12-19 00:00:00',NULL,0,900),(2,1,'2015-01-19 00:00:00',NULL,0,900),(3,1,'2015-02-19 00:00:00',NULL,0,900),(4,2,'2014-12-19 00:00:00','2014-11-19 03:17:26',1,1500),(5,2,'2015-03-19 00:00:00',NULL,0,1500),(6,2,'2015-06-19 00:00:00',NULL,0,1000),(7,3,'2014-12-03 00:00:00',NULL,0,10800),(8,3,'2015-12-03 00:00:00',NULL,0,10800),(9,3,'2016-12-03 00:00:00',NULL,0,5400),(10,4,'2014-12-19 00:00:00','2014-11-19 03:26:25',1,900);
 /*!40000 ALTER TABLE `Payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +147,7 @@ CREATE TABLE `Privilege` (
   `privilege_name` varchar(100) DEFAULT NULL,
   `privilege_file` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +187,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ','LowIncomeMarket','BosInsurance'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE','SeniorMarket','BosInsurance'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF','AdultMarket','BosInsurance'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF','FamilyMarket','BosInsurance'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF','LowIncomeFamilyMarket','BosInsurance'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(7,'JLJK',900,1000,0.8,900,'HJKSDFHJK','SmallBusinessFamilyMarket','BosInsurance'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK','SmallBusinessIndividualMarket','BosInsurance'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK','LowIncomeSmallBusinessIndividualMarket','BosInsurance'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(13,'nlnkl',90,90,90,90,'nlnknl','AdultMarket','BosInsurance');
+INSERT INTO `Product` VALUES (1,'HIEF',500,1000,0.5,200,'NBJSKDFNJ','LowIncomeMarket','BosInsurance'),(2,'KDJE',1000,500,0.8,300,'BJKSDBFWE','SeniorMarket','BosInsurance'),(3,'UIED',800,900,0.2,225,'NSDFJEKKF','AdultMarket','BosInsurance'),(4,'UIWK',890,900,0.6,400,'NSDFJEKKF','FamilyMarket','BosInsurance'),(5,'KJSL',890,900,0.3,300,'NSDFJEKKF','LowIncomeFamilyMarket','BosInsurance'),(6,'KLWL',890,900,0.8,800,'NSDFJEKKF','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(7,'JLJK',900,200,0.8,900,'HJKSDFHJK','SmallBusinessFamilyMarket','BosInsurance'),(8,'HHII',900,1000,0.6,700,'HJKSDFHJK','SmallBusinessIndividualMarket','BosInsurance'),(9,'QJED',300,2000,0.6,300,'HJKSDFHJK','LowIncomeSmallBusinessIndividualMarket','BosInsurance'),(10,'JWIE',200,200,0.8,900,'HJKSDFHJK','LowIncomeSmallBusinessFamilyMarket','BosInsurance'),(11,'HIIE',500,200,0.6,500,'OSDFJEJJK','SmallBusinessFamilyMarket','ConnInsurance'),(13,'nlnkl',90,90,90,90,'nlnknl','AdultMarket','BosInsurance');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-18 16:41:20
+-- Dump completed on 2014-11-19  4:38:52

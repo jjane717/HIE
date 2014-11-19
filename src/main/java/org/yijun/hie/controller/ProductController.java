@@ -97,7 +97,13 @@ public class ProductController {
         ProductEntity productEntity = getProductEntityByID(request);
         HttpSession session = request.getSession();
         synchronized (session){
-        session.setAttribute("tempProduct", productEntity);
+            ProductEntity productEntity1 = (ProductEntity)session.getAttribute("tempProduct");
+            if(productEntity1!=null){
+                session.removeAttribute("tempProduct");
+                session.setAttribute("tempProduct", productEntity);
+            }else if (productEntity == null){
+                session.setAttribute("tempProduct", productEntity);
+            }
         }
     }
 
