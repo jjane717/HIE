@@ -131,7 +131,7 @@ CREATE TABLE `Payment` (
 
 LOCK TABLES `Payment` WRITE;
 /*!40000 ALTER TABLE `Payment` DISABLE KEYS */;
-INSERT INTO `Payment` VALUES (1,1,'2014-12-19 00:00:00',NULL,0,900),(2,1,'2015-01-19 00:00:00',NULL,0,900),(3,1,'2015-02-19 00:00:00',NULL,0,900),(4,2,'2014-12-19 00:00:00','2014-11-19 03:17:26',1,1500),(5,2,'2015-03-19 00:00:00',NULL,0,1500),(6,2,'2015-06-19 00:00:00',NULL,0,1000),(7,3,'2014-12-03 00:00:00',NULL,0,10800),(8,3,'2015-12-03 00:00:00',NULL,0,10800),(9,3,'2016-12-03 00:00:00',NULL,0,5400),(10,4,'2014-12-19 00:00:00','2014-11-19 03:26:25',1,900);
+INSERT INTO `Payment` VALUES (1,1,'2014-12-19 00:00:00','2014-11-19 20:25:53',1,900),(2,1,'2015-01-19 00:00:00',NULL,0,900),(3,1,'2015-02-19 00:00:00',NULL,0,900),(4,2,'2014-12-19 00:00:00','2014-11-19 03:17:26',1,1500),(5,2,'2015-03-19 00:00:00',NULL,0,1500),(6,2,'2015-06-19 00:00:00',NULL,0,1000),(7,3,'2014-12-03 00:00:00',NULL,0,10800),(8,3,'2015-12-03 00:00:00',NULL,0,10800),(9,3,'2016-12-03 00:00:00',NULL,0,5400),(10,4,'2014-12-19 00:00:00','2014-11-19 03:26:25',1,900);
 /*!40000 ALTER TABLE `Payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,8 +202,9 @@ CREATE TABLE `Role` (
   `id_role` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(50) NOT NULL,
   `role_type` varchar(50) NOT NULL,
+  `id_employee` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +213,7 @@ CREATE TABLE `Role` (
 
 LOCK TABLES `Role` WRITE;
 /*!40000 ALTER TABLE `Role` DISABLE KEYS */;
-INSERT INTO `Role` VALUES (1,'Customer','customer_role_entity'),(2,'Admin','admin_role_entity'),(3,'HieAdmin','hie_admin_role_entity'),(4,'InsuranceAdmin','insurance_admin_role_entity');
+INSERT INTO `Role` VALUES (1,'Customer','customer_role_entity',NULL),(2,'Admin','admin_role_entity',NULL),(3,'HieAdmin','hie_admin_role_entity',NULL),(4,'InsuranceAdmin','insurance_admin_role_entity',NULL),(6,'Employee','employee_role_entity','96580003'),(7,'Employee','employee_role_entity','8728004'),(8,'Employee','employee_role_entity','9658004'),(9,'Employee','employee_role_entity','9658004'),(10,'Employee','employee_role_entity','90890003'),(11,'Employee','employee_role_entity','90900002'),(12,'Employee','employee_role_entity','96580005'),(13,'Employee','employee_role_entity','96580006'),(14,'Employee','employee_role_entity','96580007'),(15,'Employee','employee_role_entity','96580008'),(16,'Employee','employee_role_entity','90890004'),(17,'Employee','employee_role_entity','90890005'),(18,'Employee','employee_role_entity','98720002');
 /*!40000 ALTER TABLE `Role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +229,7 @@ CREATE TABLE `Role_Privilege` (
   `id_privilege` int(11) NOT NULL,
   `id_role` int(11) NOT NULL,
   PRIMARY KEY (`id_role_privilege`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +238,7 @@ CREATE TABLE `Role_Privilege` (
 
 LOCK TABLES `Role_Privilege` WRITE;
 /*!40000 ALTER TABLE `Role_Privilege` DISABLE KEYS */;
-INSERT INTO `Role_Privilege` VALUES (1,1,2),(2,2,2),(3,3,2),(4,4,2),(5,5,2),(6,6,2),(8,2,3),(9,4,3),(10,6,3),(12,2,4),(13,5,4),(14,6,4),(15,7,4),(16,8,1),(17,6,1),(18,9,1),(19,10,1),(20,11,1);
+INSERT INTO `Role_Privilege` VALUES (1,1,2),(3,3,2),(6,6,2),(8,2,3),(9,4,3),(10,6,3),(12,2,4),(13,5,4),(14,6,4),(15,7,4),(16,8,1),(17,6,1),(18,9,1),(19,10,1),(20,11,1),(21,4,6),(22,4,12),(23,6,12),(24,2,14);
 /*!40000 ALTER TABLE `Role_Privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +270,7 @@ CREATE TABLE `User_Account` (
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_user_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +279,7 @@ CREATE TABLE `User_Account` (
 
 LOCK TABLES `User_Account` WRITE;
 /*!40000 ALTER TABLE `User_Account` DISABLE KEYS */;
-INSERT INTO `User_Account` VALUES (1,3,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,3,2,'bbb','bbbbb',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(5,3,2,'admin','admin',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(8,1,3,'eee','eeeee',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com');
+INSERT INTO `User_Account` VALUES (1,3,1,'aaa','aaaaa',1,'Yijun','Liu','1989-07-17',25,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(2,3,2,'bbb','bbbbb',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(3,1,3,'ccc','ccccc',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(4,2,4,'ddd','ddddd',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(5,3,2,'admin','admin',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(8,1,3,'eee','eeeee',1,'Yijun','Liu','1989-07-17',24,1,1,'none','100 Huntington av.','Boston','MA','02151','000000000','jj@gmail.com'),(9,1,6,'bosaaa','bosaaa',1,'Yijun','Liu','1989-09-09',25,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','jjj@h.com'),(10,5,4,'ooo','ooooo',1,'Yijun','Liu','1980-12-01',25,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','hh@h.com'),(11,3,7,'adadmin','adadmin',1,'Yijun','Liu','1989-09-09',25,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','hhh@kk.com'),(14,4,3,'cohie','cohie',1,'Yijun','Liu','19890909',25,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','gg@d.c'),(15,1,3,'1','1',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(16,2,4,'2','2',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(17,2,10,'3','3',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(18,4,11,'4','4',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(19,1,12,'5','5',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(20,1,13,'6','6',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','090@g.com'),(21,1,14,'7','7',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','g@c.cw'),(22,1,15,'8','8',1,'Yijun','Liu','19900909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','g@c.cw'),(23,2,16,'9','9',1,'aaa','aaa','1989-09-09',24,NULL,NULL,NULL,'df','sf','sdf','sdf','000000000','sadaf@dsaf.com'),(25,5,18,'adfff','sadf',1,'Yijun','Liu','19890909',24,NULL,NULL,NULL,'2 Hancock st','Quincy','Massachusetts','02171','8572046887','adf@d.e');
 /*!40000 ALTER TABLE `User_Account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -291,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-19  4:38:52
+-- Dump completed on 2014-11-20  4:53:43

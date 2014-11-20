@@ -3,6 +3,7 @@ package org.yijun.hie.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.yijun.hie.persistence.entity.EmployeeRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.PrivilegeEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
@@ -37,5 +38,29 @@ public class UserRolePrivilegeService {
         }
 
         return userAccountEntityList;
+    }
+
+    public UserAccountEntity getUserAccountByIDFromService(Integer idUserAccount){
+        return userRepository.getUserAccountByIDFromUR(idUserAccount);
+    }
+
+    public PrivilegeEntity getPrivilegeByIdFromService(Integer idPrivilege){
+        return userRepository.getPrivilegeByIdFromRepository(idPrivilege);
+    }
+
+    public EmployeeRoleEntity getEmployeeRoleFromService(Integer idRole){
+        return userRepository.getEmployeeRoleByIDFromUR(idRole);
+    }
+
+    public void changePrivilegeForUserRoleFromService(Integer idRole, String[] strings){
+        List<PrivilegeEntity> privilegeEntityList = new LinkedList<PrivilegeEntity>();
+        EmployeeRoleEntity employeeRoleEntity = getEmployeeRoleFromService(idRole);
+        for(String str : strings){
+            Integer idPrivilege = Integer.valueOf(str);
+            PrivilegeEntity privilegeEntity = getPrivilegeByIdFromService(idPrivilege);
+            privilegeEntityList.add(privilegeEntity);
+        }
+        employeeRoleEntity.setPrivilegeEntityList(privilegeEntityList);
+        userRepository.changePrivilegeForUserRoleFromRepository(employeeRoleEntity);
     }
 }

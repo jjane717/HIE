@@ -2,33 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
     $(document).ready(function(){
-//        $.ajax({
-//            type: "Get",
-//            url : "http://localhost:8080/userAccountForEnterprise",
-//            cache:true,
-//
-//            success: function(data){
-//                $.each(data,function(i){
-//                    var content = "<tr id=\"userAccountInfo-" + data[i]["idUserAccount"] + "\"><td>" + data[i]["userName"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["firstName"] + " " + data[i]["lastName"] + "</td><td>" + data[i]["roleEntity"]["roleName"] + "</td>";
-//                    if(data[i]["status"] == "1"){
-//                        content = content + "<td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
-//                    }else{
-//                        content = content + "<td><input type=\"checkbox\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
-//                    }
-//
-//                    $("#enterpriseTable").append(content);
-//
-//                    $("#enterpriseTable tr").hover(function(){
-//                        $(this).addClass("one");
-//                    },function(){
-//                        $(this).removeClass("one");
-//                    });
-//                });
-//            },
-//            error: function(error){
-//                alert("NO"+ error);
-//            }
-//        });
         $("#enterpriseTable tr").hover(function(){
             $(this).addClass("one");
         },function(){
@@ -39,7 +12,7 @@
 </script>
 <div id="create">
     <div id="filter">
-        <span>Filter By Insurance: </span><br/>
+        <span>Filter By Enterprise: </span><br/>
         <select name="enterpriseName" id="filterEnterprise" onchange="filterUserByEnterprise()">
             <option value="All">All</option>
             <c:forEach items="${enterprises}" var="enterprise">

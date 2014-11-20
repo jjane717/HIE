@@ -51,7 +51,7 @@ public class HomeController {
     public String userLogin(HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        session.setAttribute("user",userAccountEntity);
+        session.setAttribute("user", userAccountEntity);
         return "header";
     }
 
@@ -92,9 +92,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/manageEmployees", method = RequestMethod.GET)
+    @Transactional
     public String manageEmployees(Model model) {
         List<UserAccountEntity> userAccountEntityList = userRolePrivilegeController.getAllEditableUserRole();
         model.addAttribute("userRoles", userAccountEntityList);
+        UserAccountEntity userAccount = loginService.userLogin();
+        model.addAttribute("available",userAccount.getRoleEntity().getPrivilegeEntityList());
         return "manageEmployees";
     }
 
@@ -177,5 +180,4 @@ public class HomeController {
         }
         return "choosePayment";
     }
-
 }

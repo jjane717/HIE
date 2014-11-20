@@ -24,7 +24,7 @@ public class LoginService {
     private HttpSession session;
 
     public UserAccountEntity userLogin () {
-        UserAccountEntity userAccountEntity = userRepository.getUserByName("admin").get(0);
+        UserAccountEntity userAccountEntity = userRepository.getUserByName("ccc").get(0);
         session.setAttribute("user",userAccountEntity);
         return userAccountEntity;
     }

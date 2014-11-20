@@ -4,10 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.yijun.hie.persistence.entity.EnterpriseEntity;
-import org.yijun.hie.persistence.entity.PrivilegeEntity;
-import org.yijun.hie.persistence.entity.RoleEntity;
-import org.yijun.hie.persistence.entity.UserAccountEntity;
+import org.yijun.hie.persistence.entity.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +29,7 @@ public class UserRepository {
     private String getEnterpriseGroupHql = "from EnterpriseEntity where enterpriseType = :enterpriseType";
     private String getRoleByNameHql = "from RoleEntity where roleName = :roleName";
     private String getPrivilegeByNameHql = "from PrivilegeEntity where privilegeName = :privilegeName";
+    private String getPrivilegeByIdHql = "from PrivilegeEntity where idPrivilege = :idPrivilege";
 
     public List<UserAccountEntity> getUserByName (String userName) {
         Session session = sessionFactory.getCurrentSession();
@@ -105,6 +103,13 @@ public class UserRepository {
         return roleEntity;
     }
 
+    public EmployeeRoleEntity getEmployeeRoleByIDFromUR (Integer idRole) {
+        Session session = sessionFactory.getCurrentSession();
+        EmployeeRoleEntity employeeRoleEntity;
+        employeeRoleEntity = (EmployeeRoleEntity)session.createQuery(getRoleByIDHql).setInteger("idRole",idRole).list().get(0);
+        return employeeRoleEntity;
+    }
+
     public List<RoleEntity> getRoleListFromUR () {
         Session session = sessionFactory.getCurrentSession();
         List<RoleEntity> roleEntityList;
@@ -128,9 +133,8 @@ public class UserRepository {
 
     public List<PrivilegeEntity>  getPrivilegeByRole (UserAccountEntity userAccountEntity){
         Session session = sessionFactory.getCurrentSession();
-        RoleEntity roleEntity = userAccountEntity.getRoleEntity();
         List<PrivilegeEntity> privilegeEntityList;
-        privilegeEntityList = roleEntity.getPrivilegeEntityList();
+        privilegeEntityList = userAccountEntity.getRoleEntity().getPrivilegeEntityList();
         return privilegeEntityList;
     }
 
@@ -157,6 +161,18 @@ public class UserRepository {
     public void deleteEnterpriseFromUR (EnterpriseEntity enterpriseEntity){
         Session session = sessionFactory.getCurrentSession();
         session.delete(enterpriseEntity);
+        session.flush();
+    }
+
+    public PrivilegeEntity getPrivilegeByIdFromRepository(Integer idPrivilege){
+        Session session = sessionFactory.getCurrentSession();
+        PrivilegeEntity privilegeEntity = (PrivilegeEntity) session.createQuery(getPrivilegeByIdHql).setInteger("idPrivilege", idPrivilege).list().get(0);
+        return privilegeEntity;
+    }
+
+    public void changePrivilegeForUserRoleFromRepository(EmployeeRoleEntity employeeRoleEntity){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(employeeRoleEntity);
         session.flush();
     }
 }

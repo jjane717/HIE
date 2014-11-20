@@ -819,14 +819,87 @@ function showAllPayment(){
     }
 }
 
-function filterUserByEnterprise(){
-    var name = "." + $("#filterEnterprise").val();
+function searchEmployee(){
+    var search = "."+ $("#searchEmployeeID").val();
 
-    if(name==".All"){
+    if(search == "."){
         $(".main").removeClass("hidden");
     }else{
         $(".main").addClass("hidden");
-        $(name).removeClass("hidden");
+        $(search).removeClass("hidden");
+    }
+}
+
+function chooseEmployee(){
+    var radios = document.getElementById("employeeInfo").selectEmployee;
+    var id = null;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
+        }
+    }else{
+        id = radios.value;
+    }
+
+    if(id==null){
+        alert("Please Choose One Employee.");
+    }else{
+        $("#idRole").val(id);
+        $(".selectPrivilege").removeAttr("disabled");
+        $(".selectPrivilege").removeAttr("checked");
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/choosePrivilege",
+            data : {"id":id},
+            cache:true,
+
+            success: function(data){
+                $.each(data,function(i){
+                    var name = "#" + data[i]["privilegeFile"];
+                    var privilege = $(name);
+                    privilege.attr("checked","checked");
+                });
+                $(".submit_button").removeClass("hidden");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }
+}
+
+function changePrivilege(){
+    var radios = document.getElementById("employeeInfo").selectEmployee;
+    var id = null;
+    if(radios.value == null) {
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                id = radios[i].value;
+            }
+        }
+    }else{
+        id = radios.value;
+    }
+
+    if(id==null){
+        alert("Choose Employee First.");
+    }else{
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/changePrivilege",
+            data : $("#paymentInfo").serialize(),
+            cache:true,
+
+            success: function(data){
+                alert(data);
+                $("#customer-container").load("manageEmployees");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
     }
 }
 

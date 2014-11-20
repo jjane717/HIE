@@ -14,16 +14,17 @@
 
 <div>
     <div id="create">
-        <div class="submit_button hidden" onclick="makePayment()">
-            <label>Make Payment</label>
+        <div id="filter">
+            <span>Search By Employee ID: </span><br/>
+            <input type="search" id="searchEmployeeID" onchange="searchEmployee()"/>
         </div>
-        <div class="submit_button hidden changeText" onclick="showAllPayment()">
-            <label>Show All Payment</label>
+        <div class="submit_button hidden" onclick="changePrivilege()">
+            <label>Make Change</label>
         </div>
     </div>
     <div width="570px">
         <div id="chooseOrder">
-            <form id="orderInfo">
+            <form id="employeeInfo">
                 <table id="enterpriseTable" cellspacing="0">
                     <tr>
                         <td colspan="5" class="tableTitle">Choose User Role</td>
@@ -31,66 +32,42 @@
                     <tr>
                         <th class="details"></th>
                         <th>User Name</th>
-                        <th>Role Name</th>
-                        <th>Enterprise</th>
+                        <th>Employee ID</th>
                     </tr>
                     <c:forEach items="${userRoles}" var="user">
-                        <tr>
-                            <td><input type="radio" name="selectOrder" value="${user.roleEntity.idRole}" onchange="chooseOrder()"></td>
+                        <tr class="main ${user.roleEntity.idEmployee}">
+                            <td><input type="radio" name="selectEmployee" value="${user.roleEntity.idRole}" onchange="chooseEmployee()"></td>
                             <td>${user.userName}</td>
-                            <td>${user.roleEntity.roleName}</td>
-                            <td>${user.enterpriseEntity.enterpriseName}</td>
+                            <td>${user.roleEntity.idEmployee}</td>
                         </tr>
                     </c:forEach>
-                </table>
-            </form>
-        </div>
-        <div id="preparePay" class="hidden">
-            <form id="prepareForm">
-                <table cellspacing="0" id="cardTable">
-                    <tr>
-                        <td class="tableTitle">Pay By:</td>
-                    </tr>
-                    <tr>
-                        <td class="detailsTitle"><label for="cardNumber">Card Number:</label></td>
-                    </tr>
-                    <tr>
-                        <td><input name="cardNumber" id="cardNumber" type="text" width="100px"/></td>
-                    </tr>
-                    <tr>
-                        <td class="detailsTitle"><label for="holderName">Card Holder Name:</label></td>
-                    </tr>
-                    <tr>
-                        <td><input name="holderName" id="holderName" type="text" width="100px"/></td>
-                    </tr>
-                    <tr>
-                        <td class="detailsTitle"><label for="expirationDate">Expiration Date:</label></td>
-                    </tr>
-                    <tr>
-                        <td><input name="expirationDate" id="expirationDate" type="text"/></td>
-                    </tr>
-                    <tr>
-                        <td class="detailsTitle"><label for="securityCode">Security Code:</label></td>
-                    </tr>
-                    <tr>
-                        <td><input name="securityCode" id="securityCode" type="text"/></td>
-                    </tr>
                 </table>
             </form>
         </div>
     </div>
 </div>
 <div id="choosePayment-container">
+    <div id="paymentDiv">
+        <form id="paymentInfo">
+            <input type="text" class="hidden" id="idRole" name="idRole"/>
+            <table id="paymentTable" cellspacing="0">
+                <tr>
+                    <td colspan="2" class="tableTitle">Choose Privilege</td>
+                </tr>
+                <c:forEach items="${available}" var="all">
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="${all.idPrivilege}" class="selectPrivilege" name="selectedPrivilege" id="${all.privilegeFile}" disabled="disabled"/>
+                        </td>
+                        <td>${all.privilegeName}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </form>
+    </div>
 </div>
 
 <style>
-
-    .detailsTitle{
-        color: #6d3353;
-        font-weight: bolder;
-        font-size: 16px;
-    }
-
     .submit_button{
         float: right;
         margin-top: 15px;
@@ -113,15 +90,6 @@
         text-align: center;
     }
 
-    #preparePay{
-        float: right;
-        width: 180px;
-    }
-
-    #cardTable{
-        width: 180px;
-    }
-
     #cardTable td{
         /*margin-top: 20px;*/
         padding-top: 10px;
@@ -130,25 +98,30 @@
 
     #chooseOrder{
         overflow:scroll;
-        height:300px;
-        width: 400px;
+        width: 350px;
         float:left;
     }
 
     #create{
         border-bottom: 2px solid red;
         height:60px;
+        margin:30px 30px 0px 30px;
+    }
+
+    #filter{
+        float:left;
     }
 
     #create span{
         font-size: 18px;
         font-weight: bolder;
         color: #90111a;
+        margin-bottom: 5px;
     }
 
     #enterpriseTable{
         margin-top: 20px;
-        width:380px;
+        width:330px;
         margin-left: 10px;
     }
 
@@ -172,7 +145,39 @@
 
     #choosePayment-container{
         /*border: 3px solid crimson;*/
+        border-radius: 5px;
         float: left;
+        margin-top:10px;
     }
+
+    #paymentDiv{
+        overflow:scroll;
+        width:220px;
+    }
+
+    #paymentTable{
+        margin-top: 10px;
+        width:200px;
+        margin-left: 10px;
+    }
+
+    #paymentTable th{
+        font-size: 18px;
+        broder-right: 1px solid lightgray;
+    }
+
+    #paymentTable tr{
+        margin-top: 10px;
+        padding: 20px;
+        font-size: 14px;
+        text-align: center;
+    }
+    #paymentTable td{
+        height: 50px;
+        width: auto;
+        border-bottom: 1px solid lightgray;
+    }
+
+
 
 </style>
