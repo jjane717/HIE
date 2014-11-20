@@ -116,6 +116,10 @@ public class LoginService {
         updateAllUserAccount(userAccountEntity);
     }
 
+    public List<UserAccountEntity> getAllUserAccount(){
+        return userRepository.getAllUserAccount();
+    }
+
     public List<RoleEntity> getRoleListFromService (){
         return userRepository.getRoleListFromUR();
     }

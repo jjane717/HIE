@@ -430,20 +430,19 @@ function createUserAccount(){
 
                         success: function(data){
                             if(data["userName"] != null) {
-                                $("#enterpriseTable").append("<tr id=\"userAccountInfo-" + data["idUserAccount"] + "\"><td>" + data["userName"] + "</td><td>" + data["email"] + "</td><td>" + data["firstName"] + " " + data["lastName"] + "</td><td>" + data["roleEntity"]["roleName"] + "</td><td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data["idUserAccount"] + "\")></td></tr>");
+                                //$("#enterpriseTable").append("<tr id=\"userAccountInfo-" + data["idUserAccount"] + "\"><td>" + data["userName"] + "</td><td>" + data["email"] + "</td><td>" + data["firstName"] + " " + data["lastName"] + "</td><td>" + data["roleEntity"]["roleName"] + "</td><td>" + data["enterpriseEntity"]["enterpriseName"] + "</td><td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data["idUserAccount"] + "\")></td></tr>");
                                 alert("You have already add an User");
-                                $( this ).dialog( "close" );
+                                $("#customer-container").load("manageUserAccounts");
                             }else{
                                 alert("Duplicated User.");
                             }
                         },
                         error: function(error){
                             alert("NO"+ error);
-                            $( this ).dialog( "close" );
                         }
                     });
                 }
-
+                $( this ).dialog( "close" );
             },
             Cancel: function() {
                 allFields.val( "" ).removeClass( "ui-state-error" );
@@ -817,6 +816,17 @@ function showAllPayment(){
     }else{
         $(".paid").addClass("hidden");
         $(".changeText").find("label").html("Show All Payment");
+    }
+}
+
+function filterUserByEnterprise(){
+    var name = "." + $("#filterEnterprise").val();
+
+    if(name==".All"){
+        $(".main").removeClass("hidden");
+    }else{
+        $(".main").addClass("hidden");
+        $(name).removeClass("hidden");
     }
 }
 

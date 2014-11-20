@@ -9,6 +9,7 @@ import org.yijun.hie.persistence.entity.PrivilegeEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -22,6 +23,7 @@ public class UserRepository {
     private SessionFactory sessionFactory;
 
     private String getUserByNameHql = "from UserAccountEntity where userName = :userName";
+    private String getUserAccountHql = "from UserAccountEntity";
     private String getUserAccountByIDHql = "from UserAccountEntity where idUserAccount = :idUserAccount";
     private String getEnterpriseHql = "from EnterpriseEntity";
     private String getRoleHql = "from RoleEntity ";
@@ -36,6 +38,14 @@ public class UserRepository {
         List<UserAccountEntity> userAccountEntityList;
 
         userAccountEntityList = session.createQuery(getUserByNameHql).setString("userName", userName).list();
+        return userAccountEntityList;
+    }
+
+    public List<UserAccountEntity> getAllUserAccount(){
+        Session session = sessionFactory.getCurrentSession();
+        List<UserAccountEntity> userAccountEntityList;
+
+        userAccountEntityList = session.createQuery(getUserAccountHql).list();
         return userAccountEntityList;
     }
 

@@ -105,7 +105,14 @@ public class ManageController {
     @Transactional
     public List<UserAccountEntity> getUserAccountsByEnterprise(){
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<UserAccountEntity> userAccountEntityList = loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
+        List<UserAccountEntity> userAccountEntityList;
+        if(userAccountEntity.getEnterpriseEntity().getIdEnterprise()==3){
+            userAccountEntityList = loginService.getAllUserAccount();
+            userAccountEntityList.remove(userAccountEntity);
+        }else{
+            userAccountEntityList = loginService.getUserAccountsByEnterpriseFromService(userAccountEntity.getEnterpriseEntity());
+            userAccountEntityList.remove(userAccountEntity);
+        }
         return userAccountEntityList;
     }
 
@@ -124,7 +131,8 @@ public class ManageController {
     public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
         String userName = userAccountEntity.getUserName();
         if(!loginService.isUserExist(userName)){
-            return loginService.createUserAccount(userAccountEntity,request);
+            UserAccountEntity user2 = loginService.createUserAccount(userAccountEntity,request);
+            return user2;
         }else{
             return null;
         }

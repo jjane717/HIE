@@ -1,37 +1,52 @@
-<script src="../js/js.js"></script>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
     $(document).ready(function(){
-        $.ajax({
-            type: "Get",
-            url : "http://localhost:8080/userAccountForEnterprise",
-            cache:true,
-
-            success: function(data){
-                $.each(data,function(i){
-                    var content = "<tr id=\"userAccountInfo-" + data[i]["idUserAccount"] + "\"><td>" + data[i]["userName"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["firstName"] + " " + data[i]["lastName"] + "</td><td>" + data[i]["roleEntity"]["roleName"] + "</td>";
-                    if(data[i]["status"] == "1"){
-                        content = content + "<td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
-                    }else{
-                        content = content + "<td><input type=\"checkbox\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
-                    }
-
-                    $("#enterpriseTable").append(content);
-
-                    $("#enterpriseTable tr").hover(function(){
-                        $(this).addClass("one");
-                    },function(){
-                        $(this).removeClass("one");
-                    });
-                });
-            },
-            error: function(error){
-                alert("NO"+ error);
-            }
+//        $.ajax({
+//            type: "Get",
+//            url : "http://localhost:8080/userAccountForEnterprise",
+//            cache:true,
+//
+//            success: function(data){
+//                $.each(data,function(i){
+//                    var content = "<tr id=\"userAccountInfo-" + data[i]["idUserAccount"] + "\"><td>" + data[i]["userName"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["firstName"] + " " + data[i]["lastName"] + "</td><td>" + data[i]["roleEntity"]["roleName"] + "</td>";
+//                    if(data[i]["status"] == "1"){
+//                        content = content + "<td><input type=\"checkbox\" checked=\"true\" class=\"checkStatus\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
+//                    }else{
+//                        content = content + "<td><input type=\"checkbox\" onClick=changeUserStatus(\"" + data[i]["idUserAccount"] + "\")></td></tr>";
+//                    }
+//
+//                    $("#enterpriseTable").append(content);
+//
+//                    $("#enterpriseTable tr").hover(function(){
+//                        $(this).addClass("one");
+//                    },function(){
+//                        $(this).removeClass("one");
+//                    });
+//                });
+//            },
+//            error: function(error){
+//                alert("NO"+ error);
+//            }
+//        });
+        $("#enterpriseTable tr").hover(function(){
+            $(this).addClass("one");
+        },function(){
+            $(this).removeClass("one");
         });
     });
 
 </script>
 <div id="create">
+    <div id="filter">
+        <span>Filter By Insurance: </span><br/>
+        <select name="enterpriseName" id="filterEnterprise" onchange="filterUserByEnterprise()">
+            <option value="All">All</option>
+            <c:forEach items="${enterprises}" var="enterprise">
+                <option value="${enterprise.enterpriseName}">${enterprise.enterpriseName}</option>
+            </c:forEach>
+        </select>
+    </div>
     <div id="account_save_button" class="submit_button" onclick="createUserAccount()">
         <label>Create New User Account</label>
     </div>
@@ -44,28 +59,50 @@
             <th>Email</th>
             <th>Name</th>
             <th>Role</th>
+            <th>Enterprise</th>
             <th>Status</th>
         </tr>
+        <c:forEach items="${userAccounts}" var="user">
+            <tr id="userAccountInfo_${user.idUserAccount}" class="main ${user.enterpriseEntity.enterpriseName}">
+                <td>${user.userName}</td>
+                <td>${user.email}</td>
+                <td>${user.firstName} ${user.lastName}</td>
+                <td>${user.roleEntity.roleName}</td>
+                <td>${user.enterpriseEntity.enterpriseName}</td>
+                <c:if test="${user.status == false}">
+                    <td>
+                        <input type="checkbox" onclick=changeUserStatus("${user.idUserAccount}")>
+                    </td>
+                </c:if>
+                <c:if test="${user.status == true}">
+                    <td>
+                        <input type="checkbox" checked="true" class="checkStatus" onclick=changeUserStatus("${user.idUserAccount}")>
+                    </td>
+                </c:if>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 
 <style>
-    .action{
-        width: 100px;
-        float: left;
-    }
-
     .submit_button{
         float:left;
     }
 
-    .edit{
-        margin-right: 3px;
-    }
-
     #create{
+        margin: 30px;
         border-bottom: 2px solid red;
         height:50px;
+    }
+
+    #filter{
+        float:left;
+    }
+
+    #create span{
+        font-size: 18px;
+        font-weight: bolder;
+        color: #90111a;
     }
 
     #enterpriseInfo{

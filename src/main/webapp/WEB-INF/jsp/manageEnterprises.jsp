@@ -1,4 +1,3 @@
-<script src="../js/js.js"></script>
 <script>
     $(document).ready(function(){
         $.ajax({

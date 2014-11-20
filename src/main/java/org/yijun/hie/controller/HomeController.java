@@ -36,6 +36,10 @@ public class HomeController {
     private EnterpriseController enterpriseController;
     @Autowired
     private OrderController orderController;
+    @Autowired
+    private UserRolePrivilegeController userRolePrivilegeController;
+    @Autowired
+    private ManageController manageController;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String mainIndex() {
@@ -79,12 +83,18 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/manageUserAccounts", method = RequestMethod.GET)
-    public String manageUserAccounts() {
+    public String manageUserAccounts(Model model) {
+        List<UserAccountEntity> userAccountEntityList = manageController.getUserAccountsByEnterprise();
+        List<EnterpriseEntity> enterpriseEntityList = manageController.getEnterpriseList();
+        model.addAttribute("enterprises",enterpriseEntityList);
+        model.addAttribute("userAccounts", userAccountEntityList);
         return "manageUserAccounts";
     }
 
     @RequestMapping(value = "/manageEmployees", method = RequestMethod.GET)
-    public String manageEmployees() {
+    public String manageEmployees(Model model) {
+        List<UserAccountEntity> userAccountEntityList = userRolePrivilegeController.getAllEditableUserRole();
+        model.addAttribute("userRoles", userAccountEntityList);
         return "manageEmployees";
     }
 
