@@ -64,7 +64,6 @@ public class RoleEntity {
         this.roleName = roleName;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

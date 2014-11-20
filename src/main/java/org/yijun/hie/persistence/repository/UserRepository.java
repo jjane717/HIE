@@ -73,7 +73,11 @@ public class UserRepository {
     public List<EnterpriseEntity> getEnterpriseGroupFromUR (String enterpriseType) {
         Session session = sessionFactory.getCurrentSession();
         List<EnterpriseEntity> enterpriseEntityList;
-        enterpriseEntityList = session.createQuery(getEnterpriseGroupHql).setString("enterpriseType", enterpriseType).list();
+        if(enterpriseType.equals("Employee")){
+            enterpriseEntityList = session.createQuery(getEnterpriseHql).list();
+        }else{
+            enterpriseEntityList = session.createQuery(getEnterpriseGroupHql).setString("enterpriseType", enterpriseType).list();
+        }
         return enterpriseEntityList;
     }
 

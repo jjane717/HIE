@@ -58,8 +58,14 @@ public class ManageController {
     @ResponseBody
     @Transactional
     public RoleEntity getRoleByID (String id) {
-        Integer idRole = Integer.valueOf(id);
-        return loginService.getRoleByIDFromService(idRole);
+        if(id.equals("employee")){
+            EmployeeRoleEntity employeeRoleEntity = new EmployeeRoleEntity();
+            employeeRoleEntity.setRoleName("Employee");
+            return employeeRoleEntity;
+        }else{
+            Integer idRole = Integer.valueOf(id);
+            return loginService.getRoleByIDFromService(idRole);
+        }
     }
 
     @RequestMapping(value="/enterprise", method = RequestMethod.POST)

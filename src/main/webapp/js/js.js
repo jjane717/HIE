@@ -331,10 +331,12 @@ function createUserAccount(){
 
         success: function(data){
             $.each(data,function(i){
-                if(data[i]["roleName"]!="Customer") {
+                if(data[i]["roleName"]!="Customer" && data[i]["roleName"]!="Employee") {
                     $(".roleOption").append("<option value=\"" + data[i]["idRole"] + "\">" + data[i]["roleName"] + "</option>");
                 }
             });
+
+            $(".roleOption").append("<option value=\"employee\">Employee</option>")
 
             $(".roleOption").change(function(){
 
@@ -355,6 +357,8 @@ function createUserAccount(){
                             enterpriseGroup = "HIE";
                         }else if(roleType == "InsuranceAdmin"){
                             enterpriseGroup = "Insurance";
+                        }else{
+                            enterpriseGroup = "Employee";
                         }
 
                         $.ajax({

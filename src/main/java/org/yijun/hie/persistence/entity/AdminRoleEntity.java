@@ -11,4 +11,5 @@ import javax.persistence.Table;
 //@Table(name = "role")
 @DiscriminatorValue(value = "admin_role_entity")
 public class AdminRoleEntity extends RoleEntity{
+
 }

@@ -2,6 +2,7 @@ package org.yijun.hie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yijun.hie.persistence.entity.EmployeeRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
@@ -37,8 +38,20 @@ public class LoginService {
     }
 
     public UserAccountEntity createUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
+        EnterpriseEntity enterpriseEntity = userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise")));
+        userAccountEntity.setEnterpriseEntity(enterpriseEntity);
+        userAccountEntity.setStatus(true);
         String idRole = request.getParameter("idRole");
-        userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
+        if(idRole.equals("employee")){
+            EmployeeRoleEntity employeeRoleEntity = new EmployeeRoleEntity();
+            Integer id = userAccountEntity.getEnterpriseEntity().getEnterpriseCode();
+            Integer idEmployee = id*10000 + enterpriseEntity.getUserAccountEntityList().size() + 1;
+            employeeRoleEntity.setIdEmployee(idEmployee);
+            employeeRoleEntity.setRoleName("Employee");
+            userAccountEntity.setRoleEntity(employeeRoleEntity);
+        }else{
+            userAccountEntity.setRoleEntity(userRepository.getRoleByIDFromUR(Integer.valueOf(idRole)));
+        }
         userAccountEntity.setEnterpriseEntity(userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise"))));
         userAccountEntity.setStatus(true);
         return userRepository.addUserAccount(userAccountEntity);
