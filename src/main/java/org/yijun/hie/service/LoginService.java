@@ -1,11 +1,7 @@
 package org.yijun.hie.service;
 
-//import org.eclipse.jetty.util.ajax.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.yijun.hie.persistence.entity.CustomerRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
 import org.yijun.hie.persistence.entity.UserAccountEntity;
@@ -13,17 +9,11 @@ import org.yijun.hie.persistence.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-8.
  */
-
 @Service
 public class LoginService {
     @Autowired
@@ -55,9 +45,27 @@ public class LoginService {
 
     }
 
-    public void updateUserAccount(UserAccountEntity userAccountEntity){
+    public void updateUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
+        userAccountEntity.setUserName(request.getParameter("userName"));
+        userAccountEntity.setPassword(request.getParameter("password"));
+        userAccountEntity.setAge(Integer.valueOf(request.getParameter("age")));
+        userAccountEntity.setDateOfBirth(request.getParameter("dateOfBirth"));
+        userAccountEntity.setEmail(request.getParameter("email"));
+        userAccountEntity.setFirstName(request.getParameter("firstName"));
+        userAccountEntity.setLastName(request.getParameter("lastName"));
+        userAccountEntity.setStreet(request.getParameter("street"));
+        userAccountEntity.setCity(request.getParameter("city"));
+        userAccountEntity.setState(request.getParameter("state"));
+        userAccountEntity.setZip(request.getParameter("zip"));
+        userAccountEntity.setPhone(request.getParameter("phone"));
+
+        userRepository.updateUserAccount(userAccountEntity);
+    }
+
+    public void updateAllUserAccount(UserAccountEntity userAccountEntity){
         userAccountEntity.setRoleEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getRoleEntity());
         userAccountEntity.setEnterpriseEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getEnterpriseEntity());
+
         userRepository.updateUserAccount(userAccountEntity);
     }
 
@@ -92,7 +100,7 @@ public class LoginService {
     public void getUserAccountByIDFromService (Integer idUserAccount, Boolean status){
         UserAccountEntity userAccountEntity = userRepository.getUserAccountByIDFromUR(idUserAccount);
         userAccountEntity.setStatus(status);
-        updateUserAccount(userAccountEntity);
+        updateAllUserAccount(userAccountEntity);
     }
 
     public List<RoleEntity> getRoleListFromService (){

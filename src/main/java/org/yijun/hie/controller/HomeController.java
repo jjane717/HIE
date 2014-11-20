@@ -54,8 +54,9 @@ public class HomeController {
     @RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public String update(UserAccountEntity userAccountEntity) {
-        loginService.updateUserAccount(userAccountEntity);
+    public String update(HttpServletRequest request) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        loginService.updateUserAccount(userAccountEntity, request);
         return "OK";
     }
 
@@ -70,7 +71,7 @@ public class HomeController {
 
     @RequestMapping(value = "/hiUser", method = RequestMethod.GET)
     @Transactional
-    public String userHome(Model model) {
+    public String hiUser(Model model) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
         List<PrivilegeEntity> privilegeEntityList= userRolePrivilegeService.getParticularPrivileges(userAccountEntity);
         model.addAttribute("privileges", privilegeEntityList);
@@ -121,7 +122,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/userHome", method = RequestMethod.GET)
-    public String userHome() {
+    @Transactional
+    public String userHome(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        model.addAttribute("orders", orderEntityList);
         return "userHome";
     }
 

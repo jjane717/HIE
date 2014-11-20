@@ -56,17 +56,20 @@
                                 <tr>
                                     <td class="detailsTitle">Description: </td><td colspan="3">${order.enterpriseProductEntity.productEntity.description}</td>
                                 </tr>
-                                <%--<tr>--%>
-                                    <%--<td class="detailsTitle">Next Payment Date: </td>--%>
-                                    <%--<td colspan="3">--%>
-                                        <%--<c:forEach items="${order.paymentList}" var="payment" end="${i}">--%>
-                                            <%--<c:if test="${payment.isPay == false}">--%>
-                                                <%--<c:out value="${payment.dueDate}"/>--%>
-                                                <%--<c:set var="i" value="0"/>--%>
-                                            <%--</c:if>--%>
-                                        <%--</c:forEach>--%>
-                                    <%--</td>--%>
-                                <%--</tr>--%>
+                                <tr>
+                                    <td class="detailsTitle">Next Payment Date: </td>
+                                    <td colspan="3">
+                                        <c:set var="flag" value="1"/>
+                                        <c:forEach items="${order.paymentEntityList}" var="payment">
+                                            <c:choose>
+                                                <c:when test="${payment.isPay == false && flag == 1}">
+                                                    <c:out value="${payment.dueDate}"/>
+                                                    <c:set var="flag" value="0"/>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </td>

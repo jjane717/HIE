@@ -4,7 +4,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>System Management</title>
+    <title>User Home</title>
     <link href="../css/css.css" rel="stylesheet">
     <link href="../css/css2.css" rel="stylesheet">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -36,6 +36,11 @@
             var urll = $(this).attr("source");
             $("#customer-container").load(urll);
         });
+
+        $("#customer-topmenu ul li:first-child").removeClass("holdlightblue");
+        $("#customer-topmenu ul li:first-child").addClass("clickdarkorange");
+        var urll = $("#customer-topmenu ul li:first-child").attr("source");
+        $("#customer-container").load(urll);
     });
 </script>
 <body>

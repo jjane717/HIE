@@ -36,6 +36,11 @@
             var urll = $(this).attr("source");
             $("#customer-container").load(urll);
         });
+
+        $("#customer-topmenu ul li:first-child").removeClass("holdlightblue");
+        $("#customer-topmenu ul li:first-child").addClass("clickdarkorange");
+        var urll = $("#customer-topmenu ul li:first-child").attr("source");
+        $("#customer-container").load(urll);
     });
 </script>
 <body>
