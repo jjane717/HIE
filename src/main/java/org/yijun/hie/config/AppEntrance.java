@@ -38,7 +38,7 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("js/**").addResourceLocations("js/");
         registry.addResourceHandler("html/**").addResourceLocations("html/");
         registry.addResourceHandler("jsp/**").addResourceLocations("jsp/");
-        registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
+        //registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
     }
 
 //	@Override
