@@ -40,19 +40,11 @@ public class TestController {
     @Autowired
     private UserRolePrivilegeService userRolePrivilegeService;
 
-
-    @RequestMapping(value="/hello", method = RequestMethod.GET)
-    public String helloWorld () {
-//        EnterpriseEntity enterpriseEntity = new EnterpriseEntity();
-        return "html/login";
-    }
-
-    @RequestMapping(value="/login", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public UserAccountEntity login () {
-        return loginService.userLogin();
-    }
+//    @RequestMapping(value="/login", method = RequestMethod.GET)
+//    @Transactional
+//    public String login () {
+//        return "login";
+//    }
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
     @ResponseBody

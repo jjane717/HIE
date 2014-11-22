@@ -31,15 +31,15 @@ public class AppEntrance extends WebMvcConfigurerAdapter {
         new SpringApplicationBuilder(AppEntrance.class).properties().run(args);
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("images/**").addResourceLocations("images/");
-//        registry.addResourceHandler("css/**").addResourceLocations("css/");
-//        registry.addResourceHandler("js/**").addResourceLocations("js/");
-//        registry.addResourceHandler("html/**").addResourceLocations("html/");
-//        registry.addResourceHandler("jsp/**").addResourceLocations("jsp/");
-//        registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("images/**").addResourceLocations("images/");
+        registry.addResourceHandler("css/**").addResourceLocations("css/");
+        registry.addResourceHandler("js/**").addResourceLocations("js/");
+        registry.addResourceHandler("html/**").addResourceLocations("html/");
+        registry.addResourceHandler("jsp/**").addResourceLocations("jsp/");
+        registry.addResourceHandler("WEB-INF/**").addResourceLocations("WEB-INF/");
+    }
 
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {

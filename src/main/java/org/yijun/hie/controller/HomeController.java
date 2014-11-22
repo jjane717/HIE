@@ -7,16 +7,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.service.LoginService;
 import org.yijun.hie.service.OrderService;
 import org.yijun.hie.service.UserRolePrivilegeService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liuyijun on 14-11-10.
@@ -41,9 +48,26 @@ public class HomeController {
     @Autowired
     private ManageController manageController;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String mainIndex() {
-        return "index";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(ModelAndView modelAndView){
+        modelAndView = new ModelAndView("login10");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String loginP(){
+        return "success";
+    }
+
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public String success(){
+        return "success";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(){
+        return "register";
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.GET)

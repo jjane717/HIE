@@ -98,7 +98,7 @@ public class CustomerService {
 
                     int dueMonth;
                     int dueYear;
-                    int dueDay = createDate.getDay();
+                    int dueDay = day;
                     if(month == 12){
                         dueMonth = 1;
                         dueYear = year + 1 +j;

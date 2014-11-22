@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to HIEs! Please Signin First!</title>
+
+    <link href="css/css.css" rel="stylesheet">
+    <link href="css/css2.css" rel="stylesheet">
+    <script src="js/js.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        $(document).ready(function(){
+//        $("#msform").hide();
+            $("#register").click(function(){
+                $("#msform").show();
+            });
+
+            //jQuery time
+            var current_fs, next_fs, previous_fs; //fieldsets
+            var left, opacity, scale; //fieldset properties which we will animate
+            var animating; //flag to prevent quick multi-click glitches
+
+            $(".next").click(function(){
+                if(animating) return false;
+                animating = true;
+
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next();
+
+                //activate next step on progressbar using the index of next_fs
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                //show the next fieldset
+                next_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({opacity: 0}, {
+                    step: function(now, mx) {
+                        //as the opacity of current_fs reduces to 0 - stored in "now"
+                        //1. scale current_fs down to 80%
+                        scale = 1 - (1 - now) * 0.2;
+                        //2. bring next_fs from the right(50%)
+                        left = (now * 50)+"%";
+                        //3. increase opacity of next_fs to 1 as it moves in
+                        opacity = 1 - now;
+                        current_fs.css({'transform': 'scale('+scale+')'});
+                        next_fs.css({'left': left, 'opacity': opacity});
+                    },
+                    duration: 800,
+                    complete: function(){
+                        current_fs.hide();
+                        animating = false;
+                    },
+                    //this comes from the custom easing plugin
+                    easing: 'easeInOutBack'
+                });
+            });
+
+            $(".previous").click(function(){
+                if(animating) return false;
+                animating = true;
+
+                current_fs = $(this).parent();
+                previous_fs = $(this).parent().prev();
+
+                //de-activate current step on progressbar
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                //show the previous fieldset
+                previous_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({opacity: 0}, {
+                    step: function(now, mx) {
+                        //as the opacity of current_fs reduces to 0 - stored in "now"
+                        //1. scale previous_fs from 80% to 100%
+                        scale = 0.8 + (1 - now) * 0.2;
+                        //2. take current_fs to the right(50%) - from 0%
+                        left = ((1-now) * 50)+"%";
+                        //3. increase opacity of previous_fs to 1 as it moves in
+                        opacity = 1 - now;
+                        current_fs.css({'left': left});
+                        previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+                    },
+                    duration: 800,
+                    complete: function(){
+                        current_fs.hide();
+                        animating = false;
+                    },
+                    //this comes from the custom easing plugin
+                    easing: 'easeInOutBack'
+                });
+            });
+
+            $(".submit").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url : "http://localhost:8080/createUserAccount",
+                    data : $("#msform").serialize(),
+                    cache:true,
+
+                    success: function(data){
+                        if(data["userName"] != null){
+                            alert("You have been registered.");
+                        }else{
+                            alert("Duplicated User.");
+                        }
+
+                    },
+                    error: function(error){
+                        alert("NO"+ error);
+                    }
+                });
+
+            });
+
+
+        });
+
+        function updateTips( t,tips ) {
+            tips.show()
+                    .text( t )
+                    .addClass( "ui-state-highlight" );
+            setTimeout(function() {
+                tips.removeClass( "ui-state-highlight", 1500 );
+            }, 500 );
+        }
+
+        function checkLength( o, n, min, max, tips ) {
+            if ( o.val().length > max || o.val().length < min ) {
+                o.addClass( "ui-state-error" );
+                updateTips( "Length of " + n + " must be between " +
+                min + " and " + max + "." ,tips);
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function checkRegexp( o, regexp, n, tips ) {
+            if ( !( regexp.test( o.val() ) ) ) {
+                o.addClass( "ui-state-error" );
+                updateTips( n ,tips );
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+<body>
+
+<div class="container">
+
+    <form class="form-signin" role="form" name="f" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" name="username" class="form-control" placeholder="User Name" required="" autofocus="">
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <div class="checkbox">
+            <label>
+                <p id="register">Register Now!</p>
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</div> <!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+
+</body>
+
+<!-- multistep form -->
+<form id="msform">
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">Account Setup</li>
+        <li>Personal Information</li>
+        <li>Personal Details</li>
+    </ul>
+    <span id="tips"></span>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">Create your account</h2>
+        <h3 class="fs-subtitle">This is step 1</h3>
+        <input type="text" name="idRole" id="idRole" class="hidden" value="1"/>
+        <input type="text" name="idEnterprise" id="idEnterprise" class="hidden" value="3"/>
+        <input type="text" name="email" id="email" placeholder="Email" />
+        <input type="text" name="userName" id="userName" placeholder="User Name" />
+        <input type="password" name="password" id="password" placeholder="Password" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Personal Information</h2>
+        <h3 class="fs-subtitle">Choose Your Current Information</h3>
+        <input type="text" name="firstName" id="fname" placeholder="First Name" />
+        <input type="text" name="lastName" id="lname" placeholder="Last Name" />
+        <input type="text" name="dateOfBirth" id="dateOfBirth" placeholder="Date of Birth"/>
+        <input type="text" name="age" id="age" placeholder="Age" />
+        <input type="text" name="street" id="street" placeholder="Street" />
+        <input type="text" name="city" id="city" placeholder="City" />
+        <input type="text" name="state" id="state" placeholder="State" />
+        <input type="text" name="zip" id="zip" placeholder="Zip" />
+        <input type="text" name="phone" id="phone" placeholder="phone" />
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Personal Details</h2>
+        <h3 class="fs-subtitle">We will never sell it</h3>
+        <label class="checkbox" for="isSmallBusiness">
+            <input type="checkbox" name="isSmallBusiness" id="isSmallBusiness" value="false">Small Business
+        </label>
+        <label class="checkbox" for="isFamily">
+            <input type="checkbox" name="isFamily" id="isFamily" value="false">Family Member
+        </label>
+        <label>
+            <span>Income Status:</span>
+            <select id="incomeStatus" name="incomeStatus">
+                <option value="none">Don't provide</option>
+                <option value="low">Less Than $5000 Annual</option>
+                <option value="above">Above $5000 Annual</option>
+            </select>
+        </label>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="submit" class="submit action-button" value="Submit" />
+    </fieldset>
+</form>
+
+<!-- jQuery -->
+<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<!-- jQuery easing plugin -->
+<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
+</html>
