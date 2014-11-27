@@ -73,11 +73,6 @@ public class MyUserDetailsService implements UserDetailsService{
             return AuthorityUtils.createAuthorityList(role);
         }
 
-//        @Override
-//        public String getPassword(){
-//            return getPassword();
-//        }
-
         @Override
         public String getUsername(){
             return getUserName();

@@ -192,6 +192,17 @@
         background-color: lightyellow;
     }
 
+
+    #login-error{
+        background-color: lightcoral;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    #login-error p{
+        margin-left: 10px;
+        color: #f5f5f5;
+    }
+
 </style>
 
 <body>
@@ -200,6 +211,9 @@
 
     <form class="form-signin" role="form" name="f" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
+        <c:if test="${error!=null}">
+            <div id="login-error"><p>${error}</p></div>
+        </c:if>
         <input name="username" type="text" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
@@ -336,7 +350,6 @@
         color: white;
     }
 </style>
-
     <form id="msform" class="hidden">
         <input type="button" name="cancel" class="cancel action-button" value="Cancel" />
         <!-- progressbar -->
