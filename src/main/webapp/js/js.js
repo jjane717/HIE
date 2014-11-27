@@ -49,8 +49,7 @@ function accsave(){
         cache:true,
 
         success: function(data){
-            alert("OK" + data);
-
+            $("#headerholder").load("userLogin");
         },
         error: function(error){
             alert("NO"+ error);
@@ -258,10 +257,8 @@ function deleteEnterprise(id){
 
 function changeUserStatus(id){
     var con = confirm("Do you want to change the status?");
-    var idtr = "#userAccountInfo-"+id;
-    var ptr = $(idtr);
-    var checkBox = ptr.find("[type=\"checkbox\"]");
-
+    var idcheckBox = "#checkbox-"+id;
+    var checkBox = $(idcheckBox);
     if(con){
         if(checkBox.hasClass("checkStatus")){
             $.ajax({
@@ -478,9 +475,9 @@ function showProductDetails(id){
 
 function changeProductStatus(id){
     var con = confirm("Do you want to change the status?");
+    var idBox = "#checkbox-"+id;
+    var checkBox = $(idBox);
     if(con){
-        var idBox = "#"+id;
-        var checkBox = $(idBox);
         if(checkBox.hasClass("checkStatus")){
             $.ajax({
                 type: "POST",

@@ -44,12 +44,12 @@
                 <td>${user.enterpriseEntity.enterpriseName}</td>
                 <c:if test="${user.status == false}">
                     <td>
-                        <input type="checkbox" onclick=changeUserStatus("${user.idUserAccount}")>
+                        <input id="checkbox-${user.idUserAccount}" type="checkbox" onchange=changeUserStatus("${user.idUserAccount}")>
                     </td>
                 </c:if>
                 <c:if test="${user.status == true}">
                     <td>
-                        <input type="checkbox" checked="true" class="checkStatus" onclick=changeUserStatus("${user.idUserAccount}")>
+                        <input id="checkbox-${user.idUserAccount}" type="checkbox" checked="true" class="checkStatus" onchange=changeUserStatus("${user.idUserAccount}")>
                     </td>
                 </c:if>
             </tr>

@@ -47,10 +47,10 @@
                     <td>${product.productEntity.insuranceEnterpriseName}</td>
                     <td>
                         <c:if test="${product.status == true}">
-                            <input id="${product.productEntity.idProduct}" class="checkStatus" type="checkbox" checked="checked" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
+                            <input id="checkbox-${product.idEnterpriseProduct}" class="checkStatus" type="checkbox" checked="checked" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
                         </c:if>
                         <c:if test="${product.status == false}">
-                            <input id="${product.productEntity.idProduct}" type="checkbox" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
+                            <input id="checkbox-${product.idEnterpriseProduct}" type="checkbox" onclick=changeProductStatus("${product.idEnterpriseProduct}")>
                         </c:if>
                     </td>
                 </tr>

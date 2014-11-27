@@ -6,7 +6,7 @@
             cache:true,
 
             success: function(data){
-//                $("#idUserAccount").val(data["idUserAccount"]);
+                $("#idUserAccount").val(data["idUserAccount"]);
                 $("#email").val(data["email"]);
                 $("#userName").val(data["userName"]);
                 $("#password").val(data["password"]);
@@ -42,7 +42,7 @@
         </div>
         <div class="mm">
             <h3>Login Information</h3>
-            <%--<input type="text" name="idUserAccount" id="idUserAccount" placeholder="idUserAccount" class="disabledtext hidden" disabled="true"/>--%>
+            <input type="text" name="idUserAccount" id="idUserAccount" placeholder="idUserAccount" class="disabledtext hidden"/>
             <label for="email">Email: </label><input type="text" name="email" id="email" placeholder="Email" class="disabledtext" disabled="true"/><br/>
             <label for="userName">User Name: </label><input type="text" name="userName" id="userName" placeholder="User Name" class="disabledtext" disabled="true"/><br/>
             <label for="password">Password: </label><input type="password" name="password" id="password" placeholder="Password" class="disabledtext" disabled="true"/><br/>

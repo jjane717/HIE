@@ -12,8 +12,7 @@
     </div>
     <div id="title-right">
         <p id="title-four">Hello,
-            <jsp:useBean id="user" type="org.yijun.hie.persistence.entity.UserAccountEntity" scope="session"/>
-            <jsp:getProperty name="user" property="userName"/>
+            <c:out value="${user.userName}"/>
         </p>
         <p id="title-five">
             <a href="<c:url value="http://localhost:8080/logout" />">Logout</a>

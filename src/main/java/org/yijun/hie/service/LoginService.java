@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.yijun.hie.persistence.entity.EmployeeRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
 import org.yijun.hie.persistence.entity.RoleEntity;
@@ -29,7 +30,7 @@ public class LoginService {
         //UserAccountEntity userAccountEntity = userRepository.getUserByName("aaa").get(0);
         SecurityContext securityContext=(SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         UserAccountEntity userAccountEntity = (UserAccountEntity) securityContext.getAuthentication().getPrincipal();
-        session.setAttribute("user",userAccountEntity);
+//        session.setAttribute("user",userAccountEntity);
         return userAccountEntity;
     }
 
@@ -45,6 +46,13 @@ public class LoginService {
         EnterpriseEntity enterpriseEntity = userRepository.getEnterpriseOneFromUR(Integer.valueOf(request.getParameter("idEnterprise")));
         userAccountEntity.setEnterpriseEntity(enterpriseEntity);
         userAccountEntity.setStatus(true);
+        if(userAccountEntity.getIsFamily()==null){
+            userAccountEntity.setIsFamily(false);
+        }
+
+        if(userAccountEntity.getIsSmallBusiness()==null){
+            userAccountEntity.setIsSmallBusiness(false);
+        }
         String idRole = request.getParameter("idRole");
         if(idRole.equals("employee")){
             EmployeeRoleEntity employeeRoleEntity = new EmployeeRoleEntity();
@@ -62,21 +70,39 @@ public class LoginService {
 
     }
 
-    public void updateUserAccount(UserAccountEntity userAccountEntity, HttpServletRequest request){
-        userAccountEntity.setUserName(request.getParameter("userName"));
-        userAccountEntity.setPassword(request.getParameter("password"));
-        userAccountEntity.setAge(Integer.valueOf(request.getParameter("age")));
-        userAccountEntity.setDateOfBirth(request.getParameter("dateOfBirth"));
-        userAccountEntity.setEmail(request.getParameter("email"));
-        userAccountEntity.setFirstName(request.getParameter("firstName"));
-        userAccountEntity.setLastName(request.getParameter("lastName"));
-        userAccountEntity.setStreet(request.getParameter("street"));
-        userAccountEntity.setCity(request.getParameter("city"));
-        userAccountEntity.setState(request.getParameter("state"));
-        userAccountEntity.setZip(request.getParameter("zip"));
-        userAccountEntity.setPhone(request.getParameter("phone"));
+    public void updateUserAccountForSecurity(UserAccountEntity userAccount, HttpServletRequest request){
+        userAccount.setUserName(request.getParameter("userName"));
+        userAccount.setPassword(request.getParameter("password"));
+        userAccount.setAge(Integer.valueOf(request.getParameter("age")));
+        userAccount.setDateOfBirth(request.getParameter("dateOfBirth"));
+        userAccount.setEmail(request.getParameter("email"));
+        userAccount.setFirstName(request.getParameter("firstName"));
+        userAccount.setLastName(request.getParameter("lastName"));
+        userAccount.setStreet(request.getParameter("street"));
+        userAccount.setCity(request.getParameter("city"));
+        userAccount.setState(request.getParameter("state"));
+        userAccount.setZip(request.getParameter("zip"));
+        userAccount.setPhone(request.getParameter("phone"));
+    }
 
-        userRepository.updateUserAccount(userAccountEntity);
+    @Transactional
+    public void updateUserAccount(HttpServletRequest request){
+        UserAccountEntity userAccount = userRepository.getUserAccountByIDFromUR(Integer.valueOf(request.getParameter("idUserAccount")));
+        //from request
+        userAccount.setUserName(request.getParameter("userName"));
+        userAccount.setPassword(request.getParameter("password"));
+        userAccount.setAge(Integer.valueOf(request.getParameter("age")));
+        userAccount.setDateOfBirth(request.getParameter("dateOfBirth"));
+        userAccount.setEmail(request.getParameter("email"));
+        userAccount.setFirstName(request.getParameter("firstName"));
+        userAccount.setLastName(request.getParameter("lastName"));
+        userAccount.setStreet(request.getParameter("street"));
+        userAccount.setCity(request.getParameter("city"));
+        userAccount.setState(request.getParameter("state"));
+        userAccount.setZip(request.getParameter("zip"));
+        userAccount.setPhone(request.getParameter("phone"));
+
+        userRepository.updateUserAccount(userAccount);
     }
 
     public void updateAllUserAccount(UserAccountEntity userAccountEntity){

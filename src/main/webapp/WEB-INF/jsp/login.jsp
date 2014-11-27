@@ -389,10 +389,10 @@
             <h2 class="fs-title">Personal Details</h2>
             <h3 class="fs-subtitle">We will never sell it</h3>
             <label class="checkbox" for="isSmallBusiness">
-                <input type="checkbox" name="isSmallBusiness" id="isSmallBusiness" value="false">Small Business
+                <input type="checkbox" name="isSmallBusiness" id="isSmallBusiness">Small Business
             </label>
             <label class="checkbox" for="isFamily">
-                <input type="checkbox" name="isFamily" id="isFamily" value="false">Family Member
+                <input type="checkbox" name="isFamily" id="isFamily">Family Member
             </label>
             <label>
                 <span>Income Status:</span>

@@ -29,6 +29,13 @@
                 <th>Payment Type</th>
                 <th>Total Amount</th>
             </tr>
+            <c:if test="${orders.size()<1}">
+                <tr>
+                    <td colspan="5">
+                        No Order Here. Try to Get One. Go to View Market.
+                    </td>
+                </tr>
+            </c:if>
             <c:forEach items="${orders}" var="order">
                 <tr>
                     <td id="original_${order.idOrder}" class="details up detailsTd" onclick=showProductDetails("${order.idOrder}")></td>

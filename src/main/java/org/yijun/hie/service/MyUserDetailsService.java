@@ -39,12 +39,13 @@ public class MyUserDetailsService implements UserDetailsService{
 
     private final static class UserRepositoryUserDetails extends UserAccountEntity implements UserDetails{
 
-        //private UserAccountEntity userAccountEntity;
+//        private UserAccountEntity userAccountEntity;
 
         private String role;
 
         private UserRepositoryUserDetails(UserAccountEntity userAccountEntity){
             super();
+//            this.userAccountEntity = userAccountEntity;
             setIdUserAccount(userAccountEntity.getIdUserAccount());
             setPassword(userAccountEntity.getPassword());
             setStatus(userAccountEntity.getStatus());

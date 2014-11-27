@@ -56,31 +56,21 @@ public class HomeController {
         session.invalidate();
     }
 
-    @RequestMapping(value = "/success", method = RequestMethod.GET)
-    public String success(){
-        return "success";
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(){
-        return "register";
-    }
-
     @RequestMapping(value = "/userLogin", method = RequestMethod.GET)
     @Transactional
-    public String userLogin(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String userLogin(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        session.setAttribute("user", userAccountEntity);
+        model.addAttribute("user", userAccountEntity);
         return "header";
     }
 
     @RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
     @ResponseBody
-    @Transactional
     public String update(HttpServletRequest request) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        loginService.updateUserAccount(userAccountEntity, request);
+        loginService.updateUserAccountForSecurity(userAccountEntity,request);
+        loginService.updateUserAccount(request);
         return "OK";
     }
 
