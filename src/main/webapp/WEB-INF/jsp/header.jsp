@@ -15,6 +15,9 @@
             <jsp:useBean id="user" type="org.yijun.hie.persistence.entity.UserAccountEntity" scope="session"/>
             <jsp:getProperty name="user" property="userName"/>
         </p>
+        <p id="title-five">
+            <a href="<c:url value="http://localhost:8080/logout" />">Logout</a>
+        </p>
     </div>
 
 </div>

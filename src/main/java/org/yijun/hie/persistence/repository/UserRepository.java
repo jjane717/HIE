@@ -31,12 +31,13 @@ public class UserRepository {
     private String getPrivilegeByNameHql = "from PrivilegeEntity where privilegeName = :privilegeName";
     private String getPrivilegeByIdHql = "from PrivilegeEntity where idPrivilege = :idPrivilege";
 
-    public List<UserAccountEntity> getUserByName (String userName) {
+    public UserAccountEntity getUserByName (String userName) {
         Session session = sessionFactory.getCurrentSession();
-        List<UserAccountEntity> userAccountEntityList;
-
-        userAccountEntityList = session.createQuery(getUserByNameHql).setString("userName", userName).list();
-        return userAccountEntityList;
+        UserAccountEntity userAccountEntity = null;
+        if(session.createQuery(getUserByNameHql).setString("userName", userName).list().size()>0) {
+            userAccountEntity = (UserAccountEntity) session.createQuery(getUserByNameHql).setString("userName", userName).list().get(0);
+        }
+        return userAccountEntity;
     }
 
     public List<UserAccountEntity> getAllUserAccount(){

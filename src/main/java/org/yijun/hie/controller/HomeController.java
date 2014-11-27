@@ -54,10 +54,11 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
-    public String loginP(){
-        return "success";
+    public void logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
     }
 
     @RequestMapping(value = "/success", method = RequestMethod.GET)

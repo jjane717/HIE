@@ -1,6 +1,8 @@
 package org.yijun.hie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.stereotype.Service;
 import org.yijun.hie.persistence.entity.EmployeeRoleEntity;
 import org.yijun.hie.persistence.entity.EnterpriseEntity;
@@ -24,13 +26,15 @@ public class LoginService {
     private HttpSession session;
 
     public UserAccountEntity userLogin () {
-        UserAccountEntity userAccountEntity = userRepository.getUserByName("aaa").get(0);
+        //UserAccountEntity userAccountEntity = userRepository.getUserByName("aaa").get(0);
+        SecurityContext securityContext=(SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        UserAccountEntity userAccountEntity = (UserAccountEntity) securityContext.getAuthentication().getPrincipal();
         session.setAttribute("user",userAccountEntity);
         return userAccountEntity;
     }
 
     public Boolean isUserExist(String userName){
-        if(userRepository.getUserByName(userName).size() > 0){
+        if(userRepository.getUserByName(userName) != null){
             return true;
         }else{
             return false;
@@ -76,8 +80,8 @@ public class LoginService {
     }
 
     public void updateAllUserAccount(UserAccountEntity userAccountEntity){
-        userAccountEntity.setRoleEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getRoleEntity());
-        userAccountEntity.setEnterpriseEntity(userRepository.getUserByName(userAccountEntity.getUserName()).get(0).getEnterpriseEntity());
+        userAccountEntity.setRoleEntity(userRepository.getUserByName(userAccountEntity.getUserName()).getRoleEntity());
+        userAccountEntity.setEnterpriseEntity(userRepository.getUserByName(userAccountEntity.getUserName()).getEnterpriseEntity());
 
         userRepository.updateUserAccount(userAccountEntity);
     }

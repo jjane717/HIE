@@ -767,6 +767,7 @@ function chooseOrder(){
                 $("#choosePayment-container").load("choosePayment");
                 $(".submit_button").removeClass("hidden");
                 $("#preparePay").removeClass("hidden");
+                $(".changeText").find("label").html("Show All Payment");
             },
             error: function(error){
                 alert("NO"+ error);
