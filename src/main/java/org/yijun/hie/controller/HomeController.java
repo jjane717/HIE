@@ -42,7 +42,7 @@ public class HomeController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request){
         HttpSession session = request.getSession();
-        modelAndView = new ModelAndView("login10");
+        modelAndView = new ModelAndView("login");
         if(session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION")!=null){
             modelAndView.addObject("error", "Invalid username or password.");
         }
