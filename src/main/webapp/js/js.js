@@ -64,17 +64,17 @@ function createEnterprise(){
         idEnterprise = $ ( "#idEnterprise"),
         enterpriseCode = $( "#enterpriseCode" ),
         enterpriseType = $( "#enterpriseType"),
-        street = $( "#street" ),
-        city= $("#city"),
-        state=$("#state"),
-        zip = $( "#zip" ),
-        email = $( "#email" ),
-        phone = $( "#phone" ),
+        street = $( "#street1" ),
+        city= $("#city1"),
+        state=$("#state1"),
+        zip = $( "#zip1" ),
+        email = $( "#email1" ),
+        phone = $( "#phone1" ),
         allFields = $( [] ).add( enterpriseName ).add( enterpriseCode).add(street).add(city).add(zip).add(state).add(email).add(phone),
         tips = $( ".validateTips" );
     allFields.val("");
 
-    $( "#dialog-form" ).dialog({
+    $( "#dialog-form2" ).dialog({
         autoOpen: true,
         height: 380,
         width: 400,
@@ -86,12 +86,11 @@ function createEnterprise(){
 
                 bValid = bValid && checkLength( enterpriseName, "Enterprise Name", 3, 16, tips );
                 bValid = bValid && checkLength( enterpriseCode, "Enterprise Code", 3, 5, tips );
-                bValid = bValid && checkLength( street, "Street", 5, 100, tips );
                 bValid = bValid && checkLength( city, "City", 2, 20, tips );
-                bValid = bValid && checkLength( zip, "City", 4, 10, tips );
-                bValid = bValid && checkLength( state, "City", 2, 20, tips );
-                bValid = bValid && checkLength( phone, "City", 8, 20, tips );
-                bValid = bValid && checkLength( email, "email", 6, 80, tips );
+                bValid = bValid && checkLength( zip, "Zip", 4, 10, tips );
+                bValid = bValid && checkLength( state, "State", 2, 20, tips );
+                bValid = bValid && checkLength( phone, "Phone", 8, 20, tips );
+                bValid = bValid && checkLength( email, "Email", 6, 80, tips );
 
                 bValid = bValid && checkRegexp( enterpriseName, /^[a-z]([0-9a-z_])+$/i, "Enterprise Name may consist of a-z, 0-9, underscores, begin with a letter.",tips );
                 bValid = bValid && checkRegexp( enterpriseCode, /^([0-9])+$/, "Enterprise Code field only allow : A-Z a-z 0-9" ,tips);
@@ -142,12 +141,12 @@ function editEnterprise(id){
         idEnterprise = $ ( "#idEnterprise"),
         enterpriseCode = $( "#enterpriseCode" ),
         enterpriseType = $( "#enterpriseType"),
-        street = $( "#street" ),
-        city= $("#city"),
-        state=$("#state"),
-        zip = $( "#zip" ),
-        email = $( "#email" ),
-        phone = $( "#phone" ),
+        street = $( "#street1" ),
+        city= $("#city1"),
+        state=$("#state1"),
+        zip = $( "#zip1" ),
+        email = $( "#email1" ),
+        phone = $( "#phone1" ),
         allFields = $( [] ).add( enterpriseName ).add( enterpriseCode).add(street).add(city).add(zip).add(state).add(email).add(phone),
         tips = $( ".validateTips" );
 
@@ -174,7 +173,7 @@ function editEnterprise(id){
         }
     });
 
-    $( "#dialog-form" ).dialog({
+    $( "#dialog-form2" ).dialog({
         autoOpen: true,
         height: 380,
         width: 400,

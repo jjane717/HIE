@@ -32,7 +32,7 @@
             $("#customer-topmenu ul li").addClass("holdlightblue");
             $(this).removeClass("holdlightblue");
             $(this).addClass("clickdarkorange");
-
+            $("#customer-container").html(" ");
             var urll = $(this).attr("source");
             $("#customer-container").load(urll);
         });
