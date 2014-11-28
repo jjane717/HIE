@@ -101,7 +101,7 @@ public class ProductController {
             if(productEntity1!=null){
                 session.removeAttribute("tempProduct");
                 session.setAttribute("tempProduct", productEntity);
-            }else if (productEntity == null){
+            }else{
                 session.setAttribute("tempProduct", productEntity);
             }
         }
@@ -125,7 +125,7 @@ public class ProductController {
     @ResponseBody
     @Transactional
     public void placeProduct(HttpServletRequest request) {
-        EnterpriseEntity enterpriseEntity = manageController.getEnterpriseById(Integer.valueOf(request.getParameter("id")));
+        EnterpriseEntity enterpriseEntity = manageController.getEnterpriseById(request);
         HttpSession session = request.getSession();
         synchronized (session) {
             ProductEntity productEntity = (ProductEntity) session.getAttribute("tempProduct");

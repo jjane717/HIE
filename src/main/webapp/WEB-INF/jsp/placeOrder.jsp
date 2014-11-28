@@ -14,6 +14,7 @@
 
 <div>
     <form id="chooseOrder">
+        <input type="text" class="hidden" name="idUserAccount" id="idUserAccount" value="${user.idUserAccount}"/>
         <div id="create">
             <div id="account_back_button" class="submit_button" onclick="backViewMarket()">
                 <label>Back</label>

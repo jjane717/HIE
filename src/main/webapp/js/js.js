@@ -50,6 +50,7 @@ function accsave(){
 
         success: function(data){
             $("#headerholder").load("userLogin");
+            alert("You have already updated.");
         },
         error: function(error){
             alert("NO"+ error);
@@ -112,7 +113,7 @@ function createEnterprise(){
                         cache:true,
 
                         success: function(data){
-                            alert("OK"+data);
+                            alert("Succeed.");
                             $("#enterpriseTable").append("<tr id=\"enterpriseInfo-" + data["idEnterprise"] + "\"><td>" + data["enterpriseName"] + "</td><td>" + data["enterpriseType"] + "</td><td>" + data["enterpriseCode"] + "</td><td><div class=\"action\"><div class=\"submit_button edit\" onClick=editEnterprise(\"" + data["idEnterprise"] + "\")>Edit</div><div class=\"submit_button delete\" onClick=deleteEnterprise(\"" + data["idEnterprise"] + "\")>Delete</div></div></td></tr>");
                         },
                         error: function(error){
@@ -213,7 +214,7 @@ function editEnterprise(id){
                         cache:true,
 
                         success: function(data){
-                            alert("OK"+data);
+                            alert("Succeed.");
                         },
                         error: function(error){
                             alert("NO"+ error);
@@ -246,7 +247,7 @@ function deleteEnterprise(id){
         cache:true,
 
         success: function(data){
-            alert("OK" + data);
+            alert("Succeed.");
             deleteTr.remove();
         },
         error: function(error){
@@ -599,6 +600,16 @@ function filterProduct(){
     }
 }
 
+function filterUserByEnterprise(){
+    $(".main").removeClass("hidden");
+
+    var target = "." + $("#filterEnterprise").val();
+    if(target != ".All"){
+        $(".main").addClass("hidden");
+        $(target).removeClass("hidden");
+    }
+}
+
 function chooseOffer(){
     var radios = document.getElementById("chooseOffer").selectOffer;
     var id = null;
@@ -691,11 +702,12 @@ function placeOrder(id){
     var totalAmount = $("#totalAmount").val();
     var paymentType = $("#paymentType").val();
     var duration = $("#duration").val();
+    var idUserAccount = $("#idUserAccount").val();
     if(totalAmount>0){
         $.ajax({
             type: "POST",
             url : "http://localhost:8080/placeOrder",
-            data : {"totalAmount":totalAmount,"paymentType":paymentType,"duration":duration, "id":id},
+            data : {"totalAmount":totalAmount,"paymentType":paymentType,"duration":duration, "id":id, "idUserAccount":idUserAccount},
             cache:true,
 
             success: function(data){
@@ -785,13 +797,26 @@ function makePayment(){
     }else{
         id = radios.value;
     }
+
+    var radios2 = document.getElementById("orderInfo").selectOrder;
+    var idOrder = null;
+    if(radios2.value == null) {
+        for (var i = 0; i < radios2.length; i++) {
+            if (radios2[i].checked) {
+                idOrder = radios2[i].value;
+            }
+        }
+    }else{
+        idOrder = radios2.value;
+    }
+
     if(id==null){
         alert("Please Choose One Payment.");
     }else{
         $.ajax({
             type: "POST",
             url : "http://localhost:8080/makePayment",
-            data : {"id":id},
+            data : {"id":id,"idOrder":idOrder},
             cache:true,
 
             success: function(data){

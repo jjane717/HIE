@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yijun.hie.persistence.entity.*;
 import org.yijun.hie.persistence.repository.CustomerRepository;
+import org.yijun.hie.persistence.repository.UserRepository;
+
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -17,6 +20,8 @@ import java.util.*;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public String getMarket(UserAccountEntity userAccountEntity){
         String market = new String();
@@ -68,7 +73,9 @@ public class CustomerService {
         return customerRepository.getOrderEntityByIDFromRepository(idOrder);
     }
 
-    public void createOrderEntityByIDFromService(OrderEntity orderEntity){
+    public void createOrderEntityByIDFromService(OrderEntity orderEntity, HttpServletRequest request){
+        Integer idUserAccount = Integer.valueOf(request.getParameter("idUserAccount"));
+        orderEntity.setUserAccountEntity(userRepository.getUserAccountByIDFromUR(idUserAccount));
         Date createDate = Date.from(Instant.now());
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(createDate);

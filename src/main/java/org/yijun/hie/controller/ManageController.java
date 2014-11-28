@@ -71,8 +71,8 @@ public class ManageController {
     @RequestMapping(value="/enterprise", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public EnterpriseEntity getEnterpriseById (Integer idEnterprise) {
-        return loginService.getEnterpriseOneFromService(idEnterprise);
+    public EnterpriseEntity getEnterpriseById (HttpServletRequest request) {
+        return loginService.getEnterpriseOneFromService(Integer.valueOf(request.getParameter("id")));
     }
 
     @RequestMapping(value="/updateEnterprise", method = RequestMethod.POST)

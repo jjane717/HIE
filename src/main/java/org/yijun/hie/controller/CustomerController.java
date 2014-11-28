@@ -83,6 +83,8 @@ public class CustomerController {
             EnterpriseProductEntity enterpriseProductEntity = (EnterpriseProductEntity) session.getAttribute("tempEnterpriseProduct");
             model.addAttribute("choose",enterpriseProductEntity);
         }
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        model.addAttribute("user",userAccountEntity);
         return "placeOrder";
     }
 
@@ -92,7 +94,6 @@ public class CustomerController {
     public void placeProduct(OrderEntity orderEntity, HttpServletRequest request) {
         EnterpriseProductEntity enterpriseProductEntity = productService.getEnterpriseProductEntityByIdFromService(Integer.valueOf(request.getParameter("id")));
         orderEntity.setEnterpriseProductEntity(enterpriseProductEntity);
-        orderEntity.setUserAccountEntity(loginService.userLogin());
-        customerService.createOrderEntityByIDFromService(orderEntity);
+        customerService.createOrderEntityByIDFromService(orderEntity,request);
     }
 }

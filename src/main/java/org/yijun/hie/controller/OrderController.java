@@ -45,6 +45,6 @@ public class OrderController {
     @ResponseBody
     @Transactional
     public void makePayment(HttpServletRequest request) {
-        orderService.updatePaymentFromService(Integer.valueOf(request.getParameter("id")));
+        orderService.updatePaymentFromService(Integer.valueOf(request.getParameter("id")),Integer.valueOf(request.getParameter("idOrder")));
     }
 }

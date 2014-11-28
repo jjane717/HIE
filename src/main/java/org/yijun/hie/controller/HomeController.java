@@ -69,7 +69,7 @@ public class HomeController {
     @ResponseBody
     public String update(HttpServletRequest request) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        loginService.updateUserAccountForSecurity(userAccountEntity,request);
+        loginService.updateUserAccountForSecurity(userAccountEntity, request);
         loginService.updateUserAccount(request);
         return "OK";
     }
@@ -148,7 +148,8 @@ public class HomeController {
     @Transactional
     public String userHome(Model model) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        UserAccountEntity user = loginService.getUserAccountByID(userAccountEntity.getIdUserAccount());
+        List<OrderEntity> orderEntityList = user.getOrderEntityList();
         model.addAttribute("orders", orderEntityList);
         return "userHome";
     }
@@ -166,7 +167,8 @@ public class HomeController {
     @Transactional
     public String chooseOneOrder(Model model) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        UserAccountEntity user = loginService.getUserAccountByID(userAccountEntity.getIdUserAccount());
+        List<OrderEntity> orderEntityList = user.getOrderEntityList();
         model.addAttribute("orders", orderEntityList);
         return "makePayment";
     }
@@ -175,7 +177,8 @@ public class HomeController {
     @Transactional
     public String orderHistory(Model model) {
         UserAccountEntity userAccountEntity = loginService.userLogin();
-        List<OrderEntity> orderEntityList = userAccountEntity.getOrderEntityList();
+        UserAccountEntity user = loginService.getUserAccountByID(userAccountEntity.getIdUserAccount());
+        List<OrderEntity> orderEntityList = user.getOrderEntityList();
         model.addAttribute("orders", orderEntityList);
         return "orderHistory";
     }
