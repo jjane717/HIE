@@ -78,8 +78,8 @@ public class ManageController {
     @RequestMapping(value="/updateEnterprise", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public String updateEnterprise (EnterpriseEntity enterpriseEntity) {
-        loginService.updateEnterpriseFromService(enterpriseEntity);
+    public String updateEnterprise (HttpServletRequest request) {
+        loginService.updateEnterpriseFromService(request);
         return "OK";
     }
 
@@ -136,5 +136,13 @@ public class ManageController {
         }else{
             return null;
         }
+    }
+
+    @RequestMapping(value="/transferMoney", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public Double transferMoney(HttpServletRequest request){
+        Double balance = loginService.transferMoneyFromService(request);
+        return balance;
     }
 }

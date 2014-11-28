@@ -47,4 +47,27 @@ public class OrderController {
     public void makePayment(HttpServletRequest request) {
         orderService.updatePaymentFromService(Integer.valueOf(request.getParameter("id")),Integer.valueOf(request.getParameter("idOrder")));
     }
+
+    @RequestMapping(value = "/viewOrders",method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public void viewOrders(HttpServletRequest request){
+        List<OrderEntity> orderEntityList = orderService.viewOrdersFromService(request.getParameter("enterpriseName"),Integer.valueOf(request.getParameter("idEnterprise")));
+        HttpSession session = request.getSession();
+        synchronized (session){
+            List<OrderEntity> orderEntityList1 = (List<OrderEntity>)session.getAttribute("viewOrders");
+            if(orderEntityList1!=null){
+                session.removeAttribute("viewOrders");
+                session.setAttribute("viewOrders",orderEntityList);
+            }else{
+                session.setAttribute("viewOrders",orderEntityList);
+            }
+        }
+    }
+
+    @Transactional
+    public List<OrderEntity> viewOrdersInsurance(String name){
+        List<OrderEntity> orderEntityList = orderService.viewOrdersInsuranceFromService(name);
+        return orderEntityList;
+    }
 }

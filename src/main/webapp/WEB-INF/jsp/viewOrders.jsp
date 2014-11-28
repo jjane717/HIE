@@ -11,19 +11,10 @@
             $(this).removeClass("one");
             $(this).find(".action").addClass("hidden");
         });
-
     });
 
 </script>
 
-<div>
-    <div id="create">
-        <div id="filter">
-            <span>Enterprise Balance: </span>
-            <span id="balance">$ ${enterprise.enterpriseBalance}</span>
-        </div>
-    </div>
-</div>
 <div>
     <form id="productForm">
         <p id="tips" class="hidden"></p>
@@ -94,47 +85,14 @@
         </table>
     </form>
 </div>
+
 <style>
+    .submit_button{
+        float: right;
+    }
+
     .submit_button label{
         cursor: pointer;
-    }
-
-    #enterpriseTable input[type="text"]{
-        width: 60px;
-        text-align: center;
-    }
-
-    #enterpriseTable th{
-        font-size: 18px;
-        broder-right: 1px solid lightgray;
-    }
-
-    #enterpriseTable tr{
-        margin-top: 10px;
-        padding: 20px;
-        font-size: 14px;
-        text-align: center;
-    }
-    #enterpriseTable td{
-        height: 50px;
-        width: auto;
-        border-bottom: 1px solid lightgray;
-    }
-
-    #create{
-        margin: 30px;
-        border-bottom: 2px solid red;
-        height:50px;
-    }
-
-    #filter{
-        float:left;
-    }
-
-    #create span{
-        font-size: 18px;
-        font-weight: bolder;
-        color: #90111a;
     }
 
     .details{
@@ -161,6 +119,29 @@
         margin-top: 30px;
         width:570px;
         margin-left:15px;
+    }
+
+    #enterpriseTable input[type="text"]{
+        width: 60px;
+        text-align: center;
+    }
+
+    #enterpriseTable th{
+        font-size: 18px;
+        broder-right: 1px solid lightgray;
+        padding-top:15px;
+    }
+
+    #enterpriseTable tr{
+        margin-top: 10px;
+        padding: 20px;
+        font-size: 14px;
+        text-align: center;
+    }
+    #enterpriseTable td{
+        height: 50px;
+        width: auto;
+        border-bottom: 1px solid lightgray;
     }
 
     .tableTitle{

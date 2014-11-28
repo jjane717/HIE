@@ -8,6 +8,7 @@ import org.yijun.hie.persistence.repository.OrderRepository;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by liuyijun on 14-11-17.
@@ -23,6 +24,14 @@ public class OrderService {
 
     public void updatePaymentFromService(Integer idPayment, Integer idOrder){
         orderRepository.updatePaymentFromRepository(idPayment,idOrder);
+    }
+
+    public List<OrderEntity> viewOrdersFromService(String name, Integer id){
+        return orderRepository.viewOrdersFromRepository(name, id);
+    }
+
+    public List<OrderEntity> viewOrdersInsuranceFromService(String name){
+        return orderRepository.viewOrdersInsuranceFromRepository(name);
     }
 
 }

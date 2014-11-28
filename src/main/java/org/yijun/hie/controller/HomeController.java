@@ -193,4 +193,35 @@ public class HomeController {
         }
         return "choosePayment";
     }
+
+    @RequestMapping(value = "/manageBalance", method = RequestMethod.GET)
+    @Transactional
+    public String manageBalance(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
+        List<EnterpriseEntity> enterpriseEntityList = enterpriseController.getEnterpriseListForType("Insurance");
+        model.addAttribute("enterprise",enterpriseEntity );
+        model.addAttribute("insurance", enterpriseEntityList);
+        return "manageBalance";
+    }
+
+    @RequestMapping(value = "/viewOrders",method = RequestMethod.GET)
+    public String viewOrdersGet(HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        synchronized (session){
+            List<OrderEntity> orderEntityList = (List<OrderEntity>)session.getAttribute("viewOrders");
+            model.addAttribute("orders",orderEntityList);
+        }
+        return "viewOrders";
+    }
+
+    @RequestMapping(value = "/viewBalance", method = RequestMethod.GET)
+    public String viewBalance(Model model) {
+        UserAccountEntity userAccountEntity = loginService.userLogin();
+        EnterpriseEntity enterpriseEntity = userAccountEntity.getEnterpriseEntity();
+        List<OrderEntity> orderEntityList = orderController.viewOrdersInsurance(enterpriseEntity.getEnterpriseName());
+        model.addAttribute("enterprise",enterpriseEntity );
+        model.addAttribute("orders",orderEntityList);
+        return "viewBalance";
+    }
 }

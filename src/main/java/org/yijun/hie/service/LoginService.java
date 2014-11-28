@@ -124,7 +124,17 @@ public class LoginService {
         return userRepository.getEnterpriseOneFromUR(idEnterprise);
     }
 
-    public void updateEnterpriseFromService(EnterpriseEntity enterpriseEntity){
+    public void updateEnterpriseFromService(HttpServletRequest request){
+        EnterpriseEntity enterpriseEntity = getEnterpriseOneFromService(Integer.valueOf(request.getParameter("idEnterprise")));
+        enterpriseEntity.setEnterpriseName(request.getParameter("enterpriseName"));
+        enterpriseEntity.setEnterpriseCode(Integer.valueOf(request.getParameter("enterpriseCode")));
+        enterpriseEntity.setStreet(request.getParameter("street"));
+        enterpriseEntity.setCity(request.getParameter("city"));
+        enterpriseEntity.setState(request.getParameter("state"));
+        enterpriseEntity.setZip(request.getParameter("zip"));
+        enterpriseEntity.setEnterpriseType(request.getParameter("enterpriseType"));
+        enterpriseEntity.setPhone(request.getParameter("phone"));
+        enterpriseEntity.setEmail(request.getParameter("email"));
         userRepository.updateEnterpriseFromUR(enterpriseEntity);
     }
 
@@ -160,6 +170,17 @@ public class LoginService {
 
     public RoleEntity getRoleByIDFromService(Integer idRole){
         return userRepository.getRoleByIDFromUR(idRole);
+    }
+
+    public Double transferMoneyFromService(HttpServletRequest request){
+        EnterpriseEntity hie = getEnterpriseOneFromService(Integer.valueOf(request.getParameter("idEnterprise")));
+        EnterpriseEntity insurance = userRepository.getEnterpriseByNameFromUR(request.getParameter("enterpriseName"));
+        Double amount = Double.valueOf(request.getParameter("amount"));
+        hie.setEnterpriseBalance(hie.getEnterpriseBalance()-amount);
+        insurance.setEnterpriseBalance(insurance.getEnterpriseBalance()+amount);
+        userRepository.updateEnterpriseFromUR(hie);
+        userRepository.updateEnterpriseFromUR(insurance);
+        return hie.getEnterpriseBalance();
     }
 
 }

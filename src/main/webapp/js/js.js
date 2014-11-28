@@ -95,7 +95,6 @@ function createEnterprise(){
 
                 bValid = bValid && checkRegexp( enterpriseName, /^[a-z]([0-9a-z_])+$/i, "Enterprise Name may consist of a-z, 0-9, underscores, begin with a letter.",tips );
                 bValid = bValid && checkRegexp( enterpriseCode, /^([0-9])+$/, "Enterprise Code field only allow : A-Z a-z 0-9" ,tips);
-                bValid = bValid && checkRegexp( street, /^([0-9a-zA-Z])+$/, "Address Line field only allow : A-Z a-z 0-9." , tips);
                 bValid = bValid && checkRegexp( city, /^([a-zA-Z])+$/, "City field only allow : A-Z a-z.", tips );
                 bValid = bValid && checkRegexp( state, /^([a-zA-Z])+$/, "State field only allow : A-Z a-z.",tips );
                 bValid = bValid && checkRegexp( zip, /^([0-9])+$/, "Zip field only allow :0-9." ,tips);
@@ -196,7 +195,6 @@ function editEnterprise(id){
 
                 bValid = bValid && checkRegexp( enterpriseName, /^[a-z]([0-9a-z_])+$/i, "Enterprise Name may consist of a-z, 0-9, underscores, begin with a letter.",tips );
                 bValid = bValid && checkRegexp( enterpriseCode, /^([0-9])+$/, "Enterprise Code field only allow : 0-9" ,tips);
-                bValid = bValid && checkRegexp( street, /^([0-9a-zA-Z])+$/, "Address Line field only allow : A-Z a-z 0-9." , tips);
                 bValid = bValid && checkRegexp( city, /^([a-zA-Z])+$/, "City field only allow : A-Z a-z.", tips );
                 bValid = bValid && checkRegexp( state, /^([a-zA-Z])+$/, "State field only allow : A-Z a-z.",tips );
                 bValid = bValid && checkRegexp( zip, /^([0-9])+$/, "Zip field only allow :0-9." ,tips);
@@ -918,6 +916,46 @@ function changePrivilege(){
             success: function(data){
                 alert(data);
                 $("#customer-container").load("manageEmployees");
+            },
+            error: function(error){
+                alert("NO"+ error);
+            }
+        });
+    }
+}
+
+function viewOrders(){
+    var name = $("#enterpriseName").val();
+    var id = $("#idEnterprise").val();
+    $.ajax({
+        type: "POST",
+        url : "http://localhost:8080/viewOrders",
+        data : {"enterpriseName":name,"idEnterprise":id},
+        cache:true,
+
+        success: function(data){
+            $("#viewOrders").load("viewOrders");
+        },
+        error: function(error){
+            alert("NO"+ error);
+        }
+    });
+}
+
+function transferMoney(){
+    var amount = $("#amount").val();
+    if(!amount){
+        alert("Enter Amount.");
+    }else{
+        $.ajax({
+            type: "POST",
+            url : "http://localhost:8080/transferMoney",
+            data : $("#productForm").serialize(),
+            cache:true,
+
+            success: function(data){
+                alert("Succeed.");
+                $("#balance").html("$ "+data);
             },
             error: function(error){
                 alert("NO"+ error);

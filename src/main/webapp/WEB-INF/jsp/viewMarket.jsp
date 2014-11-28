@@ -34,8 +34,8 @@
                 <th class="details"></th>
                 <th>Product Name</th>
                 <th>Product Price</th>
+                <th></th>
                 <th>HIE</th>
-                <th>Insurance</th>
                 <th>Choose</th>
             </tr>
             <c:forEach items="${products}" var="product">

@@ -26,6 +26,7 @@ public class UserRepository {
     private String getRoleHql = "from RoleEntity ";
     private String getRoleByIDHql = "from RoleEntity where idRole = :idRole";
     private String getEnterpriseOneHql = "from EnterpriseEntity where idEnterprise = :idEnterprise";
+    private String getEnterpriseByNameHql = "from EnterpriseEntity where enterpriseName = :enterpriseName";
     private String getEnterpriseGroupHql = "from EnterpriseEntity where enterpriseType = :enterpriseType";
     private String getRoleByNameHql = "from RoleEntity where roleName = :roleName";
     private String getPrivilegeByNameHql = "from PrivilegeEntity where privilegeName = :privilegeName";
@@ -143,6 +144,13 @@ public class UserRepository {
         Session session = sessionFactory.getCurrentSession();
         EnterpriseEntity enterpriseEntity;
         enterpriseEntity = (EnterpriseEntity)session.createQuery(getEnterpriseOneHql).setInteger("idEnterprise",idEnterprise).list().get(0);
+        return enterpriseEntity;
+    }
+
+    public EnterpriseEntity getEnterpriseByNameFromUR (String enterpriseName){
+        Session session = sessionFactory.getCurrentSession();
+        EnterpriseEntity enterpriseEntity;
+        enterpriseEntity = (EnterpriseEntity)session.createQuery(getEnterpriseByNameHql).setString("enterpriseName",enterpriseName).list().get(0);
         return enterpriseEntity;
     }
 
